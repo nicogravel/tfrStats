@@ -36,5 +36,3 @@ Content
     :caption: Python package:
 
     modules
-
-.. disqus::
