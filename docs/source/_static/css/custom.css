@@ -1,0 +1,11 @@
+a[href='red'] {
+    color: red;
+    pointer-events: none;
+    cursor: default;
+    text-decoration: none;
+}
+
+div.sphinxsidebar {
+    max-height: 100%;
+    overflow-y: auto;
+}
