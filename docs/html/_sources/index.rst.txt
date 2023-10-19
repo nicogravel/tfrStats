@@ -1,0 +1,34 @@
+**Time Frequency Representations Statistics**
+########
+
+
+**a mini-tutorial on assessing the statistical significance of a Time Frequency Representation (TFR)**
+
+This codebook is an simple example to illustrate a basic question on time frequency analysis: assessing the significance of increases in spectral power using permutation statistics. As the reader may know, there is a number of approaches to correct for multiple comparisons and reduce false positives, etc, depending on the dimensions of the data at hand. Be these spatial locations, time and frequency windows or trials of different conditions.  
+
+Here I focus on increases relative to baseline using two variants of the same method: nul distribution testing using the traditional min-max approach, which captures the variations at the extreme of the null ditribution, and null distribution testing using the whole nul distribution. I invite the reader to audit the code and propvide feedback and comments. 
+
+Depending on the approach, the computation of the p-values will change slightly. In the min-max approach the minimum and maximum values at each permutations are used. When testing using the whole null distribution, the permutations are averaged and the dimensions of the empirical distributions are preserved. In both cases the empirical cumulative distribution is obtained and used to obtain p-values.
+
+An optional step is illustrated in which cluster correction of the p-values is implemented. Since there are several ways to achieve these goals and many differences exist among the different realizations of these and other related methods (i.e. thresholds may be obtaind from the percentiles of the null distribution directly and further corrected in equivalent ways, or the pooling of data for multiple comparison correction accomplished among different dimensions), here I focus on two common methods using very simple examples in the hope to help the researchers in need of clarity on these matters. 
+
+Provided the right Python environment and data, this Jupyter notebook aims to work as a simple mini-tutorial to help discuss basic approaches for computing TFRs and assess their statistical significance.
+
+
+*****
+Content
+*****
+
+
+
+
+.. toctree::
+    :maxdepth: 3
+    :numbered:
+
+
+    uvtfrs
+    notebooks/statistical_approach
+
+
+.. disqus::
