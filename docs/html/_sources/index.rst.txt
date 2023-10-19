@@ -25,10 +25,16 @@ Content
 .. toctree::
     :maxdepth: 3
     :numbered:
+    :caption: Content:
 
 
     uvtfrs
     notebooks/statistical_approach
 
+.. toctree::
+    :maxdepth: 1
+    :caption: Python package:
+
+    modules
 
 .. disqus::

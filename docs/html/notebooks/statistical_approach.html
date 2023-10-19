@@ -20,6 +20,7 @@
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="tfrStats" href="../modules.html" />
     <link rel="prev" title="1. On TFR statistical assessments" href="../uvtfrs.html" />
     <link href="../_static/style.css" rel="stylesheet" type="text/css">
 
@@ -43,6 +44,7 @@
 
 
 <h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Content:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../uvtfrs.html">1. On TFR statistical assessments</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">2. A mini-tutorial</a><ul>
@@ -53,12 +55,17 @@
 </ul>
 </li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Python package:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">tfrStats</a></li>
+</ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
       <li>Previous: <a href="../uvtfrs.html" title="previous chapter"><span class="section-number">1. </span>On TFR statistical assessments</a></li>
+      <li>Next: <a href="../modules.html" title="next chapter">tfrStats</a></li>
   </ul></li>
 </ul>
 </div>
@@ -92,6 +99,10 @@
           &larr;
           <a href="../uvtfrs.html" title="Previous document"><span class="section-number">1. </span>On TFR statistical assessments</a>
         </li>
+        <li>
+          <a href="../modules.html" title="Next document">tfrStats</a>
+          &rarr;
+        </li>
     </ul>
   </nav>
               </div>
@@ -106,7 +117,8 @@
 <p>Depending on the approach, the computation of the p-values will change slightly. In the min-max approach the minimum and maximum values at each permutations are used. When testing using the whole null distribution, the permutations are averaged and the dimensions of the empirical distributions are preserved. In both cases the empirical cumulative distribution is obtained and used to obtain p-values.</p>
 <p>An optional step is illustrated in which cluster correction of the p-values is implemented. Since there are several ways to achieve these goals and many differences exist among the different realizations of these and other related methods (i.e. thresholds may be obtaind from the percentiles of the null distribution directly and further corrected in equivalent ways, or the pooling of data for multiple comparison correction accomplished among different dimensions), here I focus on two common
 methods using very simple examples in the hope to help the researchers in need of clarity on these matters.</p>
-<p>Provided the right Python environment and data, this Jupyter notebook should work as a simple mini-tutorial to help discuss basic approaches for computing TFRs and assess their statistical significance in a <em>toolbox free</em>, transparent, barebones DIY way. The functions within this notebook are provided in an exploratory state and are subject to change. As such, the docstrings, comments and input dictionaries haven to yet been thoroughly implemented/optimized.</p>
+<p>Provided the right Python environment and data, this Jupyter notebook should work as a simple mini-tutorial to help discuss basic approaches for computing TFRs and assess their statistical significance in a <em>toolbox free</em>, transparent, barebones DIY way. The functions within this notebook are provided in an exploratory state and are subject to change. As such, the docstrings, comments and input dictionaries haven to yet been thoroughly implemented/optimized. An <strong>Python package</strong> is provided in
+any case ;)</p>
 <section id="Import-libraries-and-define-functions">
 <h2><span class="section-number">2.1. </span>Import libraries and define functions<a class="headerlink" href="#Import-libraries-and-define-functions" title="Permalink to this heading">¶</a></h2>
 <div class="nbinput nblast docutils container">
@@ -866,7 +878,12 @@ methods using very simple examples in the hope to help the researchers in need o
 
 <span class="c1">## helper function used by plot_stats to noramlize colormap ranges</span>
 <span class="k">def</span> <span class="nf">coloroffset</span><span class="p">(</span><span class="n">min_val</span><span class="p">,</span> <span class="n">max_val</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Set colormap center offset</span>
 
+<span class="sd">    Helper function used by plot_stats to noramlize colormap ranges</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">k</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>  <span class="c1"># Ensure k is between 0 and 1</span>
         <span class="n">point</span> <span class="o">=</span> <span class="n">min_val</span> <span class="o">+</span> <span class="n">k</span><span class="o">*</span><span class="p">(</span><span class="n">max_val</span> <span class="o">-</span> <span class="n">min_val</span><span class="p">)</span>
         <span class="c1">#print(f&#39;For k={k}, the point in the range {min_val}-{max_val} is: {point}&#39;)</span>
@@ -1071,6 +1088,10 @@ cutoff computed using whole null distribution:  70.79162686024465
           &larr;
           <a href="../uvtfrs.html" title="Previous document"><span class="section-number">1. </span>On TFR statistical assessments</a>
         </li>
+        <li>
+          <a href="../modules.html" title="Next document">tfrStats</a>
+          &rarr;
+        </li>
     </ul>
   </nav>
               </div>
@@ -1080,7 +1101,7 @@ cutoff computed using whole null distribution:  70.79162686024465
     <div class="clearer"></div>
   </div>
     <div class="footer">
-      &copy;.
+      &copy;in dog we trust.
       
       |
       <a href="../_sources/notebooks/statistical_approach.ipynb.txt"
