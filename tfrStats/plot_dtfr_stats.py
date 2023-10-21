@@ -287,8 +287,8 @@ def plot_dtfr_stats(input_path, cond, fband, null, correction, cluster_size, typ
     cbar.ax.tick_params(labelsize=10)
     cbar.set_label('p-value',fontsize=10)
     ax[1].set_xlabel('Time (ms)', fontsize=12)
-    ax[0].set_ylabel('frequency (Hz)', rotation=90, fontsize=10)
-    ax[1].set_ylabel('frequency (Hz)', rotation=90, fontsize=10)
+    ax[0].set_ylabel('depth (um)', rotation=90, fontsize=10)
+    ax[1].set_ylabel('depth (um)', rotation=90, fontsize=10)
     ax[0].title.set_text('power % change relative to baseline')
     #ax[1].title.set_text('p-values')
     txt='Cutoff (blue outline) is valid for the 400-1000 ms window.'
