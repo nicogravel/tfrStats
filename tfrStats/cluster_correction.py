@@ -8,7 +8,7 @@ from scipy.interpolate import interp2d
 import matplotlib.colors as colors
 
 # Correct the p-values for multiple comparisons using cluster correction
-def cluster_correction(stats, tfr_null, cluster_size, alpha):
+def cluster_correction(stats, cluster_size, alpha):
 
     """
     Get p-values from min-max null distribution
@@ -29,30 +29,28 @@ def cluster_correction(stats, tfr_null, cluster_size, alpha):
 
     @author: Nicolás Gravel, 19.09.2023  
     
-    https://nicogravel.github.io/
     
     """
         
     ## cluster correction
     from scipy.spatial.distance import cdist
     clusters =  np.ones((stats.shape))
-    x_indexes, y_indexes  = np.where(clusters)
-    idx = np.vstack((x_indexes, y_indexes )).T
+    x_idx, y_idx  = np.where(clusters)
+    idx = np.vstack((x_idx, y_idx)).T
     dists = cdist(idx,idx)
     pvals = stats.flatten()
     pval_corr = np.ones((stats.shape))  
-    for i_freq in range(stats.shape[0]):
-        for i_time in range(stats.shape[1]):
-            p   = stats[i_freq, i_time]
+    for i_x in range(stats.shape[0]):
+        for i_y in range(stats.shape[1]):
+            p   = stats[i_x, i_y]
             if p <= alpha:
-                index = np.where((x_indexes == i_freq) & (y_indexes == i_time))
+                index = np.where((x_idx == i_x) & (y_idx == i_y))
                 d = np.squeeze(dists[index,:])
                 neighbours = d <= cluster_size
                 pvals[neighbours]
                 pval_nn= pvals[neighbours]
-                p  = pval_nn <= alpha
-                if np.count_nonzero(p) > cluster_size:
-                    pval_corr[i_freq, i_time] = np.mean(pval_nn)
+                pp  = pval_nn <= alpha
+                if np.count_nonzero(pp) >= cluster_size:
+                    pval_corr[i_x , i_y] = np.mean(pval_nn+p)
 
     return pval_corr
-    
