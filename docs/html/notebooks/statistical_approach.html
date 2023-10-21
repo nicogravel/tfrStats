@@ -56,9 +56,9 @@
 <li class="toctree-l3"><a class="reference internal" href="#whole-null">2.4.2. whole null</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#You-can-also-run-this-cell-instead-of-installing-the-package">2.5. You can also run this cell instead of installing the package</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="#You-can-also-run-this-cell-instead-of-installing-the-package">3. You can also run this cell instead of installing the package</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Python package:</span></p>
 <ul>
@@ -136,7 +136,7 @@ pip install -e .
 <section id="Import-libraries-and-define-functions">
 <h2><span class="section-number">2.1. </span>Import libraries and define functions<a class="headerlink" href="#Import-libraries-and-define-functions" title="Permalink to this heading">¶</a></h2>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tfrStats.plot_tfr_stats</span> <span class="kn">import</span> <span class="n">plot_tfr_stats</span> <span class="k">as</span> <span class="n">plot_tfr_stats</span>
@@ -153,7 +153,7 @@ pip install -e .
 <h2><span class="section-number">2.2. </span>Compute p-values<a class="headerlink" href="#Compute-p-values" title="Permalink to this heading">¶</a></h2>
 <p>Here we plot TFRs with the significance threshold computed from p-values (i.e. p-val &lt;= 0.05) (top panel, blue trace). The alpha mask specifies the section containing the values above the null percentile cutoff (i.e. 95%). The p-values (bottom panel) with the null percentile cutoff (red trace)</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">null</span>         <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">95</span><span class="p">]</span>
@@ -192,7 +192,7 @@ cutoff computed using truncated min/max of null distribution:  59.03671419283056
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">null</span>         <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">95</span><span class="p">]</span> <span class="c1">#     results   = [&#39;_100&#39;, &#39;_100_minmax&#39;]</span>
@@ -207,24 +207,14 @@ cutoff computed using truncated min/max of null distribution:  59.03671419283056
 </pre></div>
 </div>
 </div>
-<div class="nboutput docutils container">
+<div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 /Volumes/Gandalf/MWlamprop/results/stats/univariate/uvtfr_stats_high_grat_spw_100.npz
 tfr emp  :  (30, 12, 16, 113)
-tfr null    (30, 12, 16, 113)
-min = 21.35240269384813 max = 95.0319842368204
-cutoff computed using whole null distribution:  70.79162686024465
 </pre></div></div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../_images/notebooks_statistical_approach_6_1.png" src="../_images/notebooks_statistical_approach_6_1.png" />
-</div>
 </div>
 </section>
 <section id="Cluster-correction">
@@ -236,7 +226,7 @@ cutoff computed using whole null distribution:  70.79162686024465
 <li><p>average the p-values</p></li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">null</span>         <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">95</span><span class="p">]</span> <span class="c1">#     results   = [&#39;_100&#39;, &#39;_100_minmax&#39;]</span>
@@ -275,7 +265,7 @@ cutoff computed using truncated min/max of null distribution:  59.03671419283056
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">null</span>         <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">95</span><span class="p">]</span> <span class="c1">#     results   = [&#39;_100&#39;, &#39;_100_minmax&#39;]</span>
@@ -315,7 +305,7 @@ cutoff computed using whole null distribution:  70.79162686024465
 <section id="min-max">
 <h3><span class="section-number">2.4.1. </span>min-max<a class="headerlink" href="#min-max" title="Permalink to this heading">¶</a></h3>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">null</span>         <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">95</span><span class="p">]</span> <span class="c1">#     results   = [&#39;_100&#39;, &#39;_100_minmax&#39;]</span>
@@ -362,7 +352,7 @@ cutoff computed using truncated min/max of null distribution:  59.03671419283056
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">null</span>         <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">95</span><span class="p">]</span> <span class="c1">#     results   = [&#39;_100&#39;, &#39;_100_minmax&#39;]</span>
@@ -412,7 +402,7 @@ cutoff computed using truncated min/max of null distribution:  59.03671419283056
 <section id="whole-null">
 <h3><span class="section-number">2.4.2. </span>whole null<a class="headerlink" href="#whole-null" title="Permalink to this heading">¶</a></h3>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">null</span>         <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">95</span><span class="p">]</span> <span class="c1">#     results   = [&#39;_100&#39;, &#39;_100_minmax&#39;]</span>
@@ -461,7 +451,7 @@ cutoff computed using whole null distribution:  70.52901730660238
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">null</span>         <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">95</span><span class="p">]</span> <span class="c1">#     results   = [&#39;_100&#39;, &#39;_100_minmax&#39;]</span>
@@ -510,11 +500,10 @@ cutoff computed using whole null distribution:  70.52901730660238
 </div>
 </section>
 </section>
-</section>
 <section id="You-can-also-run-this-cell-instead-of-installing-the-package">
-<h1><span class="section-number">3. </span>You can also run this cell instead of installing the package<a class="headerlink" href="#You-can-also-run-this-cell-instead-of-installing-the-package" title="Permalink to this heading">¶</a></h1>
+<h2><span class="section-number">2.5. </span>You can also run this cell instead of installing the package<a class="headerlink" href="#You-can-also-run-this-cell-instead-of-installing-the-package" title="Permalink to this heading">¶</a></h2>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -1655,6 +1644,7 @@ cutoff computed using whole null distribution:  70.52901730660238
 <br/></pre></div>
 </div>
 </div>
+</section>
 </section>
 
 
