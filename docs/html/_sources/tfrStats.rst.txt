@@ -12,10 +12,18 @@ tfrStats.cluster\_correction module
    :undoc-members:
    :show-inheritance:
 
-tfrStats.coloroffset module
----------------------------
+tfrStats.get\_dpvals\_minmax module
+-----------------------------------
 
-.. automodule:: tfrStats.coloroffset
+.. automodule:: tfrStats.get_dpvals_minmax
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+tfrStats.get\_dpvals\_whole module
+----------------------------------
+
+.. automodule:: tfrStats.get_dpvals_whole
    :members:
    :undoc-members:
    :show-inheritance:
@@ -40,6 +48,14 @@ tfrStats.load\_uv\_tfrs module
 ------------------------------
 
 .. automodule:: tfrStats.load_uv_tfrs
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+tfrStats.plot\_dtfr\_stats module
+---------------------------------
+
+.. automodule:: tfrStats.plot_dtfr_stats
    :members:
    :undoc-members:
    :show-inheritance:
