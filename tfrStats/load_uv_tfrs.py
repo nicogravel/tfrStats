@@ -35,7 +35,7 @@ def load_uv_tfrs(input_path, svar, cond, fband, obs):
 
     @author: Nicolás Gravel, 19.09.2023  
     
-    https://nicogravel.github.io/
+  
     
     """
 

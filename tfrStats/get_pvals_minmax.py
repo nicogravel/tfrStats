@@ -28,7 +28,7 @@ def get_pvals_minmax(tfr_emp, tfr_null, tail):
 
     @author: Nicolás Gravel, 19.09.2023  
     
-    https://nicogravel.github.io/
+
     
     """
 

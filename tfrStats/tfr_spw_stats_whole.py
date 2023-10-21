@@ -35,7 +35,7 @@ def tfr_spw_stats_whole(paths,cond,svar,fband, n_perm):
 
     @author: Nicolás Gravel, 19.09.2023  
     
-    https://nicogravel.github.io/
+   
     
     """
 
