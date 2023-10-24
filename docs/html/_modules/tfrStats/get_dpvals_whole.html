@@ -92,13 +92,8 @@
             
   <h1>Source code for tfrStats.get_dpvals_whole</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">tqdm.auto</span> <span class="kn">import</span> <span class="n">tqdm</span>
-<span class="kn">import</span> <span class="nn">scipy.io</span> <span class="k">as</span> <span class="nn">sio</span>
-<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">inf</span>
 <span class="kn">from</span> <span class="nn">statsmodels.distributions.empirical_distribution</span> <span class="kn">import</span> <span class="n">ECDF</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">scipy.interpolate</span> <span class="kn">import</span> <span class="n">interp2d</span>
-<span class="kn">import</span> <span class="nn">matplotlib.colors</span> <span class="k">as</span> <span class="nn">colors</span>
+
 
 <span class="c1"># function to get p-values for whole distribution</span>
 <div class="viewcode-block" id="get_dpvals_whole"><a class="viewcode-back" href="../../tfrStats.get_dpvals_whole.html#tfrStats.get_dpvals_whole.get_dpvals_whole">[docs]</a><span class="k">def</span> <span class="nf">get_dpvals_whole</span><span class="p">(</span><span class="n">tfr_emp</span><span class="p">,</span> <span class="n">tfr_null</span><span class="p">,</span><span class="n">fband</span><span class="p">,</span> <span class="n">pk</span><span class="p">,</span> <span class="n">sigma</span><span class="p">):</span>
@@ -125,15 +120,15 @@
 <span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="nb">print</span><span class="p">(</span><span class="n">tfr_emp</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">tfr_null</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>    
+    <span class="c1">#print(tfr_emp.shape, tfr_null.shape)    </span>
     <span class="c1"># pool permutations accordingly</span>
     <span class="c1"># n_perm = tfr_null.shape[0]</span>
     <span class="n">tfr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">tfr_emp</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
     <span class="c1">#print(&#39;tfr after averaging :&#39;, tfr.shape)      # frequency x time</span>
     <span class="n">nullDist</span> <span class="o">=</span> <span class="n">tfr_null</span> <span class="c1">#np.nanmean(np.nanmean(tfr_null,axis=0),axis=1) # average conditions and sites</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;null after averaging :&#39;</span><span class="p">,</span><span class="n">nullDist</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="c1"># permutations x frequency x min/max</span>
+    <span class="c1">#print(&#39;null after averaging :&#39;,nullDist.shape) # permutations x frequency x min/max</span>
     <span class="n">stats</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">tfr_emp</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">tfr_emp</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;stats shape :&#39;</span><span class="p">,</span> <span class="n">stats</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="c1">#print(&#39;stats shape :&#39;, stats.shape)</span>
 
     <span class="n">tps</span>  <span class="o">=</span> <span class="p">[</span><span class="mi">57</span><span class="p">,</span><span class="mi">113</span><span class="p">,</span><span class="mi">141</span><span class="p">,</span><span class="mi">140</span><span class="p">]</span>
     <span class="n">time</span> <span class="o">=</span>  <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">start</span> <span class="o">=</span> <span class="o">-</span><span class="mi">800</span><span class="p">,</span> <span class="n">stop</span> <span class="o">=</span> <span class="mi">2000</span><span class="p">,</span> <span class="n">num</span> <span class="o">=</span> <span class="n">tps</span><span class="p">[</span><span class="n">fband</span><span class="p">])</span>

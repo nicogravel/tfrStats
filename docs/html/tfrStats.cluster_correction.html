@@ -112,10 +112,10 @@
 <span class="sig-prename descclassname"><span class="pre">tfrStats.cluster_correction.</span></span><span class="sig-name descname"><span class="pre">cluster_correction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stats</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cluster_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tfrStats/cluster_correction.html#cluster_correction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tfrStats.cluster_correction.cluster_correction" title="Permalink to this definition">¶</a></dt>
 <dd><p>Correct p-values obtained from min-max or whole null distributions
 using nearest neighbours cluster correction</p>
-<p>This functions computes distances between all time-frequency bins, pool p-vals
-of nearest neighbours based on distance threshold (defined by cluster size), tests
-that a time-frequency is below alpha and its neighbours p-vals below alpha, and if
-true, average the p-values within the cluster and assign the resulting average as
+<p>This functions computes Minkowski unweighted distances between all time-frequency bins,
+then,  based on a distance threshold (defined by cluster size) pool the p-vals from the
+nearest neighbours, tests that all the pvalues are below alpha (center bin and and its neighbours),
+and if true, average the p-values within the cluster and assign the resulting average as
 corrected p-value to the time-frequency bin.</p>
 <div class="admonition-todo admonition" id="id1">
 <p class="admonition-title">Todo</p>

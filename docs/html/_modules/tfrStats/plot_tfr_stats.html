@@ -92,10 +92,6 @@
             
   <h1>Source code for tfrStats.plot_tfr_stats</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">tqdm.auto</span> <span class="kn">import</span> <span class="n">tqdm</span>
-<span class="kn">import</span> <span class="nn">scipy.io</span> <span class="k">as</span> <span class="nn">sio</span>
-<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">inf</span>
-<span class="kn">from</span> <span class="nn">statsmodels.distributions.empirical_distribution</span> <span class="kn">import</span> <span class="n">ECDF</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">scipy.interpolate</span> <span class="kn">import</span> <span class="n">interp2d</span>
 <span class="kn">import</span> <span class="nn">matplotlib.colors</span> <span class="k">as</span> <span class="nn">colors</span>
@@ -257,6 +253,7 @@
         <span class="n">null</span> <span class="o">=</span> <span class="n">gavg_null</span>
         <span class="n">null</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">:</span><span class="n">t0</span><span class="p">]</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
         <span class="n">null</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">td</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;H0 dimensons :&#39;</span><span class="p">,</span> <span class="n">null</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
         <span class="n">null_</span> <span class="o">=</span> <span class="n">null</span><span class="p">[</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">null</span><span class="p">)]</span>
         <span class="n">gavg_thr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">null_</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span><span class="n">prctl</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;cutoff computed using whole null distribution: &#39;</span><span class="p">,</span> <span class="n">gavg_thr</span> <span class="p">)</span>

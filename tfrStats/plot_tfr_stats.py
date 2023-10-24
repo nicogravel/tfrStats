@@ -1,8 +1,4 @@
 import numpy as np
-from tqdm.auto import tqdm
-import scipy.io as sio
-from numpy import inf
-from statsmodels.distributions.empirical_distribution import ECDF
 import matplotlib.pyplot as plt
 from scipy.interpolate import interp2d
 import matplotlib.colors as colors
@@ -164,6 +160,7 @@ def plot_tfr_stats(input_path, cond, fband, null, correction, cluster_size, type
         null = gavg_null
         null[1:-1,0:t0]  = np.nan
         null[1:-1,td:-1] = np.nan
+        print('H0 dimensons :', null.shape)
         null_ = null[~np.isnan(null)]
         gavg_thr = np.percentile(null_.flatten(),prctl)
         print('cutoff computed using whole null distribution: ', gavg_thr )

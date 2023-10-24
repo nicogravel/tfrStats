@@ -2,10 +2,6 @@ import numpy as np
 from tqdm.auto import tqdm
 import scipy.io as sio
 from numpy import inf
-from statsmodels.distributions.empirical_distribution import ECDF
-import matplotlib.pyplot as plt
-from scipy.interpolate import interp2d
-import matplotlib.colors as colors
 
 # function to compute the entire null distribution (for each condition, depth, frequency and 400-1000 ms time window)
 def tfr_spw_stats_whole(paths,cond,svar,fband, n_perm):

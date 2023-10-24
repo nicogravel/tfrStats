@@ -1,12 +1,4 @@
 import numpy as np
-from tqdm.auto import tqdm
-import scipy.io as sio
-from numpy import inf
-from statsmodels.distributions.empirical_distribution import ECDF
-import matplotlib.pyplot as plt
-from scipy.interpolate import interp2d
-import matplotlib.colors as colors
-
 
 # function to load the .npz file produced by tfr_spw_stats_minmax or tfr_spw_stats
 def load_uv_tfrs(input_path, svar, cond, fband, obs):

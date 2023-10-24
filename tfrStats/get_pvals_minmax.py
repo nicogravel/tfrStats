@@ -1,11 +1,6 @@
 import numpy as np
-from tqdm.auto import tqdm
-import scipy.io as sio
-from numpy import inf
 from statsmodels.distributions.empirical_distribution import ECDF
-import matplotlib.pyplot as plt
-from scipy.interpolate import interp2d
-import matplotlib.colors as colors
+
 
 # function to get p-values
 def get_pvals_minmax(tfr_emp, tfr_null, tail):
@@ -32,13 +27,13 @@ def get_pvals_minmax(tfr_emp, tfr_null, tail):
     """
 
     # pool permutations accordingly
-    n_perm = tfr_null.shape[0]*tfr_null.shape[2] # permutations x sites
+    #n_perm = tfr_null.shape[0]*tfr_null.shape[2] # permutations x sites
     tfr = np.nanmean(np.nanmean(tfr_emp,axis=0),axis=0) # average conditions and sites
-    print(tfr.shape)      # frequency x time
+    #print(tfr.shape)      # frequency x time
     nullDist = np.nanmean(np.nanmean(tfr_null,axis=1),axis=1) # average conditions and sites
-    print('hola:',nullDist.shape) # permutations x frequency x min/max
+    #nullDist = np.nanmean(np.nanmean(tfr_null,axis=0),axis=1) # average conditions and sites
     stats = np.zeros((tfr_emp.shape[2],tfr_emp.shape[3]))
-    print(stats.shape)
+    #print(stats.shape)
     for i_freq in range(stats.shape[0]):
         for i_time in range(stats.shape[1]):
             if tail == 'two-sided':

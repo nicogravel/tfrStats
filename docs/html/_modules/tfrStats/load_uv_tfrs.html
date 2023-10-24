@@ -92,14 +92,6 @@
             
   <h1>Source code for tfrStats.load_uv_tfrs</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">tqdm.auto</span> <span class="kn">import</span> <span class="n">tqdm</span>
-<span class="kn">import</span> <span class="nn">scipy.io</span> <span class="k">as</span> <span class="nn">sio</span>
-<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">inf</span>
-<span class="kn">from</span> <span class="nn">statsmodels.distributions.empirical_distribution</span> <span class="kn">import</span> <span class="n">ECDF</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">scipy.interpolate</span> <span class="kn">import</span> <span class="n">interp2d</span>
-<span class="kn">import</span> <span class="nn">matplotlib.colors</span> <span class="k">as</span> <span class="nn">colors</span>
-
 
 <span class="c1"># function to load the .npz file produced by tfr_spw_stats_minmax or tfr_spw_stats</span>
 <div class="viewcode-block" id="load_uv_tfrs"><a class="viewcode-back" href="../../tfrStats.load_uv_tfrs.html#tfrStats.load_uv_tfrs.load_uv_tfrs">[docs]</a><span class="k">def</span> <span class="nf">load_uv_tfrs</span><span class="p">(</span><span class="n">input_path</span><span class="p">,</span> <span class="n">svar</span><span class="p">,</span> <span class="n">cond</span><span class="p">,</span> <span class="n">fband</span><span class="p">,</span> <span class="n">obs</span><span class="p">):</span>

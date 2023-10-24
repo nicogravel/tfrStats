@@ -69,7 +69,6 @@ def plot_dtfr_stats(input_path, cond, fband, null, correction, cluster_size, typ
 
     tfr_emp, tfr_null = load_uv_tfrs(input_path, [], cond, fband, results) # load tfrs from .npz file
 
-    #print('hola...',  tfr_emp.shape, tfr_null.shape)
 
     ## helper function used by plot_stats to noramlize colormap ranges
     def coloroffset(min_val, max_val, k):
@@ -134,7 +133,7 @@ def plot_dtfr_stats(input_path, cond, fband, null, correction, cluster_size, typ
     if pk-sigma<=0: 
         pwr_avg = np.mean(pwr[pk:pk+2*sigma])
         print('frequency range : ', x[pk+2*sigma])
-        print('power average a :', pwr_avg)
+        print('power average :', pwr_avg)
         davg = np.squeeze(np.nanmean(tfr_emp[:,:,pk:pk+2*sigma,:],axis=0))
         if type == 'minmax':
             davg_null = np.squeeze(np.nanmean(tfr_null[:,:,:,pk:pk+2*sigma,:],axis=1))
@@ -144,7 +143,7 @@ def plot_dtfr_stats(input_path, cond, fband, null, correction, cluster_size, typ
     elif pk+sigma>=fps[fband]: 
         pwr_avg = np.mean(pwr[pk-2*sigma:pk])
         print('frequency range : ', x[pk-2*sigma])
-        print('power average c :', pwr_avg)
+        print('power average :', pwr_avg)
         davg = np.squeeze(np.nanmean(tfr_emp[:,:,pk-2*sigma:pk,:],axis=0))
         if type == 'minmax':
             davg_null = np.squeeze(np.nanmean(tfr_null[:,:,:,pk-2*sigma:pk,:],axis=1))
@@ -154,7 +153,7 @@ def plot_dtfr_stats(input_path, cond, fband, null, correction, cluster_size, typ
     else:
         print('frequency range : ', x[pk-sigma], x[pk+sigma])
         pwr_avg = np.mean(pwr[pk-sigma:pk+sigma])
-        print('power average b :', pwr_avg)
+        print('power average :', pwr_avg)
         #print(tfr_emp.shape)
         davg = np.squeeze(np.nanmean(tfr_emp[:,:,pk-sigma:pk+sigma,:],axis=0))
         if type == 'minmax':
@@ -162,7 +161,7 @@ def plot_dtfr_stats(input_path, cond, fband, null, correction, cluster_size, typ
         if type == 'whole':
             davg_null = np.squeeze(np.nanmean(tfr_null[:,:,pk-sigma:pk+sigma,:],axis=0))
 
-    print(davg.shape, davg_null.shape)
+    #print(davg.shape, davg_null.shape)
 
     if type == 'minmax':
         ## Min-max
@@ -227,9 +226,10 @@ def plot_dtfr_stats(input_path, cond, fband, null, correction, cluster_size, typ
 
     # Thresholding using truncated min-max distribution
     if type == 'minmax':
-        h0       = np.nanmean(np.nanmean(tfr_null[:,:,:,:,1],axis=0),axis=1) # average conditions and sites
+        h0       = np.nanmean(np.nanmean(tfr_null[:,:,:,:,1],axis=1),axis=1) # average conditions and sites
+        #h0       = np.nanmean(np.nanmean(tfr_null[:,:,:,:,1],axis=1),axis=1) # average conditions and sites
         print('H0 dimensons :', h0.shape)
-        davg_thr = np.percentile(h0.flatten(),prctl) # pool permutations for all frequencies
+        davg_thr = np.percentile(h0.flatten(),prctl) # pool permutations for all frequencies and sites
         print('cutoff computed using truncated min/max of null distribution: ', davg_thr )
 
     # Thresholding using whole distribution
