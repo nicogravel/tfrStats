@@ -67,6 +67,20 @@ def plot_tfr_stats(input_path, cond, fband, null, correction, cluster_size, type
     prctl    = null[1]
     results  = null[0]
 
+
+
+    ## helper function used by plot_stats to noramlize colormap ranges
+    def coloroffset(min_val, max_val, k):
+        if 0 <= k <= 1:  # Ensure k is between 0 and 1
+            point = min_val + k*(max_val - min_val)
+            #print(f'For k={k}, the point in the range {min_val}-{max_val} is: {point}')
+        #else:
+            #print("Error: k must be between 0 and 1")
+
+        return point
+
+
+        
     ## Plot TFR across sites
     fig, ax = plt.subplots(nrows=2, ncols=1,figsize=(6,4))
 
@@ -212,12 +226,3 @@ def plot_tfr_stats(input_path, cond, fband, null, correction, cluster_size, type
     fig.text(0.5, -0.06, txt, ha='center')
     return
 
-    ## helper function used by plot_stats to noramlize colormap ranges
-    def coloroffset(min_val, max_val, k):
-        if 0 <= k <= 1:  # Ensure k is between 0 and 1
-            point = min_val + k*(max_val - min_val)
-            #print(f'For k={k}, the point in the range {min_val}-{max_val} is: {point}')
-        #else:
-            #print("Error: k must be between 0 and 1")
-
-        return point

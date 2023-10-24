@@ -1,6 +1,3 @@
-tfrStats.get\_dpvals\_minmax module
-===================================
-
 .. automodule:: tfrStats.get_dpvals_minmax
    :members:
    :undoc-members:

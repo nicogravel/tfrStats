@@ -1,6 +1,3 @@
-tfrStats.get\_dpvals\_whole module
-==================================
-
 .. automodule:: tfrStats.get_dpvals_whole
    :members:
    :undoc-members:

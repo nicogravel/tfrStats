@@ -1,6 +1,3 @@
-tfrStats.get\_pvals\_minmax module
-==================================
-
 .. automodule:: tfrStats.get_pvals_minmax
    :members:
    :undoc-members:

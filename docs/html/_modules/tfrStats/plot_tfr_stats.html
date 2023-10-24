@@ -160,6 +160,20 @@
     <span class="n">prctl</span>    <span class="o">=</span> <span class="n">null</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
     <span class="n">results</span>  <span class="o">=</span> <span class="n">null</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
+
+
+    <span class="c1">## helper function used by plot_stats to noramlize colormap ranges</span>
+    <span class="k">def</span> <span class="nf">coloroffset</span><span class="p">(</span><span class="n">min_val</span><span class="p">,</span> <span class="n">max_val</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+        <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">k</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>  <span class="c1"># Ensure k is between 0 and 1</span>
+            <span class="n">point</span> <span class="o">=</span> <span class="n">min_val</span> <span class="o">+</span> <span class="n">k</span><span class="o">*</span><span class="p">(</span><span class="n">max_val</span> <span class="o">-</span> <span class="n">min_val</span><span class="p">)</span>
+            <span class="c1">#print(f&#39;For k={k}, the point in the range {min_val}-{max_val} is: {point}&#39;)</span>
+        <span class="c1">#else:</span>
+            <span class="c1">#print(&quot;Error: k must be between 0 and 1&quot;)</span>
+
+        <span class="k">return</span> <span class="n">point</span>
+
+
+        
     <span class="c1">## Plot TFR across sites</span>
     <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
 
@@ -303,17 +317,8 @@
     <span class="c1">#ax[1].title.set_text(&#39;p-values&#39;)</span>
     <span class="n">txt</span><span class="o">=</span><span class="s1">&#39;Cutoff (blue outline) is valid for the 400-1000 ms window.&#39;</span>
     <span class="n">fig</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.06</span><span class="p">,</span> <span class="n">txt</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">)</span>
-    <span class="k">return</span>
+    <span class="k">return</span></div>
 
-    <span class="c1">## helper function used by plot_stats to noramlize colormap ranges</span>
-    <span class="k">def</span> <span class="nf">coloroffset</span><span class="p">(</span><span class="n">min_val</span><span class="p">,</span> <span class="n">max_val</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
-        <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">k</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>  <span class="c1"># Ensure k is between 0 and 1</span>
-            <span class="n">point</span> <span class="o">=</span> <span class="n">min_val</span> <span class="o">+</span> <span class="n">k</span><span class="o">*</span><span class="p">(</span><span class="n">max_val</span> <span class="o">-</span> <span class="n">min_val</span><span class="p">)</span>
-            <span class="c1">#print(f&#39;For k={k}, the point in the range {min_val}-{max_val} is: {point}&#39;)</span>
-        <span class="c1">#else:</span>
-            <span class="c1">#print(&quot;Error: k must be between 0 and 1&quot;)</span>
-
-        <span class="k">return</span> <span class="n">point</span></div>
 </pre></div>
 
           </div>
