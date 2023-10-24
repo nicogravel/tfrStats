@@ -80,7 +80,7 @@ def plot_tfr_stats(input_path, cond, fband, null, correction, cluster_size, type
         return point
 
 
-        
+
     ## Plot TFR across sites
     fig, ax = plt.subplots(nrows=2, ncols=1,figsize=(6,4))
 
@@ -129,7 +129,7 @@ def plot_tfr_stats(input_path, cond, fband, null, correction, cluster_size, type
     tfrange = gavg[:,tt0:ttf]
     _min = np.min(np.min(tfrange.flatten()))
     _max = np.max(np.max(tfrange.flatten()))
-    print('min =',_min,'max =',_max)
+    #print('min =',_min,'max =',_max)
     if cnorm == 1:
         vmin = _min
         vmax =  maxpwr
@@ -148,6 +148,7 @@ def plot_tfr_stats(input_path, cond, fband, null, correction, cluster_size, type
 
     # Thresholding using truncated min-max distribution
     if type == 'minmax':
+        print('min-max')
         h0       = np.nanmean(np.nanmean(tfr_null[:,:,:,:,1],axis=1),axis=1) # average conditions and sites
         print('H0 dimensons :', h0.shape)
         gavg_thr = np.percentile(h0.flatten(),prctl) # pool permutations for all frequencies
@@ -155,6 +156,7 @@ def plot_tfr_stats(input_path, cond, fband, null, correction, cluster_size, type
 
     # Thresholding using whole distribution
     if type == 'whole':
+        print('whole-null')
         gavg_null = np.squeeze(np.nanmean(tfr_null,axis=0))
         gavg_null[np.isnan(gavg_null)] = 0. # just for plotting
         t0 = np.searchsorted(x2,stats_range[0],side='left', sorter=None)

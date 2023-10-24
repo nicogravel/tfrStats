@@ -82,7 +82,7 @@ def plot_dtfr_stats(input_path, cond, fband, null, correction, cluster_size, typ
 
         return point
     
-    
+
     ## Plot TFR across sites
     fig, ax = plt.subplots(nrows=2, ncols=1,figsize=(6,4))
 
@@ -106,20 +106,19 @@ def plot_dtfr_stats(input_path, cond, fband, null, correction, cluster_size, typ
 
 
     # Cross-frequency TFR
-    peaks = np.zeros((5,3,2))
     x    = np.linspace(start = -800, stop = 2000, num = tps[fband])
     tt0  = np.searchsorted(x,stats_range[0],side='left', sorter=None)
     ttf  = np.searchsorted(x,stats_range[1],side='left', sorter=None)
     pwr  = np.mean(gavg[:,tt0:ttf],axis=1)
-    print(pwr.shape)
+    #print(pwr.shape)
     x    = np.linspace(lp[fband], hp[fband], num = fps[fband])
     if fband == 0:
         peak  = np.argmax(pwr); 
-        print(peak)
+        #print(peak)
         sigma = 2
     if fband == 2:
         peak  = np.argmax(pwr[0:5]); 
-        print(peak)
+        #print(peak)
         sigma = 2
     else:
         peak   = np.argmax(pwr); 
@@ -167,7 +166,7 @@ def plot_dtfr_stats(input_path, cond, fband, null, correction, cluster_size, typ
 
     if type == 'minmax':
         ## Min-max
-        print('min max')
+        print('min-max')
         if correction == 1:
             stats = get_dpvals_minmax(davg, davg_null, pk, sigma, tail = 'single-sided')
 
@@ -177,10 +176,10 @@ def plot_dtfr_stats(input_path, cond, fband, null, correction, cluster_size, typ
 
     if type == 'whole':
 
-        print('whole')
+        print('whole-null')
         if correction == 1:
             stats = get_dpvals_whole(davg, davg_null, fband, pk, sigma)
-            print('depth? pvals :', stats.shape)
+            #print('depth? pvals :', stats.shape)
         if correction == 2:
             stats = get_dpvals_whole(davg, davg_null, fband, pk, sigma)
             #print('depth? pvals :', stats.shape)
@@ -200,7 +199,7 @@ def plot_dtfr_stats(input_path, cond, fband, null, correction, cluster_size, typ
     X, Y = np.meshgrid(x, y)
     X2, Y2 = np.meshgrid(x2, y2)
 
-    print(davg.shape)
+    #print(davg.shape)
     davg = np.mean(davg,axis=1) 
     f = interp2d(x, y, np.flipud(davg), kind='linear')
 
@@ -210,7 +209,7 @@ def plot_dtfr_stats(input_path, cond, fband, null, correction, cluster_size, typ
     tfrange = davg[:,tt0:ttf] 
     _min = np.min(np.min(tfrange.flatten()))
     _max = np.max(np.max(tfrange.flatten()))
-    print('min =',_min,'max =',_max)   
+    #print('min =',_min,'max =',_max)   
     if cnorm == 1:
         vmin = _min  
         vmax =  maxpwr
@@ -228,7 +227,7 @@ def plot_dtfr_stats(input_path, cond, fband, null, correction, cluster_size, typ
 
     # Thresholding using truncated min-max distribution
     if type == 'minmax':
-        h0       = np.nanmean(np.nanmean(tfr_null[:,:,:,:,1],axis=1),axis=1) # average conditions and sites
+        h0       = np.nanmean(np.nanmean(tfr_null[:,:,:,:,1],axis=0),axis=1) # average conditions and sites
         print('H0 dimensons :', h0.shape)
         davg_thr = np.percentile(h0.flatten(),prctl) # pool permutations for all frequencies
         print('cutoff computed using truncated min/max of null distribution: ', davg_thr )
@@ -237,7 +236,6 @@ def plot_dtfr_stats(input_path, cond, fband, null, correction, cluster_size, typ
     if type == 'whole':
         t0 = np.searchsorted(x,stats_range[0],side='left', sorter=None)
         td = np.searchsorted(x,stats_range[1],side='left', sorter=None) 
-        print('gato :',davg_null.shape)
         null = np.mean(davg_null,axis=0)
         null[1:-1,0:t0]  = np.nan
         null[1:-1,td:-1] = np.nan
