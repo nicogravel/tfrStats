@@ -10,9 +10,9 @@ def cluster_correction(stats, cluster_size, alpha):
 
     This functions computes Minkowski unweighted distances between all time-frequency bins,
     then,  based on a distance threshold (defined by cluster size) pool the p-vals from the 
-    nearest neighbours, tests that all the pvalues are below alpha (center bin and and its neighbours),
-    and if true, average the p-values within the cluster and assign the resulting average as
-    corrected p-value to the time-frequency bin. 
+    nearest neighbours, tests that all the pvalues are below alpha (center bin and and its 
+    neighbours). If true, average the p-values within the cluster and assign the resulting 
+    average as corrected p-value to the time-frequency bin. 
 
     .. todo::  
         * Adapt the function to work with 3D arrays (i.e. 2D space-time-frequency maps).
