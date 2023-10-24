@@ -18,15 +18,17 @@ def get_dpvals_whole(tfr_emp, tfr_null,fband, pk, sigma):
     cumulative distribution method.
     
     
-    Args:
-        empirical tfr: n_condss x n_sites x n_freqs x n_time (i.e. 30, 12, 16, 113 )
-        null tfr: n_condss x n_sites x n_freqs x n_time (i.e. 30, 12, 16, 113 )
+    .. todo::  
+        * Merge this function with get_pvals_whole.
 
-    Returns:
+    
+    :param float tfr: empirical time frequency representation (i.e. 30, 12, 16, 113 ).
+    :param float null_tfr: nul time frequency representation (i.e. 30, 12, 16, 113 ).
 
-        stats: p-values for each frequency and time bin
-
-    @author: Nicolás Gravel, 19.09.2023  
+    :return: statistical map of p-values for each frequency-time or space-time bin.
+    :rtype: float
+ 
+    @author: Nicolas Gravel, 19.09.2023  
     
     """
 

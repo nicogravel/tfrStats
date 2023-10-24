@@ -1,17 +1,12 @@
 import numpy as np
-from tqdm.auto import tqdm
-import scipy.io as sio
-from numpy import inf
 from statsmodels.distributions.empirical_distribution import ECDF
-import matplotlib.pyplot as plt
-from scipy.interpolate import interp2d
-import matplotlib.colors as colors
+from scipy.spatial.distance import cdist
 
-# Correct the p-values for multiple comparisons using cluster correction
 def cluster_correction(stats, cluster_size, alpha):
 
     """
-    Get p-values from min-max null distribution
+    Correct p-values obtained from min-max or whole null distributions
+    using nearest neighbours cluster correction
 
     This functions computes distances between all time-frequency bins, pool p-vals 
     of nearest neighbours based on distance threshold (defined by cluster size), tests
@@ -19,25 +14,26 @@ def cluster_correction(stats, cluster_size, alpha):
     true, average the p-values within the cluster and assign the resulting average as
     corrected p-value to the time-frequency bin. 
 
+    .. todo::  
+        * Adapt the function to work with 3D arrays (i.e. 2D space-time-frequency maps).
+        * Add the possibility to use a different distance metric.
+        * Add the possibility to use a different cluster correction method (e.g. using permutation-based percentiles as input).
     
-    Args:
-        stats: un-corrected p-values for each frequency and time bin
+    :param float stat: un-corrected p-values for each frequency (and/or time) bin.
+    :param float alpha: statistical threshold (e.g. 0.05).
 
-    Returns:
-
-        stats: corrected p-values for each frequency and time bin
-
-    @author: Nicolás Gravel, 19.09.2023  
+    :return: corrected p-values for each frequency-time or space-time bin.
+    :rtype: float
     
-    
-    """
+    @author: Nicolas Gravel, 19.09.2023  
+    """ 
         
     ## cluster correction
-    from scipy.spatial.distance import cdist
+
     clusters =  np.ones((stats.shape))
     x_idx, y_idx  = np.where(clusters)
     idx = np.vstack((x_idx, y_idx)).T
-    dists = cdist(idx,idx)
+    dists = cdist(idx,idx,'sqeuclidean')
     pvals = stats.flatten()
     pval_corr = np.ones((stats.shape))  
     for i_x in range(stats.shape[0]):
@@ -47,10 +43,10 @@ def cluster_correction(stats, cluster_size, alpha):
                 index = np.where((x_idx == i_x) & (y_idx == i_y))
                 d = np.squeeze(dists[index,:])
                 neighbours = d <= cluster_size
-                pvals[neighbours]
                 pval_nn= pvals[neighbours]
                 pp  = pval_nn <= alpha
+                #if np.count_nonzero(pp) >= np.count_nonzero(neighbours):
                 if np.count_nonzero(pp) >= cluster_size:
-                    pval_corr[i_x , i_y] = np.mean(pval_nn+p)
+                    pval_corr[i_x , i_y] = np.mean(np.append(pval_nn,p))
 
     return pval_corr

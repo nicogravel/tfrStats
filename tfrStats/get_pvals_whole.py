@@ -11,25 +11,24 @@ import matplotlib.colors as colors
 def get_pvals_whole(tfr_emp, tfr_null,fband):
 
     """
-    Get p-values from min-max null distribution
+    Get p-values from whole null distribution
 
     This functions pools the averaged null distribution values and computes 
     the p-values for each frequency and time bin using the empirical
     cumulative distribution method.
     
+    .. todo::  
+        * Adapt the function to work with N-dimensional arrays from different null realizations. 
+        * Add the option to use the min or max values from the null distribution or the whole distribution.
+
     
-    Args:
-        empirical tfr: n_condss x n_sites x n_freqs x n_time (i.e. 30, 12, 16, 113 )
-        null tfr: n_condss x n_sites x n_freqs x n_time (i.e. 30, 12, 16, 113 )
+    :param float tfr: empirical time frequency representation (i.e. 30, 12, 16, 113 ).
+    :param float null_tfr: nul time frequency representation (i.e. 30, 12, 16, 113 ).
 
-    Returns:
-
-        stats: p-values for each frequency and time bin
-
-    @author: Nicolás Gravel, 19.09.2023  
-    
+    :return: statistical map of p-values for each frequency-time or space-time bin.
+    :rtype: float
  
-    
+    @author: Nicolas Gravel, 19.09.2023  
     """
         
     # pool permutations accordingly

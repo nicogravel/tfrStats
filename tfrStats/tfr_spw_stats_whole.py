@@ -16,27 +16,27 @@ def tfr_spw_stats_whole(paths,cond,svar,fband, n_perm):
     Function to compute the null distribution keeping the dimensions of the empirical
     distribution. When testing using the whole null distribution, the permutations are
     averaged and the dimensions of the empirical distributions are preserved. 
+
+    .. todo::  
+        *  Implement onset shifting to account for whole triakl (in the current example we pool values from the 400-1000 ms time window).
+        *  Implement compatibilityu with Syncopy (for now it relies on ftPool_... .mat containing the TFRs computed in Fieldtrip).
+
+        
+    :param string input_path: path to the .npz file.
+    :param in condition: condition index (i.e. 0, 1, 2, 3).
+    :param int svar: spectral power or GPR (not implemented here).
+    :param int fband: frequency band index (i.e. low, high, higher).
+    :param int obs: [nullType, percentile], two integeres: 0 for min-max, 1 for whole, 0-100 percentile.
+    :param int correction: 1 for p-values, 2 for cluster corrected p-values.
+    :param int cluster_size: cluster size.
+    :param float alpha: alpha.    
     
-    In the current example we use the min/max of frequencies pooled in the  400-1000 ms time window.
+    :return: empirical time frequency representation n_conds x n_sites x n_freqs x n_time (i.e. 30, 12, 16, 113).
+    :return: null time frequency representation (i.e. 30, 12, 16, 113  or 1000, 30, 12, 16, 2).
+    :rtype: float
+ 
+    @author: Nicolas Gravel, 19.09.2023 
 
-    It relies on ftPool_... .mat containing the TFRs computed in Fieldtrip.
-
-
-    Args:
-        paths: two strings (input and output paths)
-        condition: an integer
-        svar: spectral power or GPR (not implemented here), integer
-        fband: frequency band index (i.e. low, high, higher), integer
-        n_perm: number of permutations, integer
-
-    Returns and saves:
-        empirical tfr: n_condss x n_sites x n_freqs x n_time (i.e. 30, 12, 16, 113 )
-        null tfr: n_condss x n_sites x n_freqs x n_time (i.e. 30, 12, 16, 113 )
-
-    @author: Nicolás Gravel, 19.09.2023  
-    
-   
-    
     """
 
     tps = [57,113,141,140]

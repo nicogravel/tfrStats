@@ -28,28 +28,25 @@ def plot_dtfr_stats(input_path, cond, fband, null, correction, cluster_size, typ
     threshold for neighbours frequencies and time bins if they are alltogheter above alpha.
     
     
-    Args:
-        input path: string 
-        condition: an integer
-        null: [nullType, percentile], two integeres: 0 for min-max, 1 for whole, 0-100 percentile
-        fband: frequency band index (i.e. low, high, higher), integer
-        cluster size: integer
-        correction: integer, 1 p-values, 2 for cluster corrected p-values
-        alpha: alpha... float
-
-    Returns:
-        
-        In case of min-max:
-        empirical tfr: n_condss x n_sites x n_freqs x n_time (i.e. 30, 12, 16, 113 )
-        null tfr: n_perm x n_conds x n_sites x frequencies x min/max (i.e. 1000, 30, 12, 16, 2 )
-
-        In case of whole-null
-        empirical tfr: n_condss x n_sites x n_freqs x n_time (i.e. 30, 12, 16, 113 )
-        null tfr: n_condss x n_sites x n_freqs x n_time (i.e. 30, 12, 16, 113 )
-
-    @author: Nicolás Gravel, 19.09.2023  
     
+     .. todo::  
+        * Handle parameters with dictionary. 
+
+
+    :param string input_path: path to the .npz file.
+    :param in condition: condition index (i.e. 0, 1, 2, 3).
+    :param int svar: spectral power or GPR (not implemented here).
+    :param int fband: frequency band index (i.e. low, high, higher).
+    :param int obs: [nullType, percentile], two integeres: 0 for min-max, 1 for whole, 0-100 percentile.
+    :param int correction: 1 for p-values, 2 for cluster corrected p-values.
+    :param int cluster_size: cluster size.
+    :param float alpha: alpha.    
     
+    :return: empirical time frequency representation n_conds x n_sites x n_freqs x n_time (i.e. 30, 12, 16, 113).
+    :return: null time frequency representation (i.e. 30, 12, 16, 113  or 1000, 30, 12, 16, 2).
+    :rtype: float
+ 
+    @author: Nicolas Gravel, 19.09.2023 
     """
         
     tps           = [57,113,141,140] # time windows
@@ -296,18 +293,13 @@ def plot_dtfr_stats(input_path, cond, fband, null, correction, cluster_size, typ
     return
 
 
-## helper function used by plot_stats to noramlize colormap ranges
-def coloroffset(min_val, max_val, k):
-    """
-    Set colormap center offset
+    ## helper function used by plot_stats to noramlize colormap ranges
+    def coloroffset(min_val, max_val, k):
 
-    Helper function used by plot_stats to noramlize colormap ranges
-    
-    """
-    if 0 <= k <= 1:  # Ensure k is between 0 and 1
-        point = min_val + k*(max_val - min_val)
-        #print(f'For k={k}, the point in the range {min_val}-{max_val} is: {point}')
-    #else:
-        #print("Error: k must be between 0 and 1")
+        if 0 <= k <= 1:  # Ensure k is between 0 and 1
+            point = min_val + k*(max_val - min_val)
+            #print(f'For k={k}, the point in the range {min_val}-{max_val} is: {point}')
+        #else:
+            #print("Error: k must be between 0 and 1")
 
-    return point
+        return point

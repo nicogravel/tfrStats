@@ -4,85 +4,19 @@ tfrStats package
 Submodules
 ----------
 
-tfrStats.cluster\_correction module
------------------------------------
+.. toctree::
+   :maxdepth: 4
 
-.. automodule:: tfrStats.cluster_correction
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-tfrStats.get\_dpvals\_minmax module
------------------------------------
-
-.. automodule:: tfrStats.get_dpvals_minmax
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-tfrStats.get\_dpvals\_whole module
-----------------------------------
-
-.. automodule:: tfrStats.get_dpvals_whole
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-tfrStats.get\_pvals\_minmax module
-----------------------------------
-
-.. automodule:: tfrStats.get_pvals_minmax
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-tfrStats.get\_pvals\_whole module
----------------------------------
-
-.. automodule:: tfrStats.get_pvals_whole
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-tfrStats.load\_uv\_tfrs module
-------------------------------
-
-.. automodule:: tfrStats.load_uv_tfrs
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-tfrStats.plot\_dtfr\_stats module
----------------------------------
-
-.. automodule:: tfrStats.plot_dtfr_stats
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-tfrStats.plot\_tfr\_stats module
---------------------------------
-
-.. automodule:: tfrStats.plot_tfr_stats
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-tfrStats.tfr\_spw\_stats\_minmax module
----------------------------------------
-
-.. automodule:: tfrStats.tfr_spw_stats_minmax
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-tfrStats.tfr\_spw\_stats\_whole module
---------------------------------------
-
-.. automodule:: tfrStats.tfr_spw_stats_whole
-   :members:
-   :undoc-members:
-   :show-inheritance:
+   tfrStats.cluster_correction
+   tfrStats.get_dpvals_minmax
+   tfrStats.get_dpvals_whole
+   tfrStats.get_pvals_minmax
+   tfrStats.get_pvals_whole
+   tfrStats.load_uv_tfrs
+   tfrStats.plot_dtfr_stats
+   tfrStats.plot_tfr_stats
+   tfrStats.tfr_spw_stats_minmax
+   tfrStats.tfr_spw_stats_whole
 
 Module contents
 ---------------

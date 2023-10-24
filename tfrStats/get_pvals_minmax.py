@@ -13,23 +13,22 @@ def get_pvals_minmax(tfr_emp, tfr_null, tail):
     """
     Get p-values from min-max null distribution
 
-    This functions pools the permutated min/max values and computes 
+    This functions pools the permuted min-max values and computes 
     the p-values for each frequency and time bin using the empirical
     cumulative distribution method.
     
-    
-    Args:
-        empirical tfr: n_condss x n_sites x n_freqs x n_time (i.e. 30, 12, 16, 113 )
-        null tfr: n_perm x n_conds x n_sites x frequencies x min/max (i.e. 1000, 30, 12, 16, 2 )
 
-    Returns:
-
-        stats: p-values for each frequency and time bin
-
-    @author: Nicolás Gravel, 19.09.2023  
-    
+    .. todo::  
+        * Merge this function with get_pvals_whole.
 
     
+    :param float tfr: empirical time frequency representation (i.e. 30, 12, 16, 113 ).
+    :param float null_tfr: nul time frequency representation (i.e. 1000, 30, 12, 16, 2 ).
+
+    :return: statistical map of p-values for each frequency-time or space-time bin.
+    :rtype: float
+ 
+    @author: Nicolas Gravel, 19.09.2023  
     """
 
     # pool permutations accordingly
