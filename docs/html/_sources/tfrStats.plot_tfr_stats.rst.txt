@@ -1,3 +1,6 @@
+tfrStats.plot\_tfr\_stats module
+================================
+
 .. automodule:: tfrStats.plot_tfr_stats
    :members:
    :undoc-members:

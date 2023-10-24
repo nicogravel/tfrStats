@@ -1,3 +1,6 @@
+tfrStats.tfr\_spw\_stats\_whole module
+======================================
+
 .. automodule:: tfrStats.tfr_spw_stats_whole
    :members:
    :undoc-members:
