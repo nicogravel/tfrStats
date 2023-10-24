@@ -17,7 +17,7 @@ def cluster_correction(stats, cluster_size, alpha):
     .. todo::  
         * Adapt the function to work with 3D arrays (i.e. 2D space-time-frequency maps).
         * Add the possibility to use a different distance metric.
-        * Add the possibility to use a different cluster correction method (e.g. using permutation-based percentiles as input).
+        * Add the possibility to use a different cluster correction method.
     
     :param float stat: un-corrected p-values for each frequency (and/or time) bin.
     :param float alpha: statistical threshold (e.g. 0.05).
