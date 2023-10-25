@@ -132,8 +132,8 @@ def plot_dtfr_stats(input_path, cond, fband, null, correction, cluster_size, typ
 
     if pk-sigma<=0: 
         pwr_avg = np.mean(pwr[pk:pk+2*sigma])
-        print('frequency range : ', x[pk+2*sigma])
-        print('power average :', pwr_avg)
+        print('peak frequency range : ', x[pk+2*sigma])
+        print('power average within peak:', pwr_avg)
         davg = np.squeeze(np.nanmean(tfr_emp[:,:,pk:pk+2*sigma,:],axis=0))
         if type == 'minmax':
             davg_null = np.squeeze(np.nanmean(tfr_null[:,:,:,pk:pk+2*sigma,:],axis=1))
@@ -142,8 +142,8 @@ def plot_dtfr_stats(input_path, cond, fband, null, correction, cluster_size, typ
 
     elif pk+sigma>=fps[fband]: 
         pwr_avg = np.mean(pwr[pk-2*sigma:pk])
-        print('frequency range : ', x[pk-2*sigma])
-        print('power average :', pwr_avg)
+        print('peak frequency range : ', x[pk-2*sigma])
+        print('power average within peak:', pwr_avg)
         davg = np.squeeze(np.nanmean(tfr_emp[:,:,pk-2*sigma:pk,:],axis=0))
         if type == 'minmax':
             davg_null = np.squeeze(np.nanmean(tfr_null[:,:,:,pk-2*sigma:pk,:],axis=1))
@@ -151,9 +151,9 @@ def plot_dtfr_stats(input_path, cond, fband, null, correction, cluster_size, typ
             davg_null = np.squeeze(np.nanmean(tfr_null[:,:,pk-2*sigma:pk,:],axis=0))
   
     else:
-        print('frequency range : ', x[pk-sigma], x[pk+sigma])
+        print('peak frequency range : ', x[pk-sigma], x[pk+sigma])
         pwr_avg = np.mean(pwr[pk-sigma:pk+sigma])
-        print('power average :', pwr_avg)
+        print('power average within peak:', pwr_avg)
         #print(tfr_emp.shape)
         davg = np.squeeze(np.nanmean(tfr_emp[:,:,pk-sigma:pk+sigma,:],axis=0))
         if type == 'minmax':
@@ -188,8 +188,8 @@ def plot_dtfr_stats(input_path, cond, fband, null, correction, cluster_size, typ
 
     davg[np.isnan(davg)] = 0
     davg_null[np.isnan(davg_null)] = 0
-    print('depth average  :', davg.shape)
-    print('depth null-average  :', davg_null.shape)
+    #print('depth average  :', davg.shape)
+    #print('depth null-average  :', davg_null.shape) # e.g. depth null-average  : (1000, 12, 4, 2)
 
     x =  np.linspace(start = -800, stop = 2000, num = tps[fband])
     y = np.linspace(start=-550, stop=550, num=12).astype(int)
@@ -226,11 +226,12 @@ def plot_dtfr_stats(input_path, cond, fband, null, correction, cluster_size, typ
 
     # Thresholding using truncated min-max distribution
     if type == 'minmax':
-        h0       = np.nanmean(np.nanmean(tfr_null[:,:,:,:,1],axis=1),axis=1) # average conditions and sites
-        #h0       = np.nanmean(np.nanmean(tfr_null[:,:,:,:,1],axis=1),axis=1) # average conditions and sites
-        print('H0 dimensons :', h0.shape)
-        davg_thr = np.percentile(h0.flatten(),prctl) # pool permutations for all frequencies and sites
-        print('cutoff computed using truncated min/max of null distribution: ', davg_thr )
+        h0       = davg_null[:,:,:,1] 
+        h0       = np.amax(h0, axis=2) # max across frequency bins
+        h0       = np.amax(h0, axis=1) # max across depths
+        davg_thr = np.percentile(h0.flatten(),prctl) 
+        print('cutoff computed using min/max of null distribution: ', davg_thr )
+
 
     # Thresholding using whole distribution
     if type == 'whole':

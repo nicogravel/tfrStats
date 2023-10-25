@@ -145,10 +145,15 @@ def plot_tfr_stats(input_path, cond, fband, null, correction, cluster_size, type
     # Thresholding using truncated min-max distribution
     if type == 'minmax':
         print('min-max')
-        h0       = np.nanmean(np.nanmean(tfr_null[:,:,:,:,1],axis=1),axis=1) # average conditions and sites
-        print('H0 dimensons :', h0.shape)
-        gavg_thr = np.percentile(h0.flatten(),prctl) # pool permutations for all frequencies
-        print('cutoff computed using truncated min/max of null distribution: ', gavg_thr )
+        tail = 'single-sided'
+        if tail == 'two-sided':
+            nullDist  = tfr_null[:,:,:,:,:]  # use the both min and max
+        elif tail == 'single-sided':
+            nullDist   = tfr_null[:,:,:,:,1]  # use the max
+        nullDist     = np.nanmean(nullDist,axis=1) # average conditions
+        nullDist     = np.amax(nullDist,axis=1) # max across sites
+        gavg_thr = np.percentile(nullDist.flatten(),prctl) # pool permutations for all frequencies
+        print('cutoff computed using min/max of null distribution: ', gavg_thr )
 
     # Thresholding using whole distribution
     if type == 'whole':
@@ -160,7 +165,7 @@ def plot_tfr_stats(input_path, cond, fband, null, correction, cluster_size, type
         null = gavg_null
         null[1:-1,0:t0]  = np.nan
         null[1:-1,td:-1] = np.nan
-        print('H0 dimensons :', null.shape)
+        #print('H0 shape :', null.shape)
         null_ = null[~np.isnan(null)]
         gavg_thr = np.percentile(null_.flatten(),prctl)
         print('cutoff computed using whole null distribution: ', gavg_thr )

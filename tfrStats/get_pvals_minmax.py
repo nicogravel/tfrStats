@@ -28,18 +28,18 @@ def get_pvals_minmax(tfr_emp, tfr_null, tail):
 
     # pool permutations accordingly
     #n_perm = tfr_null.shape[0]*tfr_null.shape[2] # permutations x sites
-    tfr = np.nanmean(np.nanmean(tfr_emp,axis=0),axis=0) # average conditions and sites
-    #print(tfr.shape)      # frequency x time
-    nullDist = np.nanmean(np.nanmean(tfr_null,axis=1),axis=1) # average conditions and sites
-    #nullDist = np.nanmean(np.nanmean(tfr_null,axis=0),axis=1) # average conditions and sites
+    tfr = np.nanmean(np.nanmean(tfr_emp,axis=0),axis=0) # average conditions and sites 
+    if tail == 'two-sided':
+        nullDist  = tfr_null[:,:,:,:,:]  # use the both min and max
+    elif tail == 'single-sided':
+        nullDist   = tfr_null[:,:,:,:,1]  # use the max
+    nullDist     = np.nanmean(nullDist,axis=1) # average conditions
+    nullDist     = np.amax(nullDist,axis=1) # average sites
+    #print('H0:',nullDist.shape)
     stats = np.zeros((tfr_emp.shape[2],tfr_emp.shape[3]))
-    #print(stats.shape)
     for i_freq in range(stats.shape[0]):
+        null = nullDist
         for i_time in range(stats.shape[1]):
-            if tail == 'two-sided':
-                null = nullDist[:,:,:] # use the both min and max
-            elif tail == 'single-sided':
-                null  = nullDist[:,:,1] # use the max
             obs = np.squeeze(tfr[i_freq,i_time])
             ecdf = ECDF(null.flatten())
             p_fwe = ecdf(obs)

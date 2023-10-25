@@ -137,7 +137,6 @@ be error to be spot or loops to optimize.</p>
 <p>Depending on the approach, the computation of the p-values will change slightly. In the min-max approach the minimum and maximum values at each permutations are used. When testing using the whole null distribution, the null values obtained from the permutations are averaged the same way the empirical distribution is averaged so the dimensions of the empirical distributions are preserved in the null distribution. Once the null distributions have been obtained, p-values are obtained using the
 empirical cumulative distribution method. Additionally, an optional step is illustrated in which cluster correction of the p-values is implemented. Provided the right Python environment is installed and data, this Jupyter notebook should work as a simple mini-tutorial and support the discussion of these and related basic approaches for computing TFRs and assessing their statistical significance in a clear way. The functions within this notebook are provided in an exploratory state and are
 subject to change. A background section with an open discussion subsection is included. Please feel free to use it help improve the codebook. Optionally, the package can be downloaded from here: <a class="reference external" href="https://github.com/nicogravel/tfrStats">https://github.com/nicogravel/tfrStats</a></p>
-<p>The statistical map of p-values obtained using min-max seems to miss spectral and spatial detail. This leads to an overestimation of significance thresholds. While the cluster correction seems to partially remediate this, using the entire null-distribution provides more spectral and spatial detail, making the cluster correction optional and the whole-null approache more appealing for this case.</p>
 <section id="Installl-the-package">
 <h2><span class="section-number">2.1. </span>Installl the package<a class="headerlink" href="#Installl-the-package" title="Permalink to this heading">¶</a></h2>
 <p>To run the <a class="reference external" href="https://github.com/nicogravel/tfrStats/blob/main/docs/html/notebooks/statistical_approach.ipynb">notebook</a>, clone the package locally (optionally forking it first) and then install it:</p>
@@ -196,8 +195,7 @@ pip install -e .
 tfr emp  :  (30, 12, 16, 113)
 tfr null    (1000, 30, 12, 16, 2)
 min-max
-H0 dimensons : (1000, 16)
-cutoff computed using truncated min/max of null distribution:  59.036714192830566
+cutoff computed using min/max of null distribution:  75.96054268486813
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -235,7 +233,6 @@ cutoff computed using truncated min/max of null distribution:  59.03671419283056
 tfr emp  :  (30, 12, 16, 113)
 tfr null    (30, 12, 16, 113)
 whole-null
-H0 dimensons : (12, 16, 113)
 cutoff computed using whole null distribution:  70.79162686024465
 </pre></div></div>
 </div>
@@ -279,8 +276,7 @@ p-value to the time-frequency bin.</p>
 tfr emp  :  (30, 12, 16, 113)
 tfr null    (1000, 30, 12, 16, 2)
 min-max
-H0 dimensons : (1000, 16)
-cutoff computed using truncated min/max of null distribution:  59.036714192830566
+cutoff computed using min/max of null distribution:  75.96054268486813
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -318,7 +314,6 @@ cutoff computed using truncated min/max of null distribution:  59.03671419283056
 tfr emp  :  (30, 12, 16, 113)
 tfr null    (30, 12, 16, 113)
 whole-null
-H0 dimensons : (12, 16, 113)
 cutoff computed using whole null distribution:  70.79162686024465
 </pre></div></div>
 </div>
@@ -360,13 +355,10 @@ cutoff computed using whole null distribution:  70.79162686024465
 /Volumes/Gandalf/MWlamprop/results/stats/univariate/uvtfr_stats_high_grat_spw_1000_minmax.npz
 tfr emp  :  (30, 12, 16, 113)
 tfr null    (1000, 30, 12, 16, 2)
-frequency range :  28.0 44.0
-power average : 86.6390137791448
+peak frequency range :  28.0 44.0
+power average within peak: 86.6390137791448
 min-max
-depth average  : (12, 4, 113)
-depth null-average  : (1000, 12, 4, 2)
-H0 dimensons : (1000, 16)
-cutoff computed using truncated min/max of null distribution:  59.036714192830566
+cutoff computed using min/max of null distribution:  70.91082666125475
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -403,11 +395,9 @@ cutoff computed using truncated min/max of null distribution:  59.03671419283056
 /Volumes/Gandalf/MWlamprop/results/stats/univariate/uvtfr_stats_high_grat_spw_100.npz
 tfr emp  :  (30, 12, 16, 113)
 tfr null    (30, 12, 16, 113)
-frequency range :  28.0 44.0
-power average : 86.6390137791448
+peak frequency range :  28.0 44.0
+power average within peak: 86.6390137791448
 whole-null
-depth average  : (12, 4, 113)
-depth null-average  : (12, 4, 113)
 cutoff computed using whole null distribution:  70.52901730660238
 </pre></div></div>
 </div>
@@ -450,13 +440,10 @@ acorrected p-value to the space-frequency bin.</p>
 /Volumes/Gandalf/MWlamprop/results/stats/univariate/uvtfr_stats_high_grat_spw_1000_minmax.npz
 tfr emp  :  (30, 12, 16, 113)
 tfr null    (1000, 30, 12, 16, 2)
-frequency range :  28.0 44.0
-power average : 86.6390137791448
+peak frequency range :  28.0 44.0
+power average within peak: 86.6390137791448
 min-max
-depth average  : (12, 4, 113)
-depth null-average  : (1000, 12, 4, 2)
-H0 dimensons : (1000, 16)
-cutoff computed using truncated min/max of null distribution:  59.036714192830566
+cutoff computed using min/max of null distribution:  70.91082666125475
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -493,11 +480,9 @@ cutoff computed using truncated min/max of null distribution:  59.03671419283056
 /Volumes/Gandalf/MWlamprop/results/stats/univariate/uvtfr_stats_high_grat_spw_100.npz
 tfr emp  :  (30, 12, 16, 113)
 tfr null    (30, 12, 16, 113)
-frequency range :  28.0 44.0
-power average : 86.6390137791448
+peak frequency range :  28.0 44.0
+power average within peak: 86.6390137791448
 whole-null
-depth average  : (12, 4, 113)
-depth null-average  : (12, 4, 113)
 cutoff computed using whole null distribution:  70.52901730660238
 </pre></div></div>
 </div>
