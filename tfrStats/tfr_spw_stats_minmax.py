@@ -4,7 +4,6 @@ import scipy.io as sio
 from numpy import inf
 
 
-
 def tfr_spw_stats_minmax(paths, cond, svar, fband, n_perm):
     
 

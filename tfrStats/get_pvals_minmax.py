@@ -1,8 +1,6 @@
 import numpy as np
 from statsmodels.distributions.empirical_distribution import ECDF
 
-
-# function to get p-values
 def get_pvals_minmax(tfr_emp, tfr_null, tail):
 
     """
@@ -26,16 +24,14 @@ def get_pvals_minmax(tfr_emp, tfr_null, tail):
     @author: Nicolas Gravel, 19.09.2023  
     """
 
-    # pool permutations accordingly
-    #n_perm = tfr_null.shape[0]*tfr_null.shape[2] # permutations x sites
+    #n_perm = tfr_null.shape[0]
     tfr = np.nanmean(np.nanmean(tfr_emp,axis=0),axis=0) # average conditions and sites 
     if tail == 'two-sided':
         nullDist  = tfr_null[:,:,:,:,:]  # use the both min and max
     elif tail == 'single-sided':
         nullDist   = tfr_null[:,:,:,:,1]  # use the max
     nullDist     = np.nanmean(nullDist,axis=1) # average conditions
-    nullDist     = np.amax(nullDist,axis=1) # average sites
-    #print('H0:',nullDist.shape)
+    nullDist     = np.amax(nullDist,axis=1) # max across sites
     stats = np.zeros((tfr_emp.shape[2],tfr_emp.shape[3]))
     for i_freq in range(stats.shape[0]):
         null = nullDist

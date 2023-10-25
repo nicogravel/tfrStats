@@ -3,8 +3,8 @@ from tqdm.auto import tqdm
 import scipy.io as sio
 from numpy import inf
 
-# function to compute the entire null distribution (for each condition, depth, frequency and 400-1000 ms time window)
-def tfr_spw_stats_whole(paths,cond,svar,fband, n_perm):
+
+def tfr_spw_stats_whole(paths, cond, svar, fband, n_perm):
 
     """
     Permutation based TFR statistical asessement based on whole null distribution

@@ -12,7 +12,6 @@ from tfrStats.cluster_correction import cluster_correction as cluster_correction
 import warnings
 warnings.filterwarnings('ignore')
 
-# function to plot the tfr + stats rresults loaded using load_uv_tfr s
 def plot_tfr_stats(input_path, cond, fband, null, correction, cluster_size, type, alpha):
 
     """

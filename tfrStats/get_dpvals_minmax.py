@@ -1,8 +1,7 @@
 import numpy as np
 from statsmodels.distributions.empirical_distribution import ECDF
 
-# function to get p-values
-def get_dpvals_minmax(tfr_emp, tfr_null, pk, sigma, tail):
+def get_dpvals_minmax(tfr_emp, tfr_null, tail):
 
     """
     Get p-values from whole null distribution
@@ -30,13 +29,15 @@ def get_dpvals_minmax(tfr_emp, tfr_null, pk, sigma, tail):
         nullDist       = tfr_null[:,:,:,1] 
     elif tail == 'two-sided':
         nullDist       = tfr_null[:,:,:,0]  
-    #nullDist      = np.amax(nullDist, axis=2) # max across frequency bins
-    H0       = np.amax(nullDist, axis=1)       # max across site
+    nullDist      = np.amax(nullDist, axis=2) # max across frequency bins
+    #nullDist      = np.nanmean(nullDist, axis=2) # mean across frequency bins
+    null           = np.amax(nullDist, axis=1) # max across site
+    #null           = np.nanmean(nullDist, axis=1) # average across sites (noo!)
     stats = np.zeros((tfr_emp.shape[0],tfr_emp.shape[2]))
     for i_site in range(stats.shape[0]):
         for i_time in range(stats.shape[1]):
             obs = np.squeeze(tfr[i_site,i_time])
-            ecdf = ECDF(H0.flatten())
+            ecdf = ECDF(null.flatten())
             p_fwe = ecdf(obs)
             stats[i_site,i_time] = 1.0 - p_fwe
             #stats[i_freq,i_time] = (null >= obs).sum() / n_perm

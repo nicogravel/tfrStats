@@ -96,8 +96,8 @@
 <span class="kn">import</span> <span class="nn">scipy.io</span> <span class="k">as</span> <span class="nn">sio</span>
 <span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">inf</span>
 
-<span class="c1"># function to compute the entire null distribution (for each condition, depth, frequency and 400-1000 ms time window)</span>
-<div class="viewcode-block" id="tfr_spw_stats_whole"><a class="viewcode-back" href="../../tfrStats.tfr_spw_stats_whole.html#tfrStats.tfr_spw_stats_whole.tfr_spw_stats_whole">[docs]</a><span class="k">def</span> <span class="nf">tfr_spw_stats_whole</span><span class="p">(</span><span class="n">paths</span><span class="p">,</span><span class="n">cond</span><span class="p">,</span><span class="n">svar</span><span class="p">,</span><span class="n">fband</span><span class="p">,</span> <span class="n">n_perm</span><span class="p">):</span>
+
+<div class="viewcode-block" id="tfr_spw_stats_whole"><a class="viewcode-back" href="../../tfrStats.tfr_spw_stats_whole.html#tfrStats.tfr_spw_stats_whole.tfr_spw_stats_whole">[docs]</a><span class="k">def</span> <span class="nf">tfr_spw_stats_whole</span><span class="p">(</span><span class="n">paths</span><span class="p">,</span> <span class="n">cond</span><span class="p">,</span> <span class="n">svar</span><span class="p">,</span> <span class="n">fband</span><span class="p">,</span> <span class="n">n_perm</span><span class="p">):</span>
 
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Permutation based TFR statistical asessement based on whole null distribution</span>

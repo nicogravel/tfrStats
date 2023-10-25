@@ -167,20 +167,20 @@ def plot_dtfr_stats(input_path, cond, fband, null, correction, cluster_size, typ
         ## Min-max
         print('min-max')
         if correction == 1:
-            stats = get_dpvals_minmax(davg, davg_null, pk, sigma, tail = 'single-sided')
+            stats = get_dpvals_minmax(davg, davg_null, tail = 'single-sided')
 
         if correction == 2:
-            stats = get_dpvals_minmax(davg, davg_null, pk, sigma, tail = 'single-sided')
+            stats = get_dpvals_minmax(davg, davg_null, tail = 'single-sided')
             pvals_corr = cluster_correction(stats, cluster_size, alpha)
 
     if type == 'whole':
 
         print('whole-null')
         if correction == 1:
-            stats = get_dpvals_whole(davg, davg_null, fband, pk, sigma)
+            stats = get_dpvals_whole(davg, davg_null, fband)
             #print('depth? pvals :', stats.shape)
         if correction == 2:
-            stats = get_dpvals_whole(davg, davg_null, fband, pk, sigma)
+            stats = get_dpvals_whole(davg, davg_null, fband)
             #print('depth? pvals :', stats.shape)
             pvals_corr = cluster_correction(stats, cluster_size, alpha)
             #print('depth?  corrected pvals :', pvals_corr.shape)

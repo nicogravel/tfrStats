@@ -260,20 +260,20 @@
         <span class="c1">## Min-max</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;min-max&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">correction</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="n">stats</span> <span class="o">=</span> <span class="n">get_dpvals_minmax</span><span class="p">(</span><span class="n">davg</span><span class="p">,</span> <span class="n">davg_null</span><span class="p">,</span> <span class="n">pk</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">tail</span> <span class="o">=</span> <span class="s1">&#39;single-sided&#39;</span><span class="p">)</span>
+            <span class="n">stats</span> <span class="o">=</span> <span class="n">get_dpvals_minmax</span><span class="p">(</span><span class="n">davg</span><span class="p">,</span> <span class="n">davg_null</span><span class="p">,</span> <span class="n">tail</span> <span class="o">=</span> <span class="s1">&#39;single-sided&#39;</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">correction</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
-            <span class="n">stats</span> <span class="o">=</span> <span class="n">get_dpvals_minmax</span><span class="p">(</span><span class="n">davg</span><span class="p">,</span> <span class="n">davg_null</span><span class="p">,</span> <span class="n">pk</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">tail</span> <span class="o">=</span> <span class="s1">&#39;single-sided&#39;</span><span class="p">)</span>
+            <span class="n">stats</span> <span class="o">=</span> <span class="n">get_dpvals_minmax</span><span class="p">(</span><span class="n">davg</span><span class="p">,</span> <span class="n">davg_null</span><span class="p">,</span> <span class="n">tail</span> <span class="o">=</span> <span class="s1">&#39;single-sided&#39;</span><span class="p">)</span>
             <span class="n">pvals_corr</span> <span class="o">=</span> <span class="n">cluster_correction</span><span class="p">(</span><span class="n">stats</span><span class="p">,</span> <span class="n">cluster_size</span><span class="p">,</span> <span class="n">alpha</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;whole&#39;</span><span class="p">:</span>
 
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;whole-null&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">correction</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="n">stats</span> <span class="o">=</span> <span class="n">get_dpvals_whole</span><span class="p">(</span><span class="n">davg</span><span class="p">,</span> <span class="n">davg_null</span><span class="p">,</span> <span class="n">fband</span><span class="p">,</span> <span class="n">pk</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span>
+            <span class="n">stats</span> <span class="o">=</span> <span class="n">get_dpvals_whole</span><span class="p">(</span><span class="n">davg</span><span class="p">,</span> <span class="n">davg_null</span><span class="p">,</span> <span class="n">fband</span><span class="p">)</span>
             <span class="c1">#print(&#39;depth? pvals :&#39;, stats.shape)</span>
         <span class="k">if</span> <span class="n">correction</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
-            <span class="n">stats</span> <span class="o">=</span> <span class="n">get_dpvals_whole</span><span class="p">(</span><span class="n">davg</span><span class="p">,</span> <span class="n">davg_null</span><span class="p">,</span> <span class="n">fband</span><span class="p">,</span> <span class="n">pk</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span>
+            <span class="n">stats</span> <span class="o">=</span> <span class="n">get_dpvals_whole</span><span class="p">(</span><span class="n">davg</span><span class="p">,</span> <span class="n">davg_null</span><span class="p">,</span> <span class="n">fband</span><span class="p">)</span>
             <span class="c1">#print(&#39;depth? pvals :&#39;, stats.shape)</span>
             <span class="n">pvals_corr</span> <span class="o">=</span> <span class="n">cluster_correction</span><span class="p">(</span><span class="n">stats</span><span class="p">,</span> <span class="n">cluster_size</span><span class="p">,</span> <span class="n">alpha</span><span class="p">)</span>
             <span class="c1">#print(&#39;depth?  corrected pvals :&#39;, pvals_corr.shape)</span>

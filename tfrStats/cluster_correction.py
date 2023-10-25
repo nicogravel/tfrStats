@@ -8,7 +8,7 @@ def cluster_correction(stats, cluster_size, alpha):
     Correct p-values obtained from min-max or whole null distributions
     using nearest neighbours cluster correction
 
-    This functions computes Minkowski unweighted distances between all time-frequency bins,
+    This functions computes L1 unweighted distances between all time-frequency bins,
     then,  based on a distance threshold (defined by cluster size) pool the p-vals from the 
     nearest neighbours, tests that all the pvalues are below alpha (center bin and and its 
     neighbours). If true, average the p-values within the cluster and assign the resulting 
@@ -29,11 +29,10 @@ def cluster_correction(stats, cluster_size, alpha):
     """ 
         
     ## cluster correction
-
     clusters =  np.ones((stats.shape))
     x_idx, y_idx  = np.where(clusters)
     idx = np.vstack((x_idx, y_idx)).T
-    dists = cdist(idx,idx, 'minkowski', p=2.0)
+    dists = cdist(idx,idx, 'minkowski', p=1.0)
     pvals = stats.flatten()
     pval_corr = np.ones((stats.shape))  
     for i_x in range(stats.shape[0]):

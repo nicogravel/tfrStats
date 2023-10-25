@@ -1,6 +1,6 @@
 import numpy as np
 
-# function to load the .npz file produced by tfr_spw_stats_minmax or tfr_spw_stats
+
 def load_uv_tfrs(input_path, svar, cond, fband, obs):
 
     """
@@ -29,35 +29,24 @@ def load_uv_tfrs(input_path, svar, cond, fband, obs):
 
 
 
-    blocks  = ['grat', 'nat','nat','nat','nat']
+    blocks  = ['grat', 'nat']
     svars   = ['spw', 'gpr']
     fbands  = ['low','high','higher']
     results   = ['_100', '_1000_minmax']
 
     svar = 0
 
-    gratings = [i for i in range(30)] # Total channels (sessions x sites = 40 channels)
-    cond_idx = np.zeros((6,5)).astype(np.uint) # Index to the 8 sites in the total channels vector
-    for n in range(6):
-        C = [x for x in gratings if x%6 == n]
-        cond_idx[n,:] = C
 
 
     # Condition index
     if cond == 0:
         fname = str(input_path +'uvtfr_stats_' +    fbands[fband]  + '_' + blocks[cond] + '_' + svars[svar] + results[obs] + '.npz')
-        trialIdx = np.arange(30)    # Gratings
     if cond == 1:
         fname = str(input_path +'uvtfr_stats_' +    fbands[fband]  + '_' + blocks[cond] + '_' + svars[svar] + results[obs] + '.npz')
-        trialIdx = np.arange(36)    # Objects
-        trialIdx = trialIdx[::2]
     if cond == 2:
         fname = str(input_path +'uvtfr_stats_' +    fbands[fband]  + '_' + blocks[cond] + '_' + svars[svar] + results[obs] + '.npz')
-        trialIdx = np.arange(36)    # Scenes
-        trialIdx = trialIdx[1::2]
     if cond == 3:
         fname = str(input_path +'uvtfr_stats_' +    fbands[fband]  + '_' + blocks[cond] + '_' + svars[svar] + results[obs] + '.npz')
-        trialIdx = np.arange(36)    # Scenes + objects
 
 
 

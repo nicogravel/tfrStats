@@ -2,7 +2,6 @@ import numpy as np
 from statsmodels.distributions.empirical_distribution import ECDF
 
 
-# function to get p-values for whole distribution
 def get_pvals_whole(tfr_emp, tfr_null,fband):
 
     """
@@ -26,14 +25,10 @@ def get_pvals_whole(tfr_emp, tfr_null,fband):
     @author: Nicolas Gravel, 19.09.2023  
     """
         
-    # pool permutations accordingly
-    n_perm = tfr_null.shape[0]
+    #n_perm = tfr_null.shape[0]
     tfr = np.nanmean(np.nanmean(tfr_emp,axis=0),axis=0) # average conditions and sites
-    #print(tfr.shape)      # frequency x time
     nullDist = np.nanmean(np.nanmean(tfr_null,axis=0),axis=0) # average conditions and sites
-    #print(nullDist.shape) # permutations x frequency x min/max
     stats = np.zeros((tfr_emp.shape[2],tfr_emp.shape[3]))
-    #print(stats.shape)
 
     tps = [57,113,141,140]
     time =  np.linspace(start = -800, stop = 2000, num = tps[fband])
