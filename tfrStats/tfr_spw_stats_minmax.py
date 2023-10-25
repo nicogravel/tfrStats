@@ -16,7 +16,7 @@ def tfr_spw_stats_minmax(paths, cond, svar, fband, n_perm):
     at each permutations are used. 
     
     .. todo::  
-        *  Implement onset shifting to account for whole triakl (in the current example we pool values from the 400-1000 ms time window).
+        *  Implement onset shifting to account for whole trial (in the current example we pool values from the 400-1000 ms time window).
         *  Implement compatibilityu with Syncopy (for now it relies on ftPool_... .mat containing the TFRs computed in Fieldtrip).
 
 

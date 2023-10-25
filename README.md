@@ -14,3 +14,28 @@ Depending on the approach, the computation of the p-values will change slightly.
 
 
 
+
+
+
+## Installation
+
+To run the [notebook](https://github.com/nicogravel/tfrStats/blob/main/docs/html/notebooks/statistical_approach.ipynb), clone the package (or your fork) locally and then:
+  
+    
+    
+```
+git clone https://github.com/nicogravel/tfrStats.git
+
+cd tfrStats
+
+conda env create --name tfrStats-dev --file tfrStats.yml
+
+conda activate tfrStats-dev
+
+pip install -e .
+```
+  
+    
+    
+
+Voilà!

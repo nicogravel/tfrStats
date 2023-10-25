@@ -48,7 +48,7 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../uvtfrs.html">1. On TFR statistical assessments</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">2. A mini-tutorial</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#Installl-the-package">2.1. Installl the package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Installation">2.1. Installation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#Import-libraries-and-define-functions">2.2. Import libraries and define functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#Compute-p-values">2.3. Compute p-values</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#min-max">2.3.1. min-max</a></li>
@@ -137,12 +137,16 @@ be error to be spot or loops to optimize.</p>
 <p>Depending on the approach, the computation of the p-values will change slightly. In the min-max approach the minimum and maximum values at each permutations are used. When testing using the whole null distribution, the null values obtained from the permutations are averaged the same way the empirical distribution is averaged so the dimensions of the empirical distributions are preserved in the null distribution. Once the null distributions have been obtained, p-values are obtained using the
 empirical cumulative distribution method. Additionally, an optional step is illustrated in which cluster correction of the p-values is implemented. Provided the right Python environment is installed and data, this Jupyter notebook should work as a simple mini-tutorial and support the discussion of these and related basic approaches for computing TFRs and assessing their statistical significance in a clear way. The functions within this notebook are provided in an exploratory state and are
 subject to change. A background section with an open discussion subsection is included. Please feel free to use it help improve the codebook. The package can be downloaded from here: <a class="reference external" href="https://github.com/nicogravel/tfrStats">https://github.com/nicogravel/tfrStats</a></p>
-<section id="Installl-the-package">
-<h2><span class="section-number">2.1. </span>Installl the package<a class="headerlink" href="#Installl-the-package" title="Permalink to this heading">¶</a></h2>
-<p>To run the <a class="reference external" href="https://github.com/nicogravel/tfrStats/blob/main/docs/html/notebooks/statistical_approach.ipynb">notebook</a>, clone the package locally (optionally forking it first) and then install it:</p>
+<section id="Installation">
+<h2><span class="section-number">2.1. </span>Installation<a class="headerlink" href="#Installation" title="Permalink to this heading">¶</a></h2>
+<p>To run the <a class="reference external" href="https://github.com/nicogravel/tfrStats/blob/main/docs/html/notebooks/statistical_approach.ipynb">notebook</a>, clone the package (or your fork) locally and then:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/nicogravel/tfrStats.git
 
 cd tfrStats
+
+conda env create --name tfrStats-dev --file tfrStats.yml
+
+conda activate tfrStats-dev
 
 pip install -e .
 </pre></div>
@@ -159,8 +163,8 @@ pip install -e .
 <span class="kn">from</span> <span class="nn">tfrStats.plot_dtfr_stats</span> <span class="kn">import</span> <span class="n">plot_dtfr_stats</span> <span class="k">as</span> <span class="n">plot_dtfr_stats</span>
 
 
-<span class="n">in_path</span>   <span class="o">=</span> <span class="s1">&#39;/Volumes/Gandalf/MWlamprop/data/&#39;</span>
-<span class="n">out_path</span>  <span class="o">=</span> <span class="s1">&#39;/Volumes/Gandalf/MWlamprop/results/stats/univariate/&#39;</span>
+<span class="n">in_path</span>   <span class="o">=</span> <span class="s1">&#39;/Volumes/.../data/&#39;</span>
+<span class="n">out_path</span>  <span class="o">=</span> <span class="s1">&#39;/Volumes/.../results/stats/univariate/&#39;</span>
 </pre></div>
 </div>
 </div>
