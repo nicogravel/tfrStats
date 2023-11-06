@@ -144,8 +144,8 @@ pip install -e .
 </section>
 <section id="Import-libraries-and-define-functions">
 <h2><span class="section-number">2.2. </span>Import libraries and define functions<a class="headerlink" href="#Import-libraries-and-define-functions" title="Permalink to this heading">¶</a></h2>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tfrStats.plot_tfr_stats</span> <span class="kn">import</span> <span class="n">plot_tfr_stats</span> <span class="k">as</span> <span class="n">plot_tfr_stats</span>
@@ -158,47 +158,14 @@ pip install -e .
 </pre></div>
 </div>
 </div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">KeyboardInterrupt</span>                         Traceback (most recent call last)
-<span class="ansi-green-intense-fg ansi-bold">/Users/nicogravel/Documents/Websites/tfrStats/tfrStats_local/docs/source/notebooks/statistical_approach.ipynb Cell 4</span> line <span class="ansi-cyan-fg">1
-</span><span class="ansi-green-fg">----&gt; &lt;a href=&#39;vscode-notebook-cell:/Users/nicogravel/Documents/Websites/tfrStats/tfrStats_local/docs/source/notebooks/statistical_approach.ipynb#W3sZmlsZQ%3D%3D?line=0&#39;&gt;1&lt;/a&gt;</span> from tfrStats.plot_tfr_stats import plot_tfr_stats as plot_tfr_stats
-<span class="ansi-green-intense-fg ansi-bold">      &lt;a href=&#39;vscode-notebook-cell:/Users/nicogravel/Documents/Websites/tfrStats/tfrStats_local/docs/source/notebooks/statistical_approach.ipynb#W3sZmlsZQ%3D%3D?line=1&#39;&gt;2&lt;/a&gt;</span> from tfrStats.plot_dtfr_stats import plot_dtfr_stats as plot_dtfr_stats
-<span class="ansi-green-intense-fg ansi-bold">      &lt;a href=&#39;vscode-notebook-cell:/Users/nicogravel/Documents/Websites/tfrStats/tfrStats_local/docs/source/notebooks/statistical_approach.ipynb#W3sZmlsZQ%3D%3D?line=3&#39;&gt;4&lt;/a&gt;</span> #in_path   = &#39;/Volumes/.../data/&#39;
-<span class="ansi-green-intense-fg ansi-bold">      &lt;a href=&#39;vscode-notebook-cell:/Users/nicogravel/Documents/Websites/tfrStats/tfrStats_local/docs/source/notebooks/statistical_approach.ipynb#W3sZmlsZQ%3D%3D?line=4&#39;&gt;5&lt;/a&gt;</span> #out_path  = &#39;/Volumes/.../results/stats/univariate/&#39;
-
-File <span class="ansi-green-fg">~/Documents/Websites/tfrStats/tfrStats_local/tfrStats/plot_tfr_stats.py:1</span>
-<span class="ansi-green-fg">----&gt; 1</span> import numpy as np
-<span class="ansi-green-intense-fg ansi-bold">      2</span> import matplotlib.pyplot as plt
-<span class="ansi-green-intense-fg ansi-bold">      3</span> from scipy.interpolate import interp2d
-
-File <span class="ansi-green-fg">~/opt/anaconda3/envs/lamidec/lib/python3.8/site-packages/numpy/__init__.py:337</span>
-<span class="ansi-green-intense-fg ansi-bold">    334</span> del PytestTester
-<span class="ansi-green-intense-fg ansi-bold">    336</span> import mkl
-<span class="ansi-green-fg">--&gt; 337</span> __mkl_version__ = &#34;{MajorVersion}.{MinorVersion}.{UpdateVersion}&#34;.format(**mkl.get_version())
-<span class="ansi-green-intense-fg ansi-bold">    340</span> def _sanity_check():
-<span class="ansi-green-intense-fg ansi-bold">    341</span>     &#34;&#34;&#34;
-<span class="ansi-green-intense-fg ansi-bold">    342</span>     Quick sanity checks for common bugs caused by environment.
-<span class="ansi-green-intense-fg ansi-bold">    343</span>     There are some cases e.g. with wrong BLAS ABI that cause wrong
-<span class="ansi-green-fg">   (...)</span>
-<span class="ansi-green-intense-fg ansi-bold">    349</span>
-<span class="ansi-green-intense-fg ansi-bold">    350</span>     &#34;&#34;&#34;
-
-<span class="ansi-red-fg">KeyboardInterrupt</span>:
-</pre></div></div>
-</div>
 </section>
 <section id="Compute-p-values">
 <h2><span class="section-number">2.3. </span>Compute p-values<a class="headerlink" href="#Compute-p-values" title="Permalink to this heading">¶</a></h2>
 <p>Here we plot TFRs with the significance threshold computed from p-values (i.e. p-val &lt;= 0.05) (top panel, blue trace). The alpha mask specifies the section containing the values above the null percentile cutoff (i.e. 95%). The p-values (bottom panel) with the null percentile cutoff (red trace)</p>
 <section id="min-max">
 <h3><span class="section-number">2.3.1. </span>min-max<a class="headerlink" href="#min-max" title="Permalink to this heading">¶</a></h3>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span>         <span class="o">=</span> <span class="s1">&#39;minmax&#39;</span>
@@ -210,11 +177,30 @@ File <span class="ansi-green-fg">~/opt/anaconda3/envs/lamidec/lib/python3.8/site
 </pre></div>
 </div>
 </div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+/Volumes/Gandalf/MWlamprop/results/stats/univariate/uvtfr_stats_high_grat_spw_1000_minmax.npz
+tfr emp  :  (30, 12, 16, 113)
+tfr null    (1000, 30, 12, 16, 2)
+min-max
+cutoff computed using min/max of null distribution:  75.96054268486813
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_statistical_approach_6_1.png" src="../_images/notebooks_statistical_approach_6_1.png" />
+</div>
+</div>
 </section>
 <section id="whole-null">
 <h3><span class="section-number">2.3.2. </span>whole-null<a class="headerlink" href="#whole-null" title="Permalink to this heading">¶</a></h3>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span>         <span class="o">=</span> <span class="s1">&#39;whole&#39;</span>
@@ -224,6 +210,25 @@ File <span class="ansi-green-fg">~/opt/anaconda3/envs/lamidec/lib/python3.8/site
 
 <span class="n">plot_tfr_stats</span><span class="p">(</span><span class="n">out_path</span><span class="p">,</span> <span class="n">cond</span><span class="p">,</span> <span class="n">fband</span><span class="p">,</span> <span class="n">null</span><span class="p">,</span> <span class="nb">type</span><span class="p">)</span>
 </pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+/Volumes/Gandalf/MWlamprop/results/stats/univariate/uvtfr_stats_high_grat_spw_100.npz
+tfr emp  :  (30, 12, 16, 113)
+tfr null    (30, 12, 16, 113)
+whole-null
+cutoff computed using whole null distribution:  70.79162686024465
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_statistical_approach_8_1.png" src="../_images/notebooks_statistical_approach_8_1.png" />
 </div>
 </div>
 </section>
@@ -233,8 +238,8 @@ File <span class="ansi-green-fg">~/opt/anaconda3/envs/lamidec/lib/python3.8/site
 <p>For this other type of TFR one must consider the pooling of data over predefined frequency bins, as well as spatial dimentions (i.e. ROIs). Therefore, the multiple correction will change slightly.</p>
 <section id="id1">
 <h3><span class="section-number">2.4.1. </span>min-max<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h3>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span>         <span class="o">=</span> <span class="s1">&#39;minmax&#39;</span>
@@ -246,11 +251,32 @@ File <span class="ansi-green-fg">~/opt/anaconda3/envs/lamidec/lib/python3.8/site
 </pre></div>
 </div>
 </div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+/Volumes/Gandalf/MWlamprop/results/stats/univariate/uvtfr_stats_high_grat_spw_1000_minmax.npz
+tfr emp  :  (30, 12, 16, 113)
+tfr null    (1000, 30, 12, 16, 2)
+peak frequency range :  28.0 44.0
+power average within peak: 86.6390137791448
+min-max
+cutoff computed using min/max of null distribution:  70.91082666125475
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_statistical_approach_11_1.png" src="../_images/notebooks_statistical_approach_11_1.png" />
+</div>
+</div>
 </section>
 <section id="id2">
 <h3><span class="section-number">2.4.2. </span>whole null<a class="headerlink" href="#id2" title="Permalink to this heading">¶</a></h3>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span>         <span class="o">=</span> <span class="s1">&#39;whole&#39;</span>
@@ -260,6 +286,27 @@ File <span class="ansi-green-fg">~/opt/anaconda3/envs/lamidec/lib/python3.8/site
 
 <span class="n">plot_dtfr_stats</span><span class="p">(</span><span class="n">out_path</span><span class="p">,</span> <span class="n">cond</span><span class="p">,</span> <span class="n">fband</span><span class="p">,</span> <span class="n">null</span><span class="p">,</span> <span class="nb">type</span><span class="p">)</span>
 </pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+/Volumes/Gandalf/MWlamprop/results/stats/univariate/uvtfr_stats_high_grat_spw_100.npz
+tfr emp  :  (30, 12, 16, 113)
+tfr null    (30, 12, 16, 113)
+peak frequency range :  28.0 44.0
+power average within peak: 86.6390137791448
+whole-null
+cutoff computed using whole null distribution:  70.52901730660238
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_statistical_approach_13_1.png" src="../_images/notebooks_statistical_approach_13_1.png" />
 </div>
 </div>
 <div class="nbinput nblast docutils container">
