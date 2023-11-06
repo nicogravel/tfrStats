@@ -1,4 +1,4 @@
-**On the Statistical Assessment Time Frequency Data**
+**A mini-tutorial on the Statistical Assessment of Time Frequency Data**
 ########
 
 
