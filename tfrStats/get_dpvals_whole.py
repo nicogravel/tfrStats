@@ -8,28 +8,28 @@ def get_dpvals_whole(tfr_emp, tfr_null,fband):
     """
     Get p-values from min-max null distribution
 
-    This functions pools the averaged null distribution values and computes 
+    This functions pools the averaged null distribution values and computes
     the p-values for each frequency and time bin using the empirical
     cumulative distribution method.
-    
-    
-    .. todo::  
+
+
+    .. todo::
         * Merge this function with get_pvals_whole.
 
-    
+
     :param float tfr: empirical time frequency representation (i.e. 30, 12, 16, 113 ).
     :param float null_tfr: nul time frequency representation (i.e. 30, 12, 16, 113 ).
 
     :return: statistical map of p-values for each frequency-time or space-time bin.
     :rtype: float
- 
-    @author: Nicolas Gravel, 19.09.2023  
-    
+
+    @author: Nicolas Gravel, 19.09.2023
+
     """
 
     #n_perm = tfr_null.shape[0]
     tfr = np.nanmean(tfr_emp,axis=1)
-    nullDist = tfr_null 
+    nullDist = tfr_null
     stats = np.zeros((tfr_emp.shape[0],tfr_emp.shape[2]))
 
     tps  = [57,113,141,140]
@@ -40,11 +40,11 @@ def get_dpvals_whole(tfr_emp, tfr_null,fband):
 
     for i_site in range(stats.shape[0]):
         for i_time in range(stats.shape[1]):
-            null = nullDist[:,:,t0:tf] 
+            #null = nullDist[:,:,t0:tf]
+            null = nullDist[:,:,:]
             obs = np.squeeze(tfr[i_site,i_time])
             ecdf = ECDF(null.flatten())
-            p_fwe = ecdf(obs)
-            stats[i_site,i_time] = 1.0 - p_fwe
+            p_ = ecdf(obs)
+            stats[i_site,i_time] = 1.0 - p_
             #stats[i_freq,i_time] = (null >= obs).sum() / n_perm
     return stats
-

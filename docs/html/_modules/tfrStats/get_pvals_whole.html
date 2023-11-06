@@ -100,24 +100,24 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Get p-values from whole null distribution</span>
 
-<span class="sd">    This functions pools the averaged null distribution values and computes </span>
+<span class="sd">    This functions pools the averaged null distribution values and computes</span>
 <span class="sd">    the p-values for each frequency and time bin using the empirical</span>
 <span class="sd">    cumulative distribution method.</span>
-<span class="sd">    </span>
-<span class="sd">    .. todo::  </span>
-<span class="sd">        * Adapt the function to work with N-dimensional arrays from different null realizations. </span>
+
+<span class="sd">    .. todo::</span>
+<span class="sd">        * Adapt the function to work with N-dimensional arrays from different null realizations.</span>
 <span class="sd">        * Add the option to use the min or max values from the null distribution or the whole distribution.</span>
 
-<span class="sd">    </span>
+
 <span class="sd">    :param float tfr: empirical time frequency representation (i.e. 30, 12, 16, 113 ).</span>
 <span class="sd">    :param float null_tfr: nul time frequency representation (i.e. 30, 12, 16, 113 ).</span>
 
 <span class="sd">    :return: statistical map of p-values for each frequency-time or space-time bin.</span>
 <span class="sd">    :rtype: float</span>
-<span class="sd"> </span>
-<span class="sd">    @author: Nicolas Gravel, 19.09.2023  </span>
+
+<span class="sd">    @author: Nicolas Gravel, 19.09.2023</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-        
+
     <span class="c1">#n_perm = tfr_null.shape[0]</span>
     <span class="n">tfr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">tfr_emp</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># average conditions and sites</span>
     <span class="n">nullDist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">tfr_null</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># average conditions and sites</span>
@@ -134,11 +134,10 @@
             <span class="n">null</span> <span class="o">=</span> <span class="n">nullDist</span><span class="p">[:,</span><span class="n">t0</span><span class="p">:</span><span class="n">tf</span><span class="p">]</span> <span class="c1"># use the both min and max</span>
             <span class="n">obs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">tfr</span><span class="p">[</span><span class="n">i_freq</span><span class="p">,</span><span class="n">i_time</span><span class="p">])</span>
             <span class="n">ecdf</span> <span class="o">=</span> <span class="n">ECDF</span><span class="p">(</span><span class="n">null</span><span class="o">.</span><span class="n">flatten</span><span class="p">())</span>
-            <span class="n">p_fwe</span> <span class="o">=</span> <span class="n">ecdf</span><span class="p">(</span><span class="n">obs</span><span class="p">)</span>
-            <span class="n">stats</span><span class="p">[</span><span class="n">i_freq</span><span class="p">,</span><span class="n">i_time</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="n">p_fwe</span>
+            <span class="n">p_</span> <span class="o">=</span> <span class="n">ecdf</span><span class="p">(</span><span class="n">obs</span><span class="p">)</span>
+            <span class="n">stats</span><span class="p">[</span><span class="n">i_freq</span><span class="p">,</span><span class="n">i_time</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="n">p_</span>
             <span class="c1">#stats[i_freq,i_time] = (null &gt;= obs).sum() / n_perm</span>
     <span class="k">return</span> <span class="n">stats</span></div>
-
 </pre></div>
 
           </div>

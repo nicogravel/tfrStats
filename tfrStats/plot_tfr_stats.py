@@ -91,7 +91,30 @@ def plot_tfr_stats(input_path, cond, fband, null, correction, cluster_size, type
             stats = get_pvals_minmax(tfr_emp, tfr_null, tail = 'single-sided')
             pvals_corr = cluster_correction(stats,  cluster_size, alpha)
 
+    if type == 'minmax_roll':
+        ## Min-max
+
+        tfr_emp, tfr_null = load_uv_tfrs(input_path, [], cond, fband, results) # load tfrs from .npz file
+
+        if correction == 1:
+            stats = get_pvals_minmax(tfr_emp, tfr_null, tail = 'single-sided')
+
+        if correction == 2:
+            stats = get_pvals_minmax(tfr_emp, tfr_null, tail = 'single-sided')
+            pvals_corr = cluster_correction(stats,  cluster_size, alpha)
+
     if type == 'whole':
+
+        tfr_emp, tfr_null = load_uv_tfrs(input_path, [], cond, fband, results)
+
+        if correction == 1:
+            stats = get_pvals_whole(tfr_emp, tfr_null, fband)
+
+        if correction == 2:
+            stats = get_pvals_whole(tfr_emp, tfr_null, fband)
+            pvals_corr = cluster_correction(stats,  cluster_size, alpha)
+
+    if type == 'whole_roll':
 
         tfr_emp, tfr_null = load_uv_tfrs(input_path, [], cond, fband, results)
 
@@ -154,6 +177,18 @@ def plot_tfr_stats(input_path, cond, fband, null, correction, cluster_size, type
         gavg_thr = np.percentile(nullDist.flatten(),prctl) # pool permutations for all frequencies
         print('cutoff computed using min/max of null distribution: ', gavg_thr )
 
+    if type == 'minmax_roll':
+        print('min-max-roll')
+        tail = 'single-sided'
+        if tail == 'two-sided':
+            nullDist  = tfr_null[:,:,:,:,:]  # use the both min and max
+        elif tail == 'single-sided':
+            nullDist   = tfr_null[:,:,:,:,1]  # use the max
+        nullDist     = np.nanmean(nullDist,axis=1) # average conditions
+        nullDist     = np.amax(nullDist,axis=1) # max across sites
+        gavg_thr = np.percentile(nullDist.flatten(),prctl) # pool permutations for all frequencies
+        print('cutoff computed using min/max of null distribution: ', gavg_thr )
+
     # Thresholding using whole distribution
     if type == 'whole':
         print('whole-null')
@@ -168,6 +203,22 @@ def plot_tfr_stats(input_path, cond, fband, null, correction, cluster_size, type
         null_ = null[~np.isnan(null)]
         gavg_thr = np.percentile(null_.flatten(),prctl)
         print('cutoff computed using whole null distribution: ', gavg_thr )
+
+    if type == 'whole_roll':
+        print('whole-null-roll')
+        gavg_null = np.squeeze(np.nanmean(tfr_null,axis=0))
+        gavg_null[np.isnan(gavg_null)] = 0. # just for plotting
+        t0 = np.searchsorted(x2,-200,side='left', sorter=None)
+        td = np.searchsorted(x2,1200,side='left', sorter=None)
+        null = gavg_null
+        null[1:-1,0:t0]  = np.nan
+        null[1:-1,td:-1] = np.nan
+        #print('H0 shape :', null.shape)
+        null_ = null[~np.isnan(null)]
+        gavg_thr = np.percentile(null_.flatten(),prctl)
+        print('cutoff computed using whole null distribution: ', gavg_thr )
+
+
     cut = np.full((TFR_emp.shape[0],TFR_emp.shape[1]),gavg_thr)
     t0 = np.searchsorted(x2,stats_range[0],side='left', sorter=None)
     td = np.searchsorted(x2,stats_range[1],side='left', sorter=None)

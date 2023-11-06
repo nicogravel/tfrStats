@@ -6,26 +6,26 @@ def get_pvals_minmax(tfr_emp, tfr_null, tail):
     """
     Get p-values from min-max null distribution
 
-    This functions pools the permuted min-max values and computes 
+    This functions pools the permuted min-max values and computes
     the p-values for each frequency and time bin using the empirical
     cumulative distribution method.
-    
 
-    .. todo::  
+
+    .. todo::
         * Merge this function with get_pvals_whole.
 
-    
+
     :param float tfr: empirical time frequency representation (i.e. 30, 12, 16, 113 ).
     :param float null_tfr: nul time frequency representation (i.e. 1000, 30, 12, 16, 2 ).
 
     :return: statistical map of p-values for each frequency-time or space-time bin.
     :rtype: float
- 
-    @author: Nicolas Gravel, 19.09.2023  
+
+    @author: Nicolas Gravel, 19.09.2023
     """
 
     #n_perm = tfr_null.shape[0]
-    tfr = np.nanmean(np.nanmean(tfr_emp,axis=0),axis=0) # average conditions and sites 
+    tfr = np.nanmean(np.nanmean(tfr_emp,axis=0),axis=0) # average conditions and sites
     if tail == 'two-sided':
         nullDist  = tfr_null[:,:,:,:,:]  # use the both min and max
     elif tail == 'single-sided':
@@ -38,8 +38,7 @@ def get_pvals_minmax(tfr_emp, tfr_null, tail):
         for i_time in range(stats.shape[1]):
             obs = np.squeeze(tfr[i_freq,i_time])
             ecdf = ECDF(null.flatten())
-            p_fwe = ecdf(obs)
-            stats[i_freq,i_time] = 1.0 - p_fwe
+            p_ = ecdf(obs)
+            stats[i_freq,i_time] = 1.0 - p_
             #stats[i_freq,i_time] = (null >= obs).sum() / n_perm
     return stats
-

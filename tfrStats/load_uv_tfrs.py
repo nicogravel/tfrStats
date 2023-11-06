@@ -32,7 +32,7 @@ def load_uv_tfrs(input_path, svar, cond, fband, obs):
     blocks  = ['grat', 'nat']
     svars   = ['spw', 'gpr']
     fbands  = ['low','high','higher']
-    results   = ['_100', '_1000_minmax']
+    results   = ['_100', '_1000_minmax','_30_roll', '_100_minmax_roll']
 
     svar = 0
 

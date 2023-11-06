@@ -55,19 +55,9 @@
 <li class="toctree-l3"><a class="reference internal" href="#whole-null">2.3.2. whole-null</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#Cluster-correction-of-time-frequency-bins">2.4. Cluster correction of time-frequency bins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Spectral-power-as-a-function-of-depth-and-space">2.4. Spectral power as a function of depth and space</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id1">2.4.1. min-max</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id2">2.4.2. whole-null</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#Spectral-power-as-a-function-of-depth-and-space">2.5. Spectral power as a function of depth and space</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id3">2.5.1. min-max</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id4">2.5.2. whole null</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#Cluster-correction-of-space-frequency-bins">2.6. Cluster correction of space-frequency bins</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id5">2.6.1. min-max</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id6">2.6.2. whole-null</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">2.4.2. whole null</a></li>
 </ul>
 </li>
 </ul>
@@ -130,13 +120,20 @@
             
   <section id="A-mini-tutorial">
 <h1><span class="section-number">2. </span>A mini-tutorial<a class="headerlink" href="#A-mini-tutorial" title="Permalink to this heading">¶</a></h1>
-<p>This codebook is a simple example meant to illustrate a two fundamental questions in time frequency analysis: 1) permutation-based null hypothesis testing and 2) correction for multiple comparisons. Typically, there is more than one approach for a given scenario. They will all depend on the dimensions of the data at hand, be these spatial locations, time and frequency analysis parameters, trials of different conditions, the nature of hypothesis, etc. For basic pedagogical purposes, here I focus
-on spectral power increases relative to baseline using two variants of the same method: 1) null hypothesis testing using the traditional min-max distribution approach, which captures variations at the extremes of the null ditribution, and 2) null hypthesis testing using the whole null distribution, obtained by averaging across specific dimensions. I invite the reader to audit the code and propvide feedback and comments in the open discussion subsection within the background section. Since there
-are several ways to achieve these goals and many realizations of these and other related methods (i.e. thresholds may be obtaind from the percentiles of the null distribution directly and further corrected in equivalent ways, or the pooling of data accomplished among specific dimensions), here I focus on two common methods using very simple examples in the hope to help those researchers (including myself) that are or may be in need of clarity on these matters, touch ground. Beware there may even
-be error to be spot or loops to optimize.</p>
+<p><strong>On the Statistical Assessment Time Frequency Data</strong></p>
+<p>Recently I came across one article that highlighted the replication crisis in biology. Why so often, results obtained by different labs using the same data are difficult or even impossible to replicate reliably? According to the article, there is some agreement about what may be partly causing this replication crisis: in many cases statisticians act more like plumbers rather than like a priest. While I personally do not agree with the dogmatic view of priest-like statisticians imposing their
+hypothesis-making machinery to every problem they stumble upon, even if the nature of the problem lay beyond their field, I do agree on the need to reach some collective consensus, especially when the delicate decisions involving the statistical assessment of given problem may contribute with more confusion than clarity.</p>
+<p>While good intentioned, the priest-like perspective should not turn into <a class="reference external" href="https://www.merriam-webster.com/dictionary/scientism">scientificism/scientism</a>, <em>or the urge to trust on the temporary answers our good old metrics provide more than the underlying problem that inspired them in first place. Funnily, at the same time I was reading this article I came across another gem in ––now defunct–– Twitter.</em> <a class="reference external" href="https://twitter.com/lakens/status/1718654122516156777">A post</a> <em>by</em> <a class="reference external" href="https://twitter.com/lakens">Daniël
+Lackens</a> <em>provided the much needed,</em> so zu sagen*, plumber’s perspective. After all, plumbing and fitting are delicate activities whose results can either resemble a pipe jungle or a professional design.</p>
+<p>In this mini-tutorial, I show how two approaches, when applied to the same scenario, can lead to the same conclusions. I provide basic Python code to illustrate how two different but fundamentally similar pipelines can lead to slightly different but comparable results. The pipelines are based on examples provided in <a class="reference external" href="https://www.fieldtriptoolbox.org/workshop/oslo2019/statistics/#permutation-test-with-cluster-correction">Fieldtrip</a> and adapted from the book <a class="reference external" href="https://direct.mit.edu/books/book/4013/Analyzing-Neural-Time-Series-DataTheory-and">Analyzing Neural Time Series Data:
+Theory and Practice</a></p>
+<p>Specifically, to assess the statistical significance of spectral estimates obtained from electrophysiological data (i.e. LFP) we used non-parametric permutation tests and focused on the multiple comparison correction of time frequency representations (TFRs). The success of the two approaches depends on the dimensions of the data at hand, be these spatial locations, time and frequency analysis parameters, trials of different conditions, the nature of hypothesis, etc. For basic pedagogical
+purposes, here I focus on spectral power increases relative to baseline using two variants of the same method: 1) null hypothesis testing using the min-max distribution approach, which captures variations at the extremes of the null distribution, and 2) null hypothesis testing using the whole null distribution, obtained by averaging across specific dimensions. Since there are several ways to achieve these goals and many realizations of these and other related methods (i.e. thresholds may be
+obtained from the percentiles of the null distribution directly and further corrected in equivalent ways, or the pooling of data accomplished among specific dimensions), here I focus on two common methods using very simple examples in the hope to help those researchers (including myself) that are or may be in need of clarity on these matters, touch ground. Beware there may even be error to be spot or loops to optimize.</p>
 <p>Depending on the approach, the computation of the p-values will change slightly. In the min-max approach the minimum and maximum values at each permutations are used. When testing using the whole null distribution, the null values obtained from the permutations are averaged the same way the empirical distribution is averaged so the dimensions of the empirical distributions are preserved in the null distribution. Once the null distributions have been obtained, p-values are obtained using the
-empirical cumulative distribution method. Additionally, an optional step is illustrated in which cluster correction of the p-values is implemented. Provided the right Python environment is installed and data, this Jupyter notebook should work as a simple mini-tutorial and support the discussion of these and related basic approaches for computing TFRs and assessing their statistical significance in a clear way. The functions within this notebook are provided in an exploratory state and are
-subject to change. A background section with an open discussion subsection is included. Please feel free to use it help improve the codebook. The package can be downloaded from here: <a class="reference external" href="https://github.com/nicogravel/tfrStats">https://github.com/nicogravel/tfrStats</a></p>
+empirical cumulative distribution method.</p>
+<p>Provided the right Python environment is installed and data, this Jupyter notebook should work as a simple mini-tutorial and support the discussion of these and related basic approaches for computing TFRs and assessing their statistical significance in a clear and easy to <em>understand/explain</em> way. The functions within this notebook are provided in an exploratory state and are subject to change. A background section with an open discussion subsection is included. Please feel free to use it help
+improve the codebook. The package can be downloaded from here: <a class="reference external" href="https://github.com/nicogravel/tfrStats">https://github.com/nicogravel/tfrStats</a></p>
 <section id="Installation">
 <h2><span class="section-number">2.1. </span>Installation<a class="headerlink" href="#Installation" title="Permalink to this heading">¶</a></h2>
 <p>To run the <a class="reference external" href="https://github.com/nicogravel/tfrStats/blob/main/docs/html/notebooks/statistical_approach.ipynb">notebook</a>, clone the package (or your fork) locally and then:</p>
@@ -163,8 +160,20 @@ pip install -e .
 <span class="kn">from</span> <span class="nn">tfrStats.plot_dtfr_stats</span> <span class="kn">import</span> <span class="n">plot_dtfr_stats</span> <span class="k">as</span> <span class="n">plot_dtfr_stats</span>
 
 
-<span class="n">in_path</span>   <span class="o">=</span> <span class="s1">&#39;/Volumes/.../data/&#39;</span>
-<span class="n">out_path</span>  <span class="o">=</span> <span class="s1">&#39;/Volumes/.../results/stats/univariate/&#39;</span>
+<span class="c1">#in_path   = &#39;/Volumes/.../data/&#39;</span>
+<span class="c1">#out_path  = &#39;/Volumes/.../results/stats/univariate/&#39;</span>
+
+
+<span class="n">in_path</span>   <span class="o">=</span> <span class="s1">&#39;/Volumes/Gandalg/MWlamprop/data/&#39;</span>
+<span class="n">out_path</span>  <span class="o">=</span> <span class="s1">&#39;/Volumes/Gandalf/MWlamprop/results/stats/univariate/&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
@@ -178,15 +187,7 @@ pip install -e .
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">null</span>         <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">95</span><span class="p">]</span>
-<span class="n">alpha</span>        <span class="o">=</span> <span class="mf">0.01</span>
-<span class="n">correction</span>   <span class="o">=</span> <span class="mi">1</span>
-<span class="n">cluster_size</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="n">fband</span>        <span class="o">=</span> <span class="mi">1</span>
-<span class="n">cond</span>         <span class="o">=</span> <span class="mi">0</span>
-<span class="nb">type</span>         <span class="o">=</span> <span class="s1">&#39;minmax&#39;</span>
-
-<span class="n">plot_tfr_stats</span><span class="p">(</span><span class="n">out_path</span><span class="p">,</span> <span class="n">cond</span><span class="p">,</span> <span class="n">fband</span><span class="p">,</span> <span class="n">null</span><span class="p">,</span> <span class="n">correction</span><span class="p">,</span> <span class="n">cluster_size</span><span class="p">,</span> <span class="nb">type</span><span class="p">,</span> <span class="n">alpha</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
@@ -206,7 +207,7 @@ cutoff computed using min/max of null distribution:  75.96054268486813
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_statistical_approach_6_1.png" src="../_images/notebooks_statistical_approach_6_1.png" />
+<img alt="../_images/notebooks_statistical_approach_7_1.png" src="../_images/notebooks_statistical_approach_7_1.png" />
 </div>
 </div>
 </section>
@@ -244,97 +245,16 @@ cutoff computed using whole null distribution:  70.79162686024465
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_statistical_approach_8_1.png" src="../_images/notebooks_statistical_approach_8_1.png" />
-</div>
-</div>
-</section>
-</section>
-<section id="Cluster-correction-of-time-frequency-bins">
-<h2><span class="section-number">2.4. </span>Cluster correction of time-frequency bins<a class="headerlink" href="#Cluster-correction-of-time-frequency-bins" title="Permalink to this heading">¶</a></h2>
-<p>One can apply cluster correction either to the percetniles (using only this correction in a single step), or to the or pvalues (turning it into a second, optional step). Here we compute distances between all time-frequency bins, pool p-vals of neighbouring time-frequency bins based on a distance threshold (defined by cluster size), test if a time-frequency bin and its neighbours are below alpha, and —if true, average the p-values within the cluster and assign the resulting average as acorrected
-p-value to the time-frequency bin.</p>
-<section id="id1">
-<h3><span class="section-number">2.4.1. </span>min-max<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h3>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">null</span>         <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">95</span><span class="p">]</span>
-<span class="n">alpha</span>        <span class="o">=</span> <span class="mf">0.01</span>
-<span class="n">correction</span>   <span class="o">=</span> <span class="mi">2</span>
-<span class="n">cluster_size</span> <span class="o">=</span> <span class="mi">3</span>
-<span class="n">fband</span>        <span class="o">=</span> <span class="mi">1</span>
-<span class="n">cond</span>         <span class="o">=</span> <span class="mi">0</span>
-<span class="nb">type</span>         <span class="o">=</span> <span class="s1">&#39;minmax&#39;</span>
-
-<span class="n">plot_tfr_stats</span><span class="p">(</span><span class="n">out_path</span><span class="p">,</span> <span class="n">cond</span><span class="p">,</span> <span class="n">fband</span><span class="p">,</span> <span class="n">null</span><span class="p">,</span> <span class="n">correction</span><span class="p">,</span> <span class="n">cluster_size</span><span class="p">,</span> <span class="nb">type</span><span class="p">,</span> <span class="n">alpha</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-/Volumes/Gandalf/MWlamprop/results/stats/univariate/uvtfr_stats_high_grat_spw_1000_minmax.npz
-tfr emp  :  (30, 12, 16, 113)
-tfr null    (1000, 30, 12, 16, 2)
-min-max
-cutoff computed using min/max of null distribution:  75.96054268486813
-</pre></div></div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../_images/notebooks_statistical_approach_11_1.png" src="../_images/notebooks_statistical_approach_11_1.png" />
-</div>
-</div>
-</section>
-<section id="id2">
-<h3><span class="section-number">2.4.2. </span>whole-null<a class="headerlink" href="#id2" title="Permalink to this heading">¶</a></h3>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">null</span>         <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">95</span><span class="p">]</span>
-<span class="n">alpha</span>        <span class="o">=</span> <span class="mf">0.01</span>
-<span class="n">correction</span>   <span class="o">=</span> <span class="mi">2</span>
-<span class="n">cluster_size</span> <span class="o">=</span> <span class="mi">3</span>
-<span class="n">fband</span>        <span class="o">=</span> <span class="mi">1</span>
-<span class="n">cond</span>         <span class="o">=</span> <span class="mi">0</span>
-<span class="nb">type</span>         <span class="o">=</span> <span class="s1">&#39;whole&#39;</span>
-
-<span class="n">plot_tfr_stats</span><span class="p">(</span><span class="n">out_path</span><span class="p">,</span> <span class="n">cond</span><span class="p">,</span> <span class="n">fband</span><span class="p">,</span> <span class="n">null</span><span class="p">,</span> <span class="n">correction</span><span class="p">,</span> <span class="n">cluster_size</span><span class="p">,</span> <span class="nb">type</span><span class="p">,</span> <span class="n">alpha</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-/Volumes/Gandalf/MWlamprop/results/stats/univariate/uvtfr_stats_high_grat_spw_100.npz
-tfr emp  :  (30, 12, 16, 113)
-tfr null    (30, 12, 16, 113)
-whole-null
-cutoff computed using whole null distribution:  70.79162686024465
-</pre></div></div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../_images/notebooks_statistical_approach_13_1.png" src="../_images/notebooks_statistical_approach_13_1.png" />
+<img alt="../_images/notebooks_statistical_approach_9_1.png" src="../_images/notebooks_statistical_approach_9_1.png" />
 </div>
 </div>
 </section>
 </section>
 <section id="Spectral-power-as-a-function-of-depth-and-space">
-<h2><span class="section-number">2.5. </span>Spectral power as a function of depth and space<a class="headerlink" href="#Spectral-power-as-a-function-of-depth-and-space" title="Permalink to this heading">¶</a></h2>
+<h2><span class="section-number">2.4. </span>Spectral power as a function of depth and space<a class="headerlink" href="#Spectral-power-as-a-function-of-depth-and-space" title="Permalink to this heading">¶</a></h2>
 <p>For this other type of TFR one must consider the pooling of data over predefined frequency bins, as well as spatial dimentions (i.e. ROIs). Therefore, the multiple correction will change slightly.</p>
-<section id="id3">
-<h3><span class="section-number">2.5.1. </span>min-max<a class="headerlink" href="#id3" title="Permalink to this heading">¶</a></h3>
+<section id="id1">
+<h3><span class="section-number">2.4.1. </span>min-max<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h3>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
@@ -369,12 +289,12 @@ cutoff computed using min/max of null distribution:  70.91082666125475
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_statistical_approach_16_1.png" src="../_images/notebooks_statistical_approach_16_1.png" />
+<img alt="../_images/notebooks_statistical_approach_12_1.png" src="../_images/notebooks_statistical_approach_12_1.png" />
 </div>
 </div>
 </section>
-<section id="id4">
-<h3><span class="section-number">2.5.2. </span>whole null<a class="headerlink" href="#id4" title="Permalink to this heading">¶</a></h3>
+<section id="id2">
+<h3><span class="section-number">2.4.2. </span>whole null<a class="headerlink" href="#id2" title="Permalink to this heading">¶</a></h3>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
@@ -409,92 +329,7 @@ cutoff computed using whole null distribution:  70.52901730660238
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_statistical_approach_18_1.png" src="../_images/notebooks_statistical_approach_18_1.png" />
-</div>
-</div>
-</section>
-</section>
-<section id="Cluster-correction-of-space-frequency-bins">
-<h2><span class="section-number">2.6. </span>Cluster correction of space-frequency bins<a class="headerlink" href="#Cluster-correction-of-space-frequency-bins" title="Permalink to this heading">¶</a></h2>
-<p>One can apply cluster correction either to the percetniles (using only this correction in a single step), or to the or pvalues (turning it into a second, optional step). Here we compute distances between all space-frequency bins, pool p-vals of neighbouring space-frequency bins based on a distance threshold (defined by cluster size), test if a space-frequency bin and its neighbours are below alpha, and —if true, average the p-values within the cluster and assign the resulting average as
-acorrected p-value to the space-frequency bin.</p>
-<section id="id5">
-<h3><span class="section-number">2.6.1. </span>min-max<a class="headerlink" href="#id5" title="Permalink to this heading">¶</a></h3>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">null</span>         <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">95</span><span class="p">]</span>
-<span class="n">alpha</span>        <span class="o">=</span> <span class="mf">0.05</span>
-<span class="n">correction</span>   <span class="o">=</span> <span class="mi">2</span>
-<span class="n">cluster_size</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="n">fband</span>        <span class="o">=</span> <span class="mi">1</span>
-<span class="n">cond</span>         <span class="o">=</span> <span class="mi">0</span>
-<span class="nb">type</span>         <span class="o">=</span> <span class="s1">&#39;minmax&#39;</span>
-
-<span class="n">plot_dtfr_stats</span><span class="p">(</span><span class="n">out_path</span><span class="p">,</span> <span class="n">cond</span><span class="p">,</span> <span class="n">fband</span><span class="p">,</span> <span class="n">null</span><span class="p">,</span> <span class="n">correction</span><span class="p">,</span> <span class="n">cluster_size</span><span class="p">,</span> <span class="nb">type</span><span class="p">,</span> <span class="n">alpha</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-/Volumes/Gandalf/MWlamprop/results/stats/univariate/uvtfr_stats_high_grat_spw_1000_minmax.npz
-tfr emp  :  (30, 12, 16, 113)
-tfr null    (1000, 30, 12, 16, 2)
-peak frequency range :  28.0 44.0
-power average within peak: 86.6390137791448
-min-max
-cutoff computed using min/max of null distribution:  70.91082666125475
-</pre></div></div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../_images/notebooks_statistical_approach_21_1.png" src="../_images/notebooks_statistical_approach_21_1.png" />
-</div>
-</div>
-</section>
-<section id="id6">
-<h3><span class="section-number">2.6.2. </span>whole-null<a class="headerlink" href="#id6" title="Permalink to this heading">¶</a></h3>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">null</span>         <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">95</span><span class="p">]</span>
-<span class="n">alpha</span>        <span class="o">=</span> <span class="mf">0.05</span>
-<span class="n">correction</span>   <span class="o">=</span> <span class="mi">2</span>
-<span class="n">cluster_size</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="n">fband</span>        <span class="o">=</span> <span class="mi">1</span>
-<span class="n">cond</span>         <span class="o">=</span> <span class="mi">0</span>
-<span class="nb">type</span>         <span class="o">=</span> <span class="s1">&#39;whole&#39;</span>
-
-<span class="n">plot_dtfr_stats</span><span class="p">(</span><span class="n">out_path</span><span class="p">,</span> <span class="n">cond</span><span class="p">,</span> <span class="n">fband</span><span class="p">,</span> <span class="n">null</span><span class="p">,</span> <span class="n">correction</span><span class="p">,</span> <span class="n">cluster_size</span><span class="p">,</span> <span class="nb">type</span><span class="p">,</span> <span class="n">alpha</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-/Volumes/Gandalf/MWlamprop/results/stats/univariate/uvtfr_stats_high_grat_spw_100.npz
-tfr emp  :  (30, 12, 16, 113)
-tfr null    (30, 12, 16, 113)
-peak frequency range :  28.0 44.0
-power average within peak: 86.6390137791448
-whole-null
-cutoff computed using whole null distribution:  70.52901730660238
-</pre></div></div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../_images/notebooks_statistical_approach_23_1.png" src="../_images/notebooks_statistical_approach_23_1.png" />
+<img alt="../_images/notebooks_statistical_approach_14_1.png" src="../_images/notebooks_statistical_approach_14_1.png" />
 </div>
 </div>
 </section>
