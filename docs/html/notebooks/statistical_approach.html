@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>2. A mini-tutorial on the Statistical Assessment of Time Frequency Data &#8212; tfrStats 1.0.0 documentation</title>
+    <title>2. A mini-tutorial… &#8212; tfrStats 1.0.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
     <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
@@ -47,7 +47,7 @@
 <p class="caption" role="heading"><span class="caption-text">Content:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../uvtfrs.html">1. On TFR statistical assessments</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">2. A mini-tutorial on the Statistical Assessment of Time Frequency Data</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">2. A mini-tutorial…</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#Installation">2.1. Installation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#Import-libraries-and-define-functions">2.2. Import libraries and define functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#Compute-p-values">2.3. Compute p-values</a><ul>
@@ -118,14 +118,16 @@
 
           <div class="body" role="main">
             
-  <section id="A-mini-tutorial-on-the-Statistical-Assessment-of-Time-Frequency-Data">
-<h1><span class="section-number">2. </span>A mini-tutorial on the Statistical Assessment of Time Frequency Data<a class="headerlink" href="#A-mini-tutorial-on-the-Statistical-Assessment-of-Time-Frequency-Data" title="Permalink to this heading">¶</a></h1>
+  <section id="A-mini-tutorial...">
+<h1><span class="section-number">2. </span>A mini-tutorial…<a class="headerlink" href="#A-mini-tutorial..." title="Permalink to this heading">¶</a></h1>
 <p>Recently, I encountered an <a class="reference external" href="https://www.tandfonline.com/doi/full/10.1080/08989621.2021.1962713">article</a> discussing the ongoing replication issue in the field of biology. Why so often, the article stressed, results obtained by teams at different labs using the same data (and following the same inquiries) are difficult or even impossible to replicate reliably? According to the article, there is some agreement about what may be partly causing this replication crisis: in many cases statisticians
 act more like a plumber rather than a priest. While I personally do not agree with the dogmatic view of priest-like statisticians imposing their hypothesis-making machinery to every problem they stumble upon, I do agree on the need to reach some collective consensus, specially when potentially diverging decisions during the statistical assessment may bring forth confusion rather than clarity. With all its good intentions, the overly dogmatic approach of some scientists should not lead us into
-the realm of extreme scientific belief or <a class="reference external" href="https://www.merriam-webster.com/dictionary/scientism">scientificism/scientism</a>, (i.e. <em>the urge to trust on the temporary answers our good ol’ metric provide more than the underlying problem that inspired them in first place</em>). Coincidentally, while I was engrossed in this piece, I stumbled upon another noteworthy piece in the now obsolete Twitter. A <a class="reference external" href="https://twitter.com/lakens/status/1718654122516156777">post</a> by <a class="reference external" href="https://twitter.com/lakens">Daniël
-Lackens</a> provided the much needed, <em>so zu sagen</em>, plumber’s perspective. After all, plumbing and fitting are nuanced tasks that can either yield a pipe jungle or a professionally designed system.</p>
+the realm of extreme scientific belief or <a class="reference external" href="https://www.merriam-webster.com/dictionary/scientism">scientificism/scientism</a>, (i.e. <em>the urge to trust on the temporary answers our good ol’ metric provide more than the underlying problem that inspired them in first place</em>). Coincidentally, while I was engrossed in this piece, I stumbled upon another noteworthy piece in the now obsolete Twitter. A <a class="reference external" href="https://twitter.com/lakens/status/1718654122516156777">post</a> provided the much needed, <em>so zu
+sagen</em>, plumber’s perspective. After all, plumbing and fitting are nuanced tasks that can either yield a pipe jungle or a professionally designed system.</p>
+<p><em>Statisticians should be less like priests and more plumbers. I don’t care what you personally believe is the right way to do things - if I have a specific problem, I want to know all possible solutions that might fix it, what their limitations are, and how much each would cost.</em></p>
+<p><a class="reference external" href="https://twitter.com/lakens">Daniël Lackens</a></p>
 <p>In this mini-tutorial, I show two related approaches applied to the same scenario. I provide basic Python code to illustrate how two different yet fundamentally similar pipelines can lead to slightly different but comparable results. The pipelines are based on examples provided in <a class="reference external" href="https://www.fieldtriptoolbox.org/workshop/oslo2019/statistics/#permutation-test-with-cluster-correction">Fieldtrip</a> and adapted from the
-<a class="reference external" href="https://direct.mit.edu/books/book/4013/Analyzing-Neural-Time-Series-DataTheory-and">book</a><em>Analyzing Neural Time Series Data: Theory and Practice</em>. Specifically, to assess the statistical significance of spectral estimates obtained from electrophysiological data (in this case LFP) we used non-parametric permutation tests and focused on the multiple comparison correction of time frequency representations (TFRs). We show that the success of the two approaches depends on the dimensions of the
+<a class="reference external" href="https://direct.mit.edu/books/book/4013/Analyzing-Neural-Time-Series-DataTheory-and">book</a> <em>Analyzing Neural Time Series Data: Theory and Practice</em>. Specifically, to assess the statistical significance of spectral estimates obtained from electrophysiological data (in this case LFP) we used non-parametric permutation tests and focused on the multiple comparison correction of time frequency representations (TFRs). We show that the success of the two approaches depends on the dimensions of the
 data at hand, be these spatial locations, time and frequency analysis parameters, trials of different conditions, the nature of hypothesis, etc. For basic pedagogical purposes, here I focus on spectral power increases relative to baseline using two variants of essentially the same approach: 1) null hypothesis testing using the min-max distribution approach, which captures variations at the extremes of the null distribution, and 2) null hypothesis testing using the whole null distribution,
 obtained by averaging across specific dimensions.</p>
 <p>Since there are several ways to achieve these goals and many realizations of these and other related methods (i.e. thresholds may be obtained from the percentiles of the null distribution directly and further corrected in equivalent ways, or the pooling of data accomplished among specific dimensions), here I focus on these two common methods using very simple examples in the hope to help those researchers (including myself) that are or may be in need of clarity on these matters, touch ground.
