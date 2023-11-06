@@ -12,7 +12,7 @@ from tfrStats.cluster_correction import cluster_correction as cluster_correction
 import warnings
 warnings.filterwarnings('ignore')
 
-def plot_tfr_stats(input_path, cond, fband, null, correction, cluster_size, type, alpha):
+def plot_tfr_stats(input_path, cond, fband, null, type):
 
     """
     Plot empirical TFR and stats results
@@ -58,10 +58,26 @@ def plot_tfr_stats(input_path, cond, fband, null, correction, cluster_size, type
     cnorm_range   = [400, 1000]
     maxpwr        = 150
     overlay_range = [1,-1]  # range for overlay coverage
-    calpha         = 0.25
-    prctl    = null[1]
-    results  = null[0]
+    calpha        = 0.25
+    prctl         = null[0]
+    alpha         = null[1]
 
+    if type == 'minmax' or type == 'minmax_oll':
+        results       = 1
+        tfr_emp, tfr_null = load_uv_tfrs(input_path, [], cond, fband, results) # load tfrs from .npz file
+
+    if type == 'whole' or type == 'whole_roll':
+        results       = 0
+        tfr_emp, tfr_null = load_uv_tfrs(input_path, [], cond, fband, results) # load tfrs from .npz file
+    
+    if type == 'minmax':
+        stats = get_pvals_minmax(tfr_emp, tfr_null, tail = 'single-sided')
+    if type == 'minmax_roll':
+        stats = get_pvals_minmax_roll(tfr_emp, tfr_null, tail = 'single-sided')
+    if type == 'whole':
+        stats = get_pvals_whole(tfr_emp, tfr_null, fband)
+    if type == 'whole_roll':
+        stats = get_pvals_whole_roll(tfr_emp, tfr_null, fband)
 
 
     ## helper function used by plot_stats to noramlize colormap ranges
@@ -71,62 +87,13 @@ def plot_tfr_stats(input_path, cond, fband, null, correction, cluster_size, type
             #print(f'For k={k}, the point in the range {min_val}-{max_val} is: {point}')
         #else:
             #print("Error: k must be between 0 and 1")
-
         return point
-
-
 
     ## Plot TFR across sites
     fig, ax = plt.subplots(nrows=2, ncols=1,figsize=(6,4))
 
-    if type == 'minmax':
-        ## Min-max
-
-        tfr_emp, tfr_null = load_uv_tfrs(input_path, [], cond, fband, results) # load tfrs from .npz file
-
-        if correction == 1:
-            stats = get_pvals_minmax(tfr_emp, tfr_null, tail = 'single-sided')
-
-        if correction == 2:
-            stats = get_pvals_minmax(tfr_emp, tfr_null, tail = 'single-sided')
-            pvals_corr = cluster_correction(stats,  cluster_size, alpha)
-
-    if type == 'minmax_roll':
-        ## Min-max
-
-        tfr_emp, tfr_null = load_uv_tfrs(input_path, [], cond, fband, results) # load tfrs from .npz file
-
-        if correction == 1:
-            stats = get_pvals_minmax(tfr_emp, tfr_null, tail = 'single-sided')
-
-        if correction == 2:
-            stats = get_pvals_minmax(tfr_emp, tfr_null, tail = 'single-sided')
-            pvals_corr = cluster_correction(stats,  cluster_size, alpha)
-
-    if type == 'whole':
-
-        tfr_emp, tfr_null = load_uv_tfrs(input_path, [], cond, fband, results)
-
-        if correction == 1:
-            stats = get_pvals_whole(tfr_emp, tfr_null, fband)
-
-        if correction == 2:
-            stats = get_pvals_whole(tfr_emp, tfr_null, fband)
-            pvals_corr = cluster_correction(stats,  cluster_size, alpha)
-
-    if type == 'whole_roll':
-
-        tfr_emp, tfr_null = load_uv_tfrs(input_path, [], cond, fband, results)
-
-        if correction == 1:
-            stats = get_pvals_whole(tfr_emp, tfr_null, fband)
-
-        if correction == 2:
-            stats = get_pvals_whole(tfr_emp, tfr_null, fband)
-            pvals_corr = cluster_correction(stats,  cluster_size, alpha)
-
     # indices for plotting
-    x =  np.linspace(start = -800, stop = 2000, num = tps[fband])# time vector
+    x =  np.linspace(start = -800, stop = 2000, num = tps[fband]) # time vector
     t0 = np.searchsorted(x, 400,side='left', sorter=None) # time index for induced power period start
     tf = np.searchsorted(x, 1000,side='left', sorter=None) # time index for induced power period end
     y = np.linspace(lp[fband], hp[fband], fps[fband])
@@ -161,9 +128,6 @@ def plot_tfr_stats(input_path, cond, fband, null, correction, cluster_size, type
     TFR_emp = f(x2, y2)
     im_spwr = ax[0].pcolormesh(X2[:,twindow[0]:-twindow[1]], Y2[:,twindow[0]:-twindow[1]], TFR_emp[:,twindow[0]:-twindow[1]],cmap=cmap, norm=norm)
 
-
-
-
     # Thresholding using truncated min-max distribution
     if type == 'minmax':
         print('min-max')
@@ -177,7 +141,7 @@ def plot_tfr_stats(input_path, cond, fband, null, correction, cluster_size, type
         gavg_thr = np.percentile(nullDist.flatten(),prctl) # pool permutations for all frequencies
         print('cutoff computed using min/max of null distribution: ', gavg_thr )
 
-    if type == 'minmax_roll':
+    if type == 'minmax-roll':
         print('min-max-roll')
         tail = 'single-sided'
         if tail == 'two-sided':
@@ -204,7 +168,7 @@ def plot_tfr_stats(input_path, cond, fband, null, correction, cluster_size, type
         gavg_thr = np.percentile(null_.flatten(),prctl)
         print('cutoff computed using whole null distribution: ', gavg_thr )
 
-    if type == 'whole_roll':
+    if type == 'whole-roll':
         print('whole-null-roll')
         gavg_null = np.squeeze(np.nanmean(tfr_null,axis=0))
         gavg_null[np.isnan(gavg_null)] = 0. # just for plotting
@@ -238,26 +202,14 @@ def plot_tfr_stats(input_path, cond, fband, null, correction, cluster_size, type
 
 
     # Plot p-values ad thresholding
-    if correction == 1:
-        f = interp2d(x, y, stats, kind='linear')
-        TFR_pvals = f(x2, y2)
-        THR = TFR_pvals <= alpha
-        im_pvals = ax[1].pcolormesh(X2[:,twindow[0]:-twindow[1]], Y2[:,twindow[0]:-twindow[1]], TFR_pvals[:,twindow[0]:-twindow[1]])
-        ax[0].contour(X2[overlay_range[0]:overlay_range[1],twindow[0]:-twindow[1]], Y2[overlay_range[0]:overlay_range[1],twindow[0]:-twindow[1]],
-                        THR[overlay_range[0]:overlay_range[1],twindow[0]:-twindow[1]],
-                        origin='upper',
-                        colors='dodgerblue',
-                        linestyles='solid',
-                        linewidths=0.5)
-    # Cluster
-    elif correction == 2:
-        f = interp2d(x, y, stats, kind='linear')
-        TFR_pvals = f(x2, y2)
-        f = interp2d(x, y, pvals_corr, kind='linear')
-        TFR_pvals_corr = f(x2, y2)
-        THR = TFR_pvals_corr <= alpha
-        im_pvals = ax[1].pcolormesh(X2[:,twindow[0]:-twindow[1]], Y2[:,twindow[0]:-twindow[1]], TFR_pvals[:,twindow[0]:-twindow[1]])
-        ax[0].contour(X2[overlay_range[0]:overlay_range[1],twindow[0]:-twindow[1]], Y2[overlay_range[0]:overlay_range[1],twindow[0]:-twindow[1]],
+
+    f = interp2d(x, y, stats, kind='linear')
+    TFR_pvals = f(x2, y2)
+    THR = TFR_pvals <= alpha
+    im_pvals = ax[1].pcolormesh(X2[:,twindow[0]:-twindow[1]], Y2[:,twindow[0]:-twindow[1]], 
+                                TFR_pvals[:,twindow[0]:-twindow[1]])
+    ax[0].contour(X2[overlay_range[0]:overlay_range[1],twindow[0]:-twindow[1]], 
+                        Y2[overlay_range[0]:overlay_range[1],twindow[0]:-twindow[1]],
                         THR[overlay_range[0]:overlay_range[1],twindow[0]:-twindow[1]],
                         origin='upper',
                         colors='dodgerblue',

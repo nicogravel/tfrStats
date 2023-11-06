@@ -15,7 +15,7 @@ from tfrStats.cluster_correction import cluster_correction as cluster_correction
 import warnings
 warnings.filterwarnings('ignore')
 
-def plot_dtfr_stats(input_path, cond, fband, null, correction, cluster_size, type, alpha):
+def plot_dtfr_stats(input_path, cond, fband, null, type):
 
     """
     Plot empirical TFR and stats results for depth x time TFR
@@ -64,10 +64,19 @@ def plot_dtfr_stats(input_path, cond, fband, null, correction, cluster_size, typ
     maxpwr        = 150
     overlay_range = [1,-1]  # range for overlay coverage
     calpha         = 0.25
-    prctl    = null[1]
-    results  = null[0]
+    prctl         = null[0]
+    alpha         = null[1]
 
-    tfr_emp, tfr_null = load_uv_tfrs(input_path, [], cond, fband, results) # load tfrs from .npz file
+
+    if type == 'minmax' or type == 'minmax_oll':
+        results       = 1
+        tfr_emp, tfr_null = load_uv_tfrs(input_path, [], cond, fband, results) # load tfrs from .npz file
+
+    if type == 'whole' or type == 'whole_roll':
+        results       = 0
+        tfr_emp, tfr_null = load_uv_tfrs(input_path, [], cond, fband, results) # load tfrs from .npz file
+    
+
 
 
     ## helper function used by plot_stats to noramlize colormap ranges
@@ -164,26 +173,11 @@ def plot_dtfr_stats(input_path, cond, fband, null, correction, cluster_size, typ
     #print(davg.shape, davg_null.shape)
 
     if type == 'minmax':
-        ## Min-max
         print('min-max')
-        if correction == 1:
-            stats = get_dpvals_minmax(davg, davg_null, tail = 'single-sided')
-
-        if correction == 2:
-            stats = get_dpvals_minmax(davg, davg_null, tail = 'single-sided')
-            pvals_corr = cluster_correction(stats, cluster_size, alpha)
-
+        stats = get_dpvals_minmax(davg, davg_null, tail = 'single-sided')
     if type == 'whole':
-
         print('whole-null')
-        if correction == 1:
-            stats = get_dpvals_whole(davg, davg_null, fband)
-            #print('depth? pvals :', stats.shape)
-        if correction == 2:
-            stats = get_dpvals_whole(davg, davg_null, fband)
-            #print('depth? pvals :', stats.shape)
-            pvals_corr = cluster_correction(stats, cluster_size, alpha)
-            #print('depth?  corrected pvals :', pvals_corr.shape)
+        stats = get_dpvals_whole(davg, davg_null, fband)
 
 
     davg[np.isnan(davg)] = 0
@@ -262,31 +256,16 @@ def plot_dtfr_stats(input_path, cond, fband, null, correction, cluster_size, typ
 
 
     # Plot p-values ad thresholding
-    if correction == 1:
-        f = interp2d(x, y, np.flipud(stats), kind='linear')
-        TFR_pvals = f(x2, y2)
-        THR = TFR_pvals <= alpha
-        im_pvals = ax[1].pcolormesh(X2[:,twindow[0]:-twindow[1]], Y2[:,twindow[0]:-twindow[1]], TFR_pvals[:,twindow[0]:-twindow[1]])
-        ax[0].contour(X2[overlay_range[0]:overlay_range[1],twindow[0]:-twindow[1]], Y2[overlay_range[0]:overlay_range[1],twindow[0]:-twindow[1]],
-                        THR[overlay_range[0]:overlay_range[1],twindow[0]:-twindow[1]],
-                        origin='upper',
-                        colors='dodgerblue',
-                        linestyles='solid',
-                        linewidths=0.5)
-    # Cluster
-    elif correction == 2:
-        f = interp2d(x, y, np.flipud(stats), kind='linear')
-        TFR_pvals = f(x2, y2)
-        f = interp2d(x, y, np.flipud(pvals_corr), kind='linear')
-        TFR_pvals_corr = f(x2, y2)
-        THR = TFR_pvals_corr <= alpha
-        im_pvals = ax[1].pcolormesh(X2[:,twindow[0]:-twindow[1]], Y2[:,twindow[0]:-twindow[1]], TFR_pvals[:,twindow[0]:-twindow[1]])
-        ax[0].contour(X2[overlay_range[0]:overlay_range[1],twindow[0]:-twindow[1]], Y2[overlay_range[0]:overlay_range[1],twindow[0]:-twindow[1]],
-                        THR[overlay_range[0]:overlay_range[1],twindow[0]:-twindow[1]],
-                        origin='upper',
-                        colors='dodgerblue',
-                        linestyles='solid',
-                        linewidths=0.5)
+    f = interp2d(x, y, np.flipud(stats), kind='linear')
+    TFR_pvals = f(x2, y2)
+    THR = TFR_pvals <= alpha
+    im_pvals = ax[1].pcolormesh(X2[:,twindow[0]:-twindow[1]], Y2[:,twindow[0]:-twindow[1]], TFR_pvals[:,twindow[0]:-twindow[1]])
+    ax[0].contour(X2[overlay_range[0]:overlay_range[1],twindow[0]:-twindow[1]], Y2[overlay_range[0]:overlay_range[1],twindow[0]:-twindow[1]],
+                    THR[overlay_range[0]:overlay_range[1],twindow[0]:-twindow[1]],
+                    origin='upper',
+                    colors='dodgerblue',
+                    linestyles='solid',
+                    linewidths=0.5)
 
 
     cbar = plt.colorbar(im_spwr,cax = fig.add_axes([0.95, 0.6, 0.02, 0.15]),extend='both')

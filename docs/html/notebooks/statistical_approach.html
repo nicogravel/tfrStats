@@ -120,21 +120,12 @@
             
   <section id="A-mini-tutorial...">
 <h1><span class="section-number">2. </span>A mini-tutorial…<a class="headerlink" href="#A-mini-tutorial..." title="Permalink to this heading">¶</a></h1>
-<p>Recently, I encountered an <a class="reference external" href="https://www.tandfonline.com/doi/full/10.1080/08989621.2021.1962713">article</a> discussing the ongoing replication issue in the field of biology. Why so often, the article stressed, results obtained by teams at different labs using the same data (and following the same inquiries) are difficult or even impossible to replicate reliably? According to the article, there is some agreement about what may be partly causing this replication crisis: in many cases statisticians
-act more like a plumber rather than a priest. While I personally do not agree with the dogmatic view of priest-like statisticians imposing their hypothesis-making machinery to every problem they stumble upon, I do agree on the need to reach some collective consensus, specially when potentially diverging decisions during the statistical assessment may bring forth confusion rather than clarity. With all its good intentions, the overly dogmatic approach of some scientists should not lead us into
-the realm of extreme scientific belief or <a class="reference external" href="https://www.merriam-webster.com/dictionary/scientism">scientificism/scientism</a>, (i.e. <em>the urge to trust on the temporary answers our good ol’ metric provide more than the underlying problem that inspired them in first place</em>). Coincidentally, while I was engrossed in this piece, I stumbled upon another noteworthy piece in the now obsolete Twitter. A <a class="reference external" href="https://twitter.com/lakens/status/1718654122516156777">post</a> provided the much needed, <em>so zu
-sagen</em>, plumber’s perspective. After all, plumbing and fitting are nuanced tasks that can either yield a pipe jungle or a professionally designed system.</p>
-<p><em>Statisticians should be less like priests and more plumbers. I don’t care what you personally believe is the right way to do things - if I have a specific problem, I want to know all possible solutions that might fix it, what their limitations are, and how much each would cost.</em></p>
-<p><a class="reference external" href="https://twitter.com/lakens">Daniël Lackens</a></p>
-<p>In this mini-tutorial, I show two related approaches applied to the same scenario. I provide basic Python code to illustrate how two different yet fundamentally similar pipelines can lead to slightly different but comparable results. The pipelines are based on examples provided in <a class="reference external" href="https://www.fieldtriptoolbox.org/workshop/oslo2019/statistics/#permutation-test-with-cluster-correction">Fieldtrip</a> and adapted from the
-<a class="reference external" href="https://direct.mit.edu/books/book/4013/Analyzing-Neural-Time-Series-DataTheory-and">book</a> <em>Analyzing Neural Time Series Data: Theory and Practice</em>. Specifically, to assess the statistical significance of spectral estimates obtained from electrophysiological data (in this case LFP) we used non-parametric permutation tests and focused on the multiple comparison correction of time frequency representations (TFRs). We show that the success of the two approaches depends on the dimensions of the
-data at hand, be these spatial locations, time and frequency analysis parameters, trials of different conditions, the nature of hypothesis, etc. For basic pedagogical purposes, here I focus on spectral power increases relative to baseline using two variants of essentially the same approach: 1) null hypothesis testing using the min-max distribution approach, which captures variations at the extremes of the null distribution, and 2) null hypothesis testing using the whole null distribution,
-obtained by averaging across specific dimensions.</p>
+<p>Specifically, to assess the statistical significance of spectral estimates obtained from electrophysiological data (in this case LFP) we used non-parametric permutation tests and focused on the multiple comparison correction of time frequency representations (TFRs). We show that the success of the two approaches depends on the dimensions of the data at hand, be these spatial locations, time and frequency analysis parameters, trials of different conditions, the nature of hypothesis, etc. For
+basic pedagogical purposes, here I focus on spectral power increases relative to baseline using two variants of essentially the same approach: 1) null hypothesis testing using the min-max distribution approach, which captures variations at the extremes of the null distribution, and 2) null hypothesis testing using the whole null distribution, obtained by averaging across specific dimensions.</p>
 <p>Since there are several ways to achieve these goals and many realizations of these and other related methods (i.e. thresholds may be obtained from the percentiles of the null distribution directly and further corrected in equivalent ways, or the pooling of data accomplished among specific dimensions), here I focus on these two common methods using very simple examples in the hope to help those researchers (including myself) that are or may be in need of clarity on these matters, touch ground.
 Depending on the approach, the computation of the p-values will change slightly. In the min-max approach the minimum and maximum values at each permutations are used. When testing using the whole null distribution, the null values obtained from the permutations are averaged the same way the empirical distribution is averaged so the dimensions of the empirical distributions are preserved in the null distribution. Once the null distributions have been obtained, p-values are obtained using the
-empirical cumulative distribution. Provided the right Python environment, this Jupyter notebook should work as a simple mini-tutorial and support the discussion of these and related basic approaches for computing TFRs and assessing their statistical significance in a clear and easy to <em>understand/explain</em> way. The functions within this notebook are provided in an exploratory state and are subject to change. A background section with an open discussion subsection is included. Please feel free to
-use it help improve the codebook. The methods presented here are a work in progress. I plan to make some refinements in the next few weeks. Should you be interested in employing these methods or if you have any questions, please feel free to reach out to me. I would be more than happy to assist you further.</p>
-<p>The package can be downloaded from here: <a class="reference external" href="https://github.com/nicogravel/tfrStatstfrStats">https://github.com/nicogravel/tfrStatstfrStats</a></p>
+empirical cumulative distribution. Provided the right Python environment, this Jupyter notebook should work as a simple mini-tutorial and support the discussion of these and related basic approaches for computing TFRs and assessing their statistical significance in a clear way. The methods presented here are a work in progress. I plan to make some refinements in the next few weeks. Should you be interested in employing these methods or if you have any questions, please feel free to reach out to
+me. I would be more than happy to assist you further.</p>
 <section id="Installation">
 <h2><span class="section-number">2.1. </span>Installation<a class="headerlink" href="#Installation" title="Permalink to this heading">¶</a></h2>
 <p>To run the <a class="reference external" href="https://github.com/nicogravel/tfrStats/blob/main/docs/html/notebooks/statistical_approach.ipynb">notebook</a>, clone the package (or your fork) locally and then:</p>
@@ -153,30 +144,52 @@ pip install -e .
 </section>
 <section id="Import-libraries-and-define-functions">
 <h2><span class="section-number">2.2. </span>Import libraries and define functions<a class="headerlink" href="#Import-libraries-and-define-functions" title="Permalink to this heading">¶</a></h2>
-<div class="nbinput nblast docutils container">
+<div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tfrStats.plot_tfr_stats</span> <span class="kn">import</span> <span class="n">plot_tfr_stats</span> <span class="k">as</span> <span class="n">plot_tfr_stats</span>
 <span class="kn">from</span> <span class="nn">tfrStats.plot_dtfr_stats</span> <span class="kn">import</span> <span class="n">plot_dtfr_stats</span> <span class="k">as</span> <span class="n">plot_dtfr_stats</span>
 
-
 <span class="c1">#in_path   = &#39;/Volumes/.../data/&#39;</span>
 <span class="c1">#out_path  = &#39;/Volumes/.../results/stats/univariate/&#39;</span>
-
-
 <span class="n">in_path</span>   <span class="o">=</span> <span class="s1">&#39;/Volumes/Gandalg/MWlamprop/data/&#39;</span>
 <span class="n">out_path</span>  <span class="o">=</span> <span class="s1">&#39;/Volumes/Gandalf/MWlamprop/results/stats/univariate/&#39;</span>
 </pre></div>
 </div>
 </div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
-</pre></div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">KeyboardInterrupt</span>                         Traceback (most recent call last)
+<span class="ansi-green-intense-fg ansi-bold">/Users/nicogravel/Documents/Websites/tfrStats/tfrStats_local/docs/source/notebooks/statistical_approach.ipynb Cell 4</span> line <span class="ansi-cyan-fg">1
+</span><span class="ansi-green-fg">----&gt; &lt;a href=&#39;vscode-notebook-cell:/Users/nicogravel/Documents/Websites/tfrStats/tfrStats_local/docs/source/notebooks/statistical_approach.ipynb#W3sZmlsZQ%3D%3D?line=0&#39;&gt;1&lt;/a&gt;</span> from tfrStats.plot_tfr_stats import plot_tfr_stats as plot_tfr_stats
+<span class="ansi-green-intense-fg ansi-bold">      &lt;a href=&#39;vscode-notebook-cell:/Users/nicogravel/Documents/Websites/tfrStats/tfrStats_local/docs/source/notebooks/statistical_approach.ipynb#W3sZmlsZQ%3D%3D?line=1&#39;&gt;2&lt;/a&gt;</span> from tfrStats.plot_dtfr_stats import plot_dtfr_stats as plot_dtfr_stats
+<span class="ansi-green-intense-fg ansi-bold">      &lt;a href=&#39;vscode-notebook-cell:/Users/nicogravel/Documents/Websites/tfrStats/tfrStats_local/docs/source/notebooks/statistical_approach.ipynb#W3sZmlsZQ%3D%3D?line=3&#39;&gt;4&lt;/a&gt;</span> #in_path   = &#39;/Volumes/.../data/&#39;
+<span class="ansi-green-intense-fg ansi-bold">      &lt;a href=&#39;vscode-notebook-cell:/Users/nicogravel/Documents/Websites/tfrStats/tfrStats_local/docs/source/notebooks/statistical_approach.ipynb#W3sZmlsZQ%3D%3D?line=4&#39;&gt;5&lt;/a&gt;</span> #out_path  = &#39;/Volumes/.../results/stats/univariate/&#39;
+
+File <span class="ansi-green-fg">~/Documents/Websites/tfrStats/tfrStats_local/tfrStats/plot_tfr_stats.py:1</span>
+<span class="ansi-green-fg">----&gt; 1</span> import numpy as np
+<span class="ansi-green-intense-fg ansi-bold">      2</span> import matplotlib.pyplot as plt
+<span class="ansi-green-intense-fg ansi-bold">      3</span> from scipy.interpolate import interp2d
+
+File <span class="ansi-green-fg">~/opt/anaconda3/envs/lamidec/lib/python3.8/site-packages/numpy/__init__.py:337</span>
+<span class="ansi-green-intense-fg ansi-bold">    334</span> del PytestTester
+<span class="ansi-green-intense-fg ansi-bold">    336</span> import mkl
+<span class="ansi-green-fg">--&gt; 337</span> __mkl_version__ = &#34;{MajorVersion}.{MinorVersion}.{UpdateVersion}&#34;.format(**mkl.get_version())
+<span class="ansi-green-intense-fg ansi-bold">    340</span> def _sanity_check():
+<span class="ansi-green-intense-fg ansi-bold">    341</span>     &#34;&#34;&#34;
+<span class="ansi-green-intense-fg ansi-bold">    342</span>     Quick sanity checks for common bugs caused by environment.
+<span class="ansi-green-intense-fg ansi-bold">    343</span>     There are some cases e.g. with wrong BLAS ABI that cause wrong
+<span class="ansi-green-fg">   (...)</span>
+<span class="ansi-green-intense-fg ansi-bold">    349</span>
+<span class="ansi-green-intense-fg ansi-bold">    350</span>     &#34;&#34;&#34;
+
+<span class="ansi-red-fg">KeyboardInterrupt</span>:
+</pre></div></div>
 </div>
 </section>
 <section id="Compute-p-values">
@@ -184,69 +197,33 @@ pip install -e .
 <p>Here we plot TFRs with the significance threshold computed from p-values (i.e. p-val &lt;= 0.05) (top panel, blue trace). The alpha mask specifies the section containing the values above the null percentile cutoff (i.e. 95%). The p-values (bottom panel) with the null percentile cutoff (red trace)</p>
 <section id="min-max">
 <h3><span class="section-number">2.3.1. </span>min-max<a class="headerlink" href="#min-max" title="Permalink to this heading">¶</a></h3>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span>         <span class="o">=</span> <span class="s1">&#39;minmax&#39;</span>
+<span class="n">null</span>         <span class="o">=</span> <span class="p">[</span><span class="mi">95</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">]</span> <span class="c1"># percentile, p-value</span>
+<span class="n">fband</span>        <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="n">cond</span>         <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">plot_tfr_stats</span><span class="p">(</span><span class="n">out_path</span><span class="p">,</span> <span class="n">cond</span><span class="p">,</span> <span class="n">fband</span><span class="p">,</span> <span class="n">null</span><span class="p">,</span> <span class="nb">type</span><span class="p">)</span>
 </pre></div>
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-/Volumes/Gandalf/MWlamprop/results/stats/univariate/uvtfr_stats_high_grat_spw_1000_minmax.npz
-tfr emp  :  (30, 12, 16, 113)
-tfr null    (1000, 30, 12, 16, 2)
-min-max
-cutoff computed using min/max of null distribution:  75.96054268486813
-</pre></div></div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../_images/notebooks_statistical_approach_7_1.png" src="../_images/notebooks_statistical_approach_7_1.png" />
 </div>
 </div>
 </section>
 <section id="whole-null">
 <h3><span class="section-number">2.3.2. </span>whole-null<a class="headerlink" href="#whole-null" title="Permalink to this heading">¶</a></h3>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">null</span>         <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">95</span><span class="p">]</span>
-<span class="n">alpha</span>        <span class="o">=</span> <span class="mf">0.01</span>
-<span class="n">correction</span>   <span class="o">=</span> <span class="mi">1</span>
-<span class="n">cluster_size</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="n">fband</span>        <span class="o">=</span> <span class="mi">1</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span>         <span class="o">=</span> <span class="s1">&#39;whole&#39;</span>
+<span class="n">null</span>         <span class="o">=</span> <span class="p">[</span><span class="mi">95</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">]</span> <span class="c1"># percentile, p-value</span>
+<span class="n">fband</span>        <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 <span class="n">cond</span>         <span class="o">=</span> <span class="mi">0</span>
-<span class="nb">type</span>         <span class="o">=</span> <span class="s1">&#39;whole&#39;</span>
 
-<span class="n">plot_tfr_stats</span><span class="p">(</span><span class="n">out_path</span><span class="p">,</span> <span class="n">cond</span><span class="p">,</span> <span class="n">fband</span><span class="p">,</span> <span class="n">null</span><span class="p">,</span> <span class="n">correction</span><span class="p">,</span> <span class="n">cluster_size</span><span class="p">,</span> <span class="nb">type</span><span class="p">,</span> <span class="n">alpha</span><span class="p">)</span>
+<span class="n">plot_tfr_stats</span><span class="p">(</span><span class="n">out_path</span><span class="p">,</span> <span class="n">cond</span><span class="p">,</span> <span class="n">fband</span><span class="p">,</span> <span class="n">null</span><span class="p">,</span> <span class="nb">type</span><span class="p">)</span>
 </pre></div>
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-/Volumes/Gandalf/MWlamprop/results/stats/univariate/uvtfr_stats_high_grat_spw_100.npz
-tfr emp  :  (30, 12, 16, 113)
-tfr null    (30, 12, 16, 113)
-whole-null
-cutoff computed using whole null distribution:  70.79162686024465
-</pre></div></div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../_images/notebooks_statistical_approach_9_1.png" src="../_images/notebooks_statistical_approach_9_1.png" />
 </div>
 </div>
 </section>
@@ -256,81 +233,41 @@ cutoff computed using whole null distribution:  70.79162686024465
 <p>For this other type of TFR one must consider the pooling of data over predefined frequency bins, as well as spatial dimentions (i.e. ROIs). Therefore, the multiple correction will change slightly.</p>
 <section id="id1">
 <h3><span class="section-number">2.4.1. </span>min-max<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h3>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">null</span>         <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">95</span><span class="p">]</span>
-<span class="n">alpha</span>        <span class="o">=</span> <span class="mf">0.05</span>
-<span class="n">correction</span>   <span class="o">=</span> <span class="mi">1</span>
-<span class="n">cluster_size</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="n">fband</span>        <span class="o">=</span> <span class="mi">1</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span>         <span class="o">=</span> <span class="s1">&#39;minmax&#39;</span>
+<span class="n">null</span>         <span class="o">=</span> <span class="p">[</span><span class="mi">95</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">]</span> <span class="c1"># percentile, p-value</span>
+<span class="n">fband</span>        <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 <span class="n">cond</span>         <span class="o">=</span> <span class="mi">0</span>
-<span class="nb">type</span>         <span class="o">=</span> <span class="s1">&#39;minmax&#39;</span>
 
-<span class="n">plot_dtfr_stats</span><span class="p">(</span><span class="n">out_path</span><span class="p">,</span> <span class="n">cond</span><span class="p">,</span> <span class="n">fband</span><span class="p">,</span> <span class="n">null</span><span class="p">,</span> <span class="n">correction</span><span class="p">,</span> <span class="n">cluster_size</span><span class="p">,</span> <span class="nb">type</span><span class="p">,</span> <span class="n">alpha</span><span class="p">)</span>
+<span class="n">plot_dtfr_stats</span><span class="p">(</span><span class="n">out_path</span><span class="p">,</span> <span class="n">cond</span><span class="p">,</span> <span class="n">fband</span><span class="p">,</span> <span class="n">null</span><span class="p">,</span> <span class="nb">type</span><span class="p">)</span>
 </pre></div>
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-/Volumes/Gandalf/MWlamprop/results/stats/univariate/uvtfr_stats_high_grat_spw_1000_minmax.npz
-tfr emp  :  (30, 12, 16, 113)
-tfr null    (1000, 30, 12, 16, 2)
-peak frequency range :  28.0 44.0
-power average within peak: 86.6390137791448
-min-max
-cutoff computed using min/max of null distribution:  70.91082666125475
-</pre></div></div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../_images/notebooks_statistical_approach_12_1.png" src="../_images/notebooks_statistical_approach_12_1.png" />
 </div>
 </div>
 </section>
 <section id="id2">
 <h3><span class="section-number">2.4.2. </span>whole null<a class="headerlink" href="#id2" title="Permalink to this heading">¶</a></h3>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">null</span>         <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">95</span><span class="p">]</span>
-<span class="n">alpha</span>        <span class="o">=</span> <span class="mf">0.05</span>
-<span class="n">correction</span>   <span class="o">=</span> <span class="mi">1</span>
-<span class="n">cluster_size</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="n">fband</span>        <span class="o">=</span> <span class="mi">1</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span>         <span class="o">=</span> <span class="s1">&#39;whole&#39;</span>
+<span class="n">null</span>         <span class="o">=</span> <span class="p">[</span><span class="mi">95</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">]</span> <span class="c1"># percentile, p-value</span>
+<span class="n">fband</span>        <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 <span class="n">cond</span>         <span class="o">=</span> <span class="mi">0</span>
-<span class="nb">type</span>         <span class="o">=</span> <span class="s1">&#39;whole&#39;</span>
 
-<span class="n">plot_dtfr_stats</span><span class="p">(</span><span class="n">out_path</span><span class="p">,</span> <span class="n">cond</span><span class="p">,</span> <span class="n">fband</span><span class="p">,</span> <span class="n">null</span><span class="p">,</span> <span class="n">correction</span><span class="p">,</span> <span class="n">cluster_size</span><span class="p">,</span> <span class="nb">type</span><span class="p">,</span> <span class="n">alpha</span><span class="p">)</span>
+<span class="n">plot_dtfr_stats</span><span class="p">(</span><span class="n">out_path</span><span class="p">,</span> <span class="n">cond</span><span class="p">,</span> <span class="n">fband</span><span class="p">,</span> <span class="n">null</span><span class="p">,</span> <span class="nb">type</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
 </div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-/Volumes/Gandalf/MWlamprop/results/stats/univariate/uvtfr_stats_high_grat_spw_100.npz
-tfr emp  :  (30, 12, 16, 113)
-tfr null    (30, 12, 16, 113)
-peak frequency range :  28.0 44.0
-power average within peak: 86.6390137791448
-whole-null
-cutoff computed using whole null distribution:  70.52901730660238
-</pre></div></div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../_images/notebooks_statistical_approach_14_1.png" src="../_images/notebooks_statistical_approach_14_1.png" />
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
 </div>
 </div>
 </section>
