@@ -49,7 +49,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../uvtfrs.html">1. On TFR statistical assessments</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">2. A mini-tutorial…</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#Installation">2.1. Installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#Statistical-thresholds-overlaid-onto-spatio-temporal-frequency-maps">2.2. Statistical thresholds overlaid onto spatio-temporal frequency maps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Compute-the-null-distributions">2.2. Compute the null distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Statistical-thresholds-overlaid-onto-spatio-temporal-frequency-maps">2.3. Statistical thresholds overlaid onto spatio-temporal frequency maps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Conlusion">2.4. Conlusion</a></li>
 </ul>
 </li>
 </ul>
@@ -134,7 +136,7 @@ pip install -e .
 <p>Voilà!</p>
 <p>Then we need to load the module with the functions we want to use and define the paths.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tfrStats.plot_tfr_stats</span> <span class="kn">import</span> <span class="n">plot_tfr_stats</span> <span class="k">as</span> <span class="n">plot_tfr_stats</span>
@@ -142,21 +144,111 @@ pip install -e .
 
 <span class="c1">#in_path   = &#39;/Volumes/.../data/&#39;</span>
 <span class="c1">#out_path  = &#39;/Volumes/.../results/stats/univariate/&#39;</span>
-<span class="n">in_path</span>   <span class="o">=</span> <span class="s1">&#39;/Volumes/Gandalg/MWlamprop/data/&#39;</span>
+<span class="n">in_path</span>   <span class="o">=</span> <span class="s1">&#39;/Volumes/Gandalf/MWlamprop/data/&#39;</span>
 <span class="n">out_path</span>  <span class="o">=</span> <span class="s1">&#39;/Volumes/Gandalf/MWlamprop/results/stats/univariate/&#39;</span>
-</pre></div>
+<span class="n">paths</span> <span class="o">=</span> <span class="p">[</span><span class="n">in_path</span><span class="p">,</span><span class="n">out_path</span><span class="p">]</span>
+<br/></pre></div>
 </div>
 </div>
 </section>
+<section id="Compute-the-null-distributions">
+<h2><span class="section-number">2.2. </span>Compute the null distributions<a class="headerlink" href="#Compute-the-null-distributions" title="Permalink to this heading">¶</a></h2>
+<p>I have pre-computed a couple of null distributions for the examles in the notebook.If you wish to compute the null distributions yourself, you can run the following (provided you are in posession of suitable data ; ) … For detailed contro, please do not hesitate in scrutinizing and editing the functions within the package. For now, the example is based on obtaining a the null distribution of % signal change from baseline by flipping a baseline period with a period that has the same length
+unfolding within the task.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tfrStats.tfr_spw_stats_whole</span> <span class="kn">import</span> <span class="n">tfr_spw_stats_whole</span> <span class="k">as</span> <span class="n">tfr_spw_stats_whole</span>
+<span class="kn">from</span> <span class="nn">tfrStats.tfr_spw_stats_minmax</span> <span class="kn">import</span> <span class="n">tfr_spw_stats_minmax</span> <span class="k">as</span> <span class="n">tfr_spw_stats_minmax</span>
+
+<span class="n">n_perm</span> <span class="o">=</span> <span class="mi">4</span> <span class="c1"># just to see if it works :P</span>
+<span class="n">fband</span>  <span class="o">=</span> <span class="mi">1</span>
+<span class="n">cond</span>   <span class="o">=</span> <span class="mi">0</span>
+<span class="n">tfr_emp</span><span class="p">,</span> <span class="n">tfr_null</span> <span class="o">=</span> <span class="n">tfr_spw_stats_whole</span><span class="p">(</span><span class="n">paths</span><span class="p">,</span><span class="n">cond</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">fband</span><span class="p">,</span><span class="n">n_perm</span><span class="p">)</span>
+<span class="n">tfr_emp</span><span class="p">,</span> <span class="n">tfr_null</span> <span class="o">=</span> <span class="n">tfr_spw_stats_minmax</span><span class="p">(</span><span class="n">paths</span><span class="p">,</span><span class="n">cond</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">fband</span><span class="p">,</span><span class="n">n_perm</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+site indices :
+[[  0  12  24  36  48  60  72  84  96 108]
+ [  1  13  25  37  49  61  73  85  97 109]
+ [  2  14  26  38  50  62  74  86  98 110]
+ [  3  15  27  39  51  63  75  87  99 111]
+ [  4  16  28  40  52  64  76  88 100 112]
+ [  5  17  29  41  53  65  77  89 101 113]
+ [  6  18  30  42  54  66  78  90 102 114]
+ [  7  19  31  43  55  67  79  91 103 115]
+ [  8  20  32  44  56  68  80  92 104 116]
+ [  9  21  33  45  57  69  81  93 105 117]
+ [ 10  22  34  46  58  70  82  94 106 118]
+ [ 11  23  35  47  59  71  83  95 107 119]]
+/Volumes/Gandalf/MWlamprop/data/ftPool_grat_high_wavelet.mat
+(30, 10, 120, 16, 113)
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "d4dd575984a7499a8116a374ebe5dd59", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(30, 12, 16, 113)
+(30, 12, 16, 113)
+/Volumes/Gandalf/MWlamprop/results/stats/univariate/uvtfr_stats_high_grat_spw_4.npz
+site indices :
+[[  0  12  24  36  48  60  72  84  96 108]
+ [  1  13  25  37  49  61  73  85  97 109]
+ [  2  14  26  38  50  62  74  86  98 110]
+ [  3  15  27  39  51  63  75  87  99 111]
+ [  4  16  28  40  52  64  76  88 100 112]
+ [  5  17  29  41  53  65  77  89 101 113]
+ [  6  18  30  42  54  66  78  90 102 114]
+ [  7  19  31  43  55  67  79  91 103 115]
+ [  8  20  32  44  56  68  80  92 104 116]
+ [  9  21  33  45  57  69  81  93 105 117]
+ [ 10  22  34  46  58  70  82  94 106 118]
+ [ 11  23  35  47  59  71  83  95 107 119]]
+/Volumes/Gandalf/MWlamprop/data/ftPool_grat_high_wavelet.mat
+(30, 10, 120, 16, 113)
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "1369882782474c29b815633c1b651662", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(30, 12, 16, 113)
+(4, 30, 12, 2)
+/Volumes/Gandalf/MWlamprop/results/stats/univariate/uvtfr_stats_high_grat_spw_4_minmax.npz
+</pre></div></div>
+</div>
+</section>
 <section id="Statistical-thresholds-overlaid-onto-spatio-temporal-frequency-maps">
-<h2><span class="section-number">2.2. </span>Statistical thresholds overlaid onto spatio-temporal frequency maps<a class="headerlink" href="#Statistical-thresholds-overlaid-onto-spatio-temporal-frequency-maps" title="Permalink to this heading">¶</a></h2>
+<h2><span class="section-number">2.3. </span>Statistical thresholds overlaid onto spatio-temporal frequency maps<a class="headerlink" href="#Statistical-thresholds-overlaid-onto-spatio-temporal-frequency-maps" title="Permalink to this heading">¶</a></h2>
 <p>Here we plot TFRs with the significance threshold computed from p-values (i.e. p-val &lt;= 0.05) (top panel, blue trace). The alpha mask specifies the section containing the values above the null percentile cutoff (i.e. 95%). The p-values (bottom panel) with the null percentile cutoff (red trace). We do so for spectral power as a function of frequency, space and time. For spatial TFR one must consider the pooling of data over predefined frequency bins, as well as spatial dimentions (i.e. ROIs).
 Therefore, the multiple correction will change slightly.</p>
 <ul class="simple">
 <li><p>Results saving minimal and maximal values at each permutation iteration (Min-Max approach)</p></li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span>         <span class="o">=</span> <span class="s1">&#39;minmax&#39;</span>
@@ -195,21 +287,21 @@ cutoff computed using min/max of null distribution:  70.91082666125475
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_statistical_approach_6_1.png" src="../_images/notebooks_statistical_approach_6_1.png" />
+<img alt="../_images/notebooks_statistical_approach_8_1.png" src="../_images/notebooks_statistical_approach_8_1.png" />
 </div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_statistical_approach_6_2.png" src="../_images/notebooks_statistical_approach_6_2.png" />
+<img alt="../_images/notebooks_statistical_approach_8_2.png" src="../_images/notebooks_statistical_approach_8_2.png" />
 </div>
 </div>
 <ul class="simple">
 <li><p>Results using the whole null distribution averaged across relevant dimensions</p></li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span>         <span class="o">=</span> <span class="s1">&#39;whole&#39;</span>
@@ -248,16 +340,22 @@ cutoff computed using whole null distribution:  70.52901730660238
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_statistical_approach_8_1.png" src="../_images/notebooks_statistical_approach_8_1.png" />
+<img alt="../_images/notebooks_statistical_approach_10_1.png" src="../_images/notebooks_statistical_approach_10_1.png" />
 </div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_statistical_approach_8_2.png" src="../_images/notebooks_statistical_approach_8_2.png" />
+<img alt="../_images/notebooks_statistical_approach_10_2.png" src="../_images/notebooks_statistical_approach_10_2.png" />
 </div>
 </div>
+</section>
+<section id="Conlusion">
+<h2><span class="section-number">2.4. </span>Conlusion<a class="headerlink" href="#Conlusion" title="Permalink to this heading">¶</a></h2>
+<p>Plotting the p-values of the whole time-frequency map, we can see that level of detail is not enough to see the differences between the the “min-max and the “whole-null” approach. However, the time-frequency-space maps show that there are differences between the two approachs, specially in the spatial distribution of p-values. The “whole-null” approach, by averaging the right dimensions while pooling the data for multiple comparisons corrections, captures spatial detail that is absent in the map
+obtained using the “min-max” approach. The explanation is simple: taking the minimum and maximum values from the pooled data at each iteration during the permutation procedure gives rise to a null distribution that is biased by the spatial locations that experience more variation. whereas the “whole-null” approach takes the spatial variation into account during tyhe averaging, the “min-max” appproach does not. As a result, the time-frequency map seems largely equivalent in both cases, whereas
+the time-frequency-space maps difer.</p>
 </section>
 </section>
 

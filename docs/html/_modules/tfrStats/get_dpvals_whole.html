@@ -133,8 +133,8 @@
 
     <span class="k">for</span> <span class="n">i_site</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">stats</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
         <span class="k">for</span> <span class="n">i_time</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">stats</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
-            <span class="c1">#null = nullDist[:,:,t0:tf]</span>
-            <span class="n">null</span> <span class="o">=</span> <span class="n">nullDist</span><span class="p">[:,:,:]</span>
+            <span class="n">null</span> <span class="o">=</span> <span class="n">nullDist</span><span class="p">[:,:,</span><span class="n">t0</span><span class="p">:</span><span class="n">tf</span><span class="p">]</span>
+            <span class="c1">#null = nullDist[:,:,:]</span>
             <span class="n">obs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">tfr</span><span class="p">[</span><span class="n">i_site</span><span class="p">,</span><span class="n">i_time</span><span class="p">])</span>
             <span class="n">ecdf</span> <span class="o">=</span> <span class="n">ECDF</span><span class="p">(</span><span class="n">null</span><span class="o">.</span><span class="n">flatten</span><span class="p">())</span>
             <span class="n">p_</span> <span class="o">=</span> <span class="n">ecdf</span><span class="p">(</span><span class="n">obs</span><span class="p">)</span>

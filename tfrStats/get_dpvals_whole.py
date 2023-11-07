@@ -40,8 +40,8 @@ def get_dpvals_whole(tfr_emp, tfr_null,fband):
 
     for i_site in range(stats.shape[0]):
         for i_time in range(stats.shape[1]):
-            #null = nullDist[:,:,t0:tf]
-            null = nullDist[:,:,:]
+            null = nullDist[:,:,t0:tf]
+            #null = nullDist[:,:,:]
             obs = np.squeeze(tfr[i_site,i_time])
             ecdf = ECDF(null.flatten())
             p_ = ecdf(obs)
