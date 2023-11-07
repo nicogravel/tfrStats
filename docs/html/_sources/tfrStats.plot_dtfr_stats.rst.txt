@@ -1,7 +1,0 @@
-tfrStats.plot\_dtfr\_stats module
-=================================
-
-.. automodule:: tfrStats.plot_dtfr_stats
-   :members:
-   :undoc-members:
-   :show-inheritance:
