@@ -155,10 +155,9 @@
     <span class="n">prctl</span>         <span class="o">=</span> <span class="n">null</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">alpha</span>         <span class="o">=</span> <span class="n">null</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
-    <span class="k">if</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;minmax&#39;</span> <span class="ow">or</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;minmax_oll&#39;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;minmax&#39;</span> <span class="ow">or</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;minmax_roll&#39;</span><span class="p">:</span>
         <span class="n">results</span>       <span class="o">=</span> <span class="mi">1</span>
         <span class="n">tfr_emp</span><span class="p">,</span> <span class="n">tfr_null</span> <span class="o">=</span> <span class="n">load_uv_tfrs</span><span class="p">(</span><span class="n">input_path</span><span class="p">,</span> <span class="p">[],</span> <span class="n">cond</span><span class="p">,</span> <span class="n">fband</span><span class="p">,</span> <span class="n">results</span><span class="p">)</span> <span class="c1"># load tfrs from .npz file</span>
-
     <span class="k">if</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;whole&#39;</span> <span class="ow">or</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;whole_roll&#39;</span><span class="p">:</span>
         <span class="n">results</span>       <span class="o">=</span> <span class="mi">0</span>
         <span class="n">tfr_emp</span><span class="p">,</span> <span class="n">tfr_null</span> <span class="o">=</span> <span class="n">load_uv_tfrs</span><span class="p">(</span><span class="n">input_path</span><span class="p">,</span> <span class="p">[],</span> <span class="n">cond</span><span class="p">,</span> <span class="n">fband</span><span class="p">,</span> <span class="n">results</span><span class="p">)</span> <span class="c1"># load tfrs from .npz file</span>

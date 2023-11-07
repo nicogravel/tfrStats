@@ -62,10 +62,9 @@ def plot_tfr_stats(input_path, cond, fband, null, type):
     prctl         = null[0]
     alpha         = null[1]
 
-    if type == 'minmax' or type == 'minmax_oll':
+    if type == 'minmax' or type == 'minmax_roll':
         results       = 1
         tfr_emp, tfr_null = load_uv_tfrs(input_path, [], cond, fband, results) # load tfrs from .npz file
-
     if type == 'whole' or type == 'whole_roll':
         results       = 0
         tfr_emp, tfr_null = load_uv_tfrs(input_path, [], cond, fband, results) # load tfrs from .npz file
