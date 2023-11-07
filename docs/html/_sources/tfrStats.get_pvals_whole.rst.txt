@@ -1,0 +1,7 @@
+tfrStats.get\_pvals\_whole module
+=================================
+
+.. automodule:: tfrStats.get_pvals_whole
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,7 @@
+tfrStats.cluster\_correction module
+===================================
+
+.. automodule:: tfrStats.cluster_correction
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,7 @@
+tfrStats.tfr\_spw\_stats\_minmax module
+=======================================
+
+.. automodule:: tfrStats.tfr_spw_stats_minmax
+   :members:
+   :undoc-members:
+   :show-inheritance:
