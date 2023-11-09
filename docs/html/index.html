@@ -45,7 +45,7 @@
 <li class="toctree-l1"><a class="reference internal" href="uvtfrs.html">1. On TFR statistical assessments</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/statistical_approach.html">2. A mini-tutorial…</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Python package:</span></p>
+<p class="caption" role="heading"><span class="caption-text">Package:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="modules.html">tfrStats</a></li>
 </ul>
@@ -97,19 +97,15 @@
             
   <section id="a-mini-tutorial-on-the-statistical-assessment-of-time-frequency-data">
 <h1><strong>A mini-tutorial on the Statistical Assessment of Time Frequency Data</strong><a class="headerlink" href="#a-mini-tutorial-on-the-statistical-assessment-of-time-frequency-data" title="Permalink to this heading">¶</a></h1>
-<p>Recently, I encountered an article discussing the ongoing replication crisis in biology <a class="footnote-reference brackets" href="#footcite-oza-2023" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a><a class="footnote-reference brackets" href="#footcite-nezer-2020" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>. Why so often, the article stressed, results obtained by different teams using the same data (and following the same inquiries) are difficult to replicate. According to the article, scientists tend to integrate their beliefs into their hypothesis-making machinery (i.e. in the form of a <em>toolbox</em>) to every problem they stumble upon in the field. While the need for collective consensus is clear, potentially diverging decisions taken during a statistical assessment may bring forth confusion rather than clarity. With all its good intentions, excess trust in a method should not lead us into the realm of extreme scientific belief or <a class="reference external" href="https://www.merriam-webster.com/dictionary/scientism">scientificism/scientism</a> (i.e. <em>the urge to trust on the temporary answers our good ol’ metric provide rather than the underlying problem that inspired them in first place</em>). Coincidentally, while trying to reach this consensus in my own work, I stumbled upon another noteworthy piece in the now obsolete Twitter. The <a class="reference external" href="https://twitter.com/lakens/status/1718654122516156777">post</a> provided the much needed, <em>so zu sagen</em>, plumber’s perspective:</p>
+<p>Recently, I encountered an article discussing the ongoing replication crisis in biology <a class="footnote-reference brackets" href="#footcite-oza-2023" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>. Why so often, the article stressed, results obtained by different teams using the same data (and following the same inquiries) are difficult to replicate. According to the article, scientists tend to integrate their beliefs into their hypothesis-making machinery (i.e. in the form of a <em>toolbox</em>) to every problem they stumble upon in the field. While the need for collective consensus is clear, potentially diverging decisions taken during a statistical assessment may bring forth confusion rather than clarity. With all its good intentions, excess trust in a method should not lead us into the realm of extreme scientific belief or <a class="reference external" href="https://www.merriam-webster.com/dictionary/scientism">scientificism/scientism</a> (i.e. <em>the urge to trust on the temporary answers our good ol’ metric provide rather than the underlying problem that inspired them in first place</em>). Coincidentally, while trying to reach this consensus in my own work, I stumbled upon another noteworthy piece in the now obsolete Twitter. The <a class="reference external" href="https://twitter.com/lakens/status/1718654122516156777">post</a> provided the much needed, <em>so zu sagen</em>, plumber’s perspective:</p>
 <blockquote>
 <div><p><em>Statisticians should be less like priests and more plumbers. I don’t care what you personally believe is the right way to do things - if I have a specific problem, I want to know all possible solutions that might fix it, what their limitations are, and how much each would cost.</em>                       <a class="reference external" href="https://twitter.com/lakens">Daniël Lackens</a></p>
 </div></blockquote>
 <p>It all made sense then. After all, plumbing and fitting are nuanced tasks that can either yield a pipe jungle or a professionally designed system. In this mini-tutorial, I show how two related statistical approaches, when applied to the same scenario, can lead to equivalent solutions. I provide basic Python code to illustrate how these two different yet fundamentally similar pipelines can lead to slightly different but comparable results. The pipelines are based on examples provided in <a class="reference external" href="https://www.fieldtriptoolbox.org/workshop/oslo2019/statistics/#permutation-test-with-cluster-correction">Fieldtrip</a> and adapted from the <a class="reference external" href="https://direct.mit.edu/books/book/4013/Analyzing-Neural-Time-Series-DataTheory-and">book</a> Analyzing Neural Time Series Data: Theory and Practice.</p>
-<div class="docutils container" id="id3">
+<div class="docutils container" id="id2">
 <aside class="footnote brackets" id="footcite-oza-2023" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
 <p>Anil Oza. Reproducibility trial, 246 biologists get different results from same data sets. <em>Nature</em>, 2023.</p>
-</aside>
-<aside class="footnote brackets" id="footcite-nezer-2020" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">2</a><span class="fn-bracket">]</span></span>
-<p>Botvinik-Nezer et al. Variability in the analysis of a single neuroimaging dataset by many teams. <em>Nature</em>, 582:84–88, 2020.</p>
 </aside>
 </div>
 <section id="content">
@@ -133,11 +129,19 @@
 </ul>
 </div>
 <div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">Python package:</span></p>
+<p class="caption" role="heading"><span class="caption-text">Package:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="modules.html">tfrStats</a></li>
 </ul>
 </div>
+<section id="indices">
+<h3>Indices<a class="headerlink" href="#indices" title="Permalink to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
 </section>
 </section>
 

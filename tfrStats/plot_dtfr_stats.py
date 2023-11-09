@@ -86,8 +86,7 @@ def plot_dtfr_stats(input_path, cond, fband, null, type):
             point = min_val + k*(max_val - min_val)
             #print(f'For k={k}, the point in the range {min_val}-{max_val} is: {point}')
         #else:
-            #print("Error: k must be between 0 and 1")
-
+            #print("Error: k must be between 0 and 1") 
         return point
     
 
@@ -237,11 +236,13 @@ def plot_dtfr_stats(input_path, cond, fband, null, type):
         null_ = null[~np.isnan(null)]
         davg_thr = np.percentile(null_.flatten(),prctl)
         print('cutoff computed using whole null distribution: ', davg_thr )
+    
     cut = np.full((TFR_emp.shape[0],TFR_emp.shape[1]),davg_thr)
     t0 = np.searchsorted(x2,stats_range[0],side='left', sorter=None)
     td = np.searchsorted(x2,stats_range[1],side='left', sorter=None)
     cut[1:-1,0:t0] = np.nan
     cut[1:-1,td:-1] = np.nan
+    
     THR =  TFR_emp >= cut
     significant = THR[overlay_range[0]:overlay_range[1],twindow[0]:-twindow[1]]*TFR_emp[overlay_range[0]:overlay_range[1],twindow[0]:-twindow[1]]
     im_pvals = ax[0].pcolormesh(X2[overlay_range[0]:overlay_range[1],twindow[0]:-twindow[1]],
