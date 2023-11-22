@@ -1,0 +1,7 @@
+tfrStats.plot\_tfr\_rdm module
+==============================
+
+.. automodule:: tfrStats.plot_tfr_rdm
+   :members:
+   :undoc-members:
+   :show-inheritance:

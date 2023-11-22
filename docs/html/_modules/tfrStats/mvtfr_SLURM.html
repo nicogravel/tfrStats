@@ -1,0 +1,198 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>tfrStats.mvtfr_SLURM &#8212; tfrStats 1.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css" />
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link href="../../_static/style.css" rel="stylesheet" type="text/css">
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="../../index.html">
+    <img class="logo" src="../../_static/logo_2.jpg" alt="Logo"/>
+    
+  </a>
+</p>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Content:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../uvtfrs.html">1. On TFR statistical assessments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/univariate_tfr_stats.html">2. Univariate TFR statistics, a mini-tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/multivariate_tfr_stats.html">3. Multiviariate TFR statistics, a mini-tutorial</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Package:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">tfrStats</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+              <div class="related top">
+                &nbsp;
+  <nav id="rellinks">
+    <ul>
+    </ul>
+  </nav>
+              </div>
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for tfrStats.mvtfr_SLURM</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy.io</span> <span class="k">as</span> <span class="nn">sio</span>
+<span class="c1">#from acme import ParallelMap, esi_cluster_setup, cluster_cleanup  </span>
+<span class="kn">from</span> <span class="nn">tqdm.auto</span> <span class="kn">import</span> <span class="n">tqdm</span>
+
+<div class="viewcode-block" id="mvtfr_SLURM"><a class="viewcode-back" href="../../tfrStats.mvtfr_SLURM.html#tfrStats.mvtfr_SLURM.mvtfr_SLURM">[docs]</a><span class="k">def</span> <span class="nf">mvtfr_SLURM</span><span class="p">(</span><span class="n">jobs</span><span class="p">,</span> <span class="n">cond</span><span class="p">,</span> <span class="n">fband</span><span class="p">,</span> <span class="n">split</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">    Running the mvtfr_classifier module in SLURM</span>
+
+
+<span class="sd">    Function to run ACME, an efficient SLURM manager for Python.</span>
+<span class="sd">    Given the inputs, selects the data:</span>
+<span class="sd">    conditions x repetitions x channels x frequency x time points</span>
+<span class="sd">    and computes, for each frequency and channel, the classification </span>
+<span class="sd">    accuracy matrix: conditions x conditions x time points.  </span>
+<span class="sd">    Because SLURM and ACME only accepts integers as inputs, the data </span>
+<span class="sd">    selection occurs inside the function. Paths, conditions and </span>
+<span class="sd">    frequency bands.</span>
+<span class="sd">    </span>
+<span class="sd">    </span>
+<span class="sd">    .. todo::  </span>
+<span class="sd">        * Add the ACME free version (using batch SLURM job arrays)</span>
+
+<span class="sd">    </span>
+<span class="sd">    :param int jobs: a 1d numpy array specifying the number of jobs</span>
+<span class="sd">    :param int cond: condition index(gratings, natural images)</span>
+<span class="sd">    :param int fband: frequency band index (low, high and higher frequencies)</span>
+<span class="sd">    :param int split : index to split (even, odd or whole)</span>
+
+<span class="sd">    :return: classification accuracy.</span>
+<span class="sd">    :rtype: numpy array</span>
+
+<span class="sd">    @author: Nicolas Gravel, 19.09.2023  </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1">#n_jobs = 100</span>
+    <span class="c1">#client = esi_cluster_setup(timeout=360*4, partition=&quot;8GBL&quot;, n_jobs=n_jobs)</span>
+
+
+    <span class="n">conds</span>   <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;grat&#39;</span><span class="p">,</span> <span class="s1">&#39;nat&#39;</span><span class="p">]</span>
+    <span class="n">fbands</span>  <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;lf&#39;</span><span class="p">,</span><span class="s1">&#39;hf&#39;</span><span class="p">,</span><span class="s1">&#39;hhf&#39;</span><span class="p">]</span> 
+    <span class="n">methods</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;hanning&#39;</span><span class="p">,</span> <span class="s1">&#39;wavelet&#39;</span><span class="p">,</span><span class="s1">&#39;wavelet&#39;</span><span class="p">];</span> 
+
+    <span class="c1">#methods = [&#39;hanning&#39;, &#39;wavelet&#39;,&#39;hanning&#39;]; </span>
+    <span class="n">splits</span>   <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;split1&#39;</span><span class="p">,</span> <span class="s1">&#39;split2&#39;</span><span class="p">,</span><span class="s1">&#39;whole&#39;</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">cond</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span> 
+        <span class="k">for</span> <span class="n">fband</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span> 
+            <span class="k">for</span> <span class="n">split</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;block: &#39;</span><span class="p">,</span> <span class="n">conds</span><span class="p">[</span><span class="n">cond</span><span class="p">])</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;method: &#39;</span><span class="p">,</span> <span class="n">methods</span><span class="p">[</span><span class="n">fband</span><span class="p">])</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;frequency band: &#39;</span><span class="p">,</span> <span class="n">fbands</span><span class="p">[</span><span class="n">fband</span><span class="p">])</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;split: &#39;</span><span class="p">,</span> <span class="n">splits</span><span class="p">[</span><span class="n">split</span><span class="p">])</span>
+            
+                <span class="k">if</span> <span class="n">fband</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="k">with</span> <span class="n">ParallelMap</span><span class="p">(</span><span class="n">mvtfr_classifier</span><span class="p">,</span> <span class="n">jobs</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">),</span> <span class="n">cond</span><span class="o">=</span><span class="n">cond</span><span class="p">,</span> <span class="n">fband</span><span class="o">=</span><span class="n">fband</span><span class="p">,</span> <span class="n">split</span><span class="o">=</span><span class="n">split</span><span class="p">)</span> <span class="k">as</span> <span class="n">pmap</span><span class="p">:</span>
+                        <span class="n">pmap</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
+                    <span class="k">with</span> <span class="n">ParallelMap</span><span class="p">(</span><span class="n">mvtfr_classifier</span><span class="p">,</span> <span class="n">jobs</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">200</span><span class="p">),</span> <span class="n">cond</span><span class="o">=</span><span class="n">cond</span><span class="p">,</span> <span class="n">fband</span><span class="o">=</span><span class="n">fband</span><span class="p">,</span> <span class="n">split</span><span class="o">=</span><span class="n">split</span><span class="p">)</span> <span class="k">as</span> <span class="n">pmap</span><span class="p">:</span>
+                            <span class="n">pmap</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
+                    <span class="k">with</span> <span class="n">ParallelMap</span><span class="p">(</span><span class="n">mvtfr_classifier</span><span class="p">,</span> <span class="n">jobs</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="mi">228</span><span class="p">),</span> <span class="n">cond</span><span class="o">=</span><span class="n">cond</span><span class="p">,</span> <span class="n">fband</span><span class="o">=</span><span class="n">fband</span><span class="p">,</span> <span class="n">split</span><span class="o">=</span><span class="n">split</span><span class="p">)</span> <span class="k">as</span> <span class="n">pmap</span><span class="p">:</span>
+                            <span class="n">pmap</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
+    
+                        
+                <span class="k">if</span> <span class="n">fband</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="k">with</span> <span class="n">ParallelMap</span><span class="p">(</span><span class="n">mvtfr_classifier</span><span class="p">,</span> <span class="n">jobs</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">),</span> <span class="n">cond</span><span class="o">=</span><span class="n">cond</span><span class="p">,</span> <span class="n">fband</span><span class="o">=</span><span class="n">fband</span><span class="p">,</span> <span class="n">split</span><span class="o">=</span><span class="n">split</span><span class="p">)</span> <span class="k">as</span> <span class="n">pmap</span><span class="p">:</span>
+                        <span class="n">pmap</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
+                    <span class="k">with</span> <span class="n">ParallelMap</span><span class="p">(</span><span class="n">mvtfr_classifier</span><span class="p">,</span> <span class="n">jobs</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">192</span><span class="p">),</span> <span class="n">cond</span><span class="o">=</span><span class="n">cond</span><span class="p">,</span> <span class="n">fband</span><span class="o">=</span><span class="n">fband</span><span class="p">,</span> <span class="n">split</span><span class="o">=</span><span class="n">split</span><span class="p">)</span> <span class="k">as</span> <span class="n">pmap</span><span class="p">:</span>
+                            <span class="n">pmap</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
+                            
+                <span class="k">if</span> <span class="n">fband</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                    <span class="k">with</span> <span class="n">ParallelMap</span><span class="p">(</span><span class="n">mvtfr_classifier</span><span class="p">,</span> <span class="n">jobs</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">66</span><span class="p">),</span> <span class="n">cond</span><span class="o">=</span><span class="n">cond</span><span class="p">,</span> <span class="n">fband</span><span class="o">=</span><span class="n">fband</span><span class="p">,</span> <span class="n">split</span><span class="o">=</span><span class="n">split</span><span class="p">)</span> <span class="k">as</span> <span class="n">pmap</span><span class="p">:</span>
+                        <span class="n">pmap</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
+                    <span class="k">with</span> <span class="n">ParallelMap</span><span class="p">(</span><span class="n">mvtfr_classifier</span><span class="p">,</span> <span class="n">jobs</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">66</span><span class="p">,</span><span class="mi">132</span><span class="p">),</span> <span class="n">cond</span><span class="o">=</span><span class="n">cond</span><span class="p">,</span> <span class="n">fband</span><span class="o">=</span><span class="n">fband</span><span class="p">,</span> <span class="n">split</span><span class="o">=</span><span class="n">split</span><span class="p">)</span> <span class="k">as</span> <span class="n">pmap</span><span class="p">:</span>
+                            <span class="n">pmap</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
+      
+                     
+    <span class="k">return</span> </div>
+                                                                                                                                              
+</pre></div>
+
+          </div>
+              <div class="related bottom">
+                &nbsp;
+  <nav id="rellinks">
+    <ul>
+    </ul>
+  </nav>
+              </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;in dog we trust.
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -41,7 +41,8 @@
 <p class="caption" role="heading"><span class="caption-text">Content:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="uvtfrs.html">1. On TFR statistical assessments</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/statistical_approach.html">2. A mini-tutorial…</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/univariate_tfr_stats.html">2. Univariate TFR statistics, a mini-tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/multivariate_tfr_stats.html">3. Multiviariate TFR statistics, a mini-tutorial</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Package:</span></p>
 <ul>
@@ -97,6 +98,7 @@
  | <a href="#L"><strong>L</strong></a>
  | <a href="#M"><strong>M</strong></a>
  | <a href="#P"><strong>P</strong></a>
+ | <a href="#S"><strong>S</strong></a>
  | <a href="#T"><strong>T</strong></a>
  
 </div>
@@ -127,6 +129,10 @@
 <h2 id="L">L</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="tfrStats.load_tfr_rdm.html#tfrStats.load_tfr_rdm.load_tfr_rdm">load_tfr_rdm() (in module tfrStats.load_tfr_rdm)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="tfrStats.load_uv_tfrs.html#tfrStats.load_uv_tfrs.load_uv_tfrs">load_uv_tfrs() (in module tfrStats.load_uv_tfrs)</a>
 </li>
   </ul></td>
@@ -151,11 +157,29 @@
 </li>
         <li><a href="tfrStats.get_pvals_whole.html#module-tfrStats.get_pvals_whole">tfrStats.get_pvals_whole</a>
 </li>
+        <li><a href="tfrStats.load_tfr_rdm.html#module-tfrStats.load_tfr_rdm">tfrStats.load_tfr_rdm</a>
+</li>
         <li><a href="tfrStats.load_uv_tfrs.html#module-tfrStats.load_uv_tfrs">tfrStats.load_uv_tfrs</a>
+</li>
+        <li><a href="tfrStats.mvtfr_classifier.html#module-tfrStats.mvtfr_classifier">tfrStats.mvtfr_classifier</a>
+</li>
+        <li><a href="tfrStats.mvtfr_reliability.html#module-tfrStats.mvtfr_reliability">tfrStats.mvtfr_reliability</a>
+</li>
+        <li><a href="tfrStats.mvtfr_SLURM.html#module-tfrStats.mvtfr_SLURM">tfrStats.mvtfr_SLURM</a>
+</li>
+        <li><a href="tfrStats.plot_dmvtfr_stats.html#module-tfrStats.plot_dmvtfr_stats">tfrStats.plot_dmvtfr_stats</a>
 </li>
         <li><a href="tfrStats.plot_dtfr_stats.html#module-tfrStats.plot_dtfr_stats">tfrStats.plot_dtfr_stats</a>
 </li>
+        <li><a href="tfrStats.plot_mvtfr_stats.html#module-tfrStats.plot_mvtfr_stats">tfrStats.plot_mvtfr_stats</a>
+</li>
+        <li><a href="tfrStats.plot_tfr_rdm.html#module-tfrStats.plot_tfr_rdm">tfrStats.plot_tfr_rdm</a>
+</li>
         <li><a href="tfrStats.plot_tfr_stats.html#module-tfrStats.plot_tfr_stats">tfrStats.plot_tfr_stats</a>
+</li>
+        <li><a href="tfrStats.stats_tfrs_avg.html#module-tfrStats.stats_tfrs_avg">tfrStats.stats_tfrs_avg</a>
+</li>
+        <li><a href="tfrStats.stats_tfrs_davg.html#module-tfrStats.stats_tfrs_davg">tfrStats.stats_tfrs_davg</a>
 </li>
         <li><a href="tfrStats.tfr_spw_stats_minmax.html#module-tfrStats.tfr_spw_stats_minmax">tfrStats.tfr_spw_stats_minmax</a>
 </li>
@@ -163,16 +187,42 @@
 </li>
       </ul></li>
   </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="tfrStats.mvtfr_classifier.html#tfrStats.mvtfr_classifier.mvtfr_classifier">mvtfr_classifier() (in module tfrStats.mvtfr_classifier)</a>
+</li>
+      <li><a href="tfrStats.mvtfr_reliability.html#tfrStats.mvtfr_reliability.mvtfr_reliability">mvtfr_reliability() (in module tfrStats.mvtfr_reliability)</a>
+</li>
+      <li><a href="tfrStats.mvtfr_SLURM.html#tfrStats.mvtfr_SLURM.mvtfr_SLURM">mvtfr_SLURM() (in module tfrStats.mvtfr_SLURM)</a>
+</li>
+  </ul></td>
 </tr></table>
 
 <h2 id="P">P</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="tfrStats.plot_dmvtfr_stats.html#tfrStats.plot_dmvtfr_stats.plot_dmvtfr_stats">plot_dmvtfr_stats() (in module tfrStats.plot_dmvtfr_stats)</a>
+</li>
       <li><a href="tfrStats.plot_dtfr_stats.html#tfrStats.plot_dtfr_stats.plot_dtfr_stats">plot_dtfr_stats() (in module tfrStats.plot_dtfr_stats)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="tfrStats.plot_mvtfr_stats.html#tfrStats.plot_mvtfr_stats.plot_mvtfr_stats">plot_mvtfr_stats() (in module tfrStats.plot_mvtfr_stats)</a>
+</li>
+      <li><a href="tfrStats.plot_tfr_rdm.html#tfrStats.plot_tfr_rdm.plot_tfr_rdm">plot_tfr_rdm() (in module tfrStats.plot_tfr_rdm)</a>
+</li>
       <li><a href="tfrStats.plot_tfr_stats.html#tfrStats.plot_tfr_stats.plot_tfr_stats">plot_tfr_stats() (in module tfrStats.plot_tfr_stats)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="S">S</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="tfrStats.stats_tfrs_avg.html#tfrStats.stats_tfrs_avg.stats_tfrs_avg">stats_tfrs_avg() (in module tfrStats.stats_tfrs_avg)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="tfrStats.stats_tfrs_davg.html#tfrStats.stats_tfrs_davg.stats_tfrs_davg">stats_tfrs_davg() (in module tfrStats.stats_tfrs_davg)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -219,13 +269,18 @@
         <li><a href="tfrStats.get_pvals_minmax.html#module-tfrStats.get_pvals_minmax">module</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     tfrStats.get_pvals_whole
 
       <ul>
         <li><a href="tfrStats.get_pvals_whole.html#module-tfrStats.get_pvals_whole">module</a>
+</li>
+      </ul></li>
+      <li>
+    tfrStats.load_tfr_rdm
+
+      <ul>
+        <li><a href="tfrStats.load_tfr_rdm.html#module-tfrStats.load_tfr_rdm">module</a>
 </li>
       </ul></li>
       <li>
@@ -236,6 +291,36 @@
 </li>
       </ul></li>
       <li>
+    tfrStats.mvtfr_classifier
+
+      <ul>
+        <li><a href="tfrStats.mvtfr_classifier.html#module-tfrStats.mvtfr_classifier">module</a>
+</li>
+      </ul></li>
+      <li>
+    tfrStats.mvtfr_reliability
+
+      <ul>
+        <li><a href="tfrStats.mvtfr_reliability.html#module-tfrStats.mvtfr_reliability">module</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    tfrStats.mvtfr_SLURM
+
+      <ul>
+        <li><a href="tfrStats.mvtfr_SLURM.html#module-tfrStats.mvtfr_SLURM">module</a>
+</li>
+      </ul></li>
+      <li>
+    tfrStats.plot_dmvtfr_stats
+
+      <ul>
+        <li><a href="tfrStats.plot_dmvtfr_stats.html#module-tfrStats.plot_dmvtfr_stats">module</a>
+</li>
+      </ul></li>
+      <li>
     tfrStats.plot_dtfr_stats
 
       <ul>
@@ -243,10 +328,38 @@
 </li>
       </ul></li>
       <li>
+    tfrStats.plot_mvtfr_stats
+
+      <ul>
+        <li><a href="tfrStats.plot_mvtfr_stats.html#module-tfrStats.plot_mvtfr_stats">module</a>
+</li>
+      </ul></li>
+      <li>
+    tfrStats.plot_tfr_rdm
+
+      <ul>
+        <li><a href="tfrStats.plot_tfr_rdm.html#module-tfrStats.plot_tfr_rdm">module</a>
+</li>
+      </ul></li>
+      <li>
     tfrStats.plot_tfr_stats
 
       <ul>
         <li><a href="tfrStats.plot_tfr_stats.html#module-tfrStats.plot_tfr_stats">module</a>
+</li>
+      </ul></li>
+      <li>
+    tfrStats.stats_tfrs_avg
+
+      <ul>
+        <li><a href="tfrStats.stats_tfrs_avg.html#module-tfrStats.stats_tfrs_avg">module</a>
+</li>
+      </ul></li>
+      <li>
+    tfrStats.stats_tfrs_davg
+
+      <ul>
+        <li><a href="tfrStats.stats_tfrs_davg.html#module-tfrStats.stats_tfrs_davg">module</a>
 </li>
       </ul></li>
       <li>

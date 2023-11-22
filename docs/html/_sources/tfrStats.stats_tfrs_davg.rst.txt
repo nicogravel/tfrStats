@@ -1,0 +1,7 @@
+tfrStats.stats\_tfrs\_davg module
+=================================
+
+.. automodule:: tfrStats.stats_tfrs_davg
+   :members:
+   :undoc-members:
+   :show-inheritance:

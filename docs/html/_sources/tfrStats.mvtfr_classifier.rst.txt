@@ -1,0 +1,7 @@
+tfrStats.mvtfr\_classifier module
+=================================
+
+.. automodule:: tfrStats.mvtfr_classifier
+   :members:
+   :undoc-members:
+   :show-inheritance:

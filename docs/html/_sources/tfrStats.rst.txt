@@ -12,9 +12,18 @@ Submodules
    tfrStats.get_dpvals_whole
    tfrStats.get_pvals_minmax
    tfrStats.get_pvals_whole
+   tfrStats.load_tfr_rdm
    tfrStats.load_uv_tfrs
+   tfrStats.mvtfr_SLURM
+   tfrStats.mvtfr_classifier
+   tfrStats.mvtfr_reliability
+   tfrStats.plot_dmvtfr_stats
    tfrStats.plot_dtfr_stats
+   tfrStats.plot_mvtfr_stats
+   tfrStats.plot_tfr_rdm
    tfrStats.plot_tfr_stats
+   tfrStats.stats_tfrs_avg
+   tfrStats.stats_tfrs_davg
    tfrStats.tfr_spw_stats_minmax
    tfrStats.tfr_spw_stats_whole
 

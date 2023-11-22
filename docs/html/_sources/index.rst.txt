@@ -24,7 +24,10 @@ Content
 
 
     uvtfrs
-    notebooks/statistical_approach
+    notebooks/univariate_tfr_stats
+    ..mvtfrs
+    notebooks/multivariate_tfr_stats
+    ..notebooks/layer_approach
 
 .. toctree::
     :maxdepth: 1

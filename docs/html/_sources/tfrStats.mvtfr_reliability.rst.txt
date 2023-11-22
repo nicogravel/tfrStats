@@ -1,0 +1,7 @@
+tfrStats.mvtfr\_reliability module
+==================================
+
+.. automodule:: tfrStats.mvtfr_reliability
+   :members:
+   :undoc-members:
+   :show-inheritance:

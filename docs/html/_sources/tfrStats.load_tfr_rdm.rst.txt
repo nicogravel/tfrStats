@@ -1,0 +1,7 @@
+tfrStats.load\_tfr\_rdm module
+==============================
+
+.. automodule:: tfrStats.load_tfr_rdm
+   :members:
+   :undoc-members:
+   :show-inheritance:

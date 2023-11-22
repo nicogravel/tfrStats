@@ -1,0 +1,202 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>tfrStats.mvtfr_reliability module &#8212; tfrStats 1.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="tfrStats.plot_dmvtfr_stats module" href="tfrStats.plot_dmvtfr_stats.html" />
+    <link rel="prev" title="tfrStats.mvtfr_classifier module" href="tfrStats.mvtfr_classifier.html" />
+    <link href="_static/style.css" rel="stylesheet" type="text/css">
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="index.html">
+    <img class="logo" src="_static/logo_2.jpg" alt="Logo"/>
+    
+  </a>
+</p>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Content:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="uvtfrs.html">1. On TFR statistical assessments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/univariate_tfr_stats.html">2. Univariate TFR statistics, a mini-tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/multivariate_tfr_stats.html">3. Multiviariate TFR statistics, a mini-tutorial</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Package:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">tfrStats</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">tfrStats</a><ul>
+  <li><a href="tfrStats.html">tfrStats package</a><ul>
+      <li>Previous: <a href="tfrStats.mvtfr_classifier.html" title="previous chapter">tfrStats.mvtfr_classifier module</a></li>
+      <li>Next: <a href="tfrStats.plot_dmvtfr_stats.html" title="next chapter">tfrStats.plot_dmvtfr_stats module</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+              <div class="related top">
+                &nbsp;
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="tfrStats.mvtfr_classifier.html" title="Previous document">tfrStats.mvtfr_classifier module</a>
+        </li>
+        <li>
+          <a href="tfrStats.plot_dmvtfr_stats.html" title="Next document">tfrStats.plot_dmvtfr_stats module</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+              </div>
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-tfrStats.mvtfr_reliability">
+<span id="tfrstats-mvtfr-reliability-module"></span><h1>tfrStats.mvtfr_reliability module<a class="headerlink" href="#module-tfrStats.mvtfr_reliability" title="Permalink to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="tfrStats.mvtfr_reliability.mvtfr_reliability">
+<span class="sig-prename descclassname"><span class="pre">tfrStats.mvtfr_reliability.</span></span><span class="sig-name descname"><span class="pre">mvtfr_reliability</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rdms</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conf</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tfrStats/mvtfr_reliability.html#mvtfr_reliability"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tfrStats.mvtfr_reliability.mvtfr_reliability" title="Permalink to this definition">¶</a></dt>
+<dd><p>Multivariate Time Frequency Representation Reliability (MVTFR-RSA)</p>
+<p>Taking paths and a configuration structure as input and computes, for each frequency bin
+and time window, the Spearman’s rho correlation between two RDMs (for ven and odd trials).
+Following on Schütt et al, (2023), here we use the Spearman’s rank-correlation with random
+tiebreaking as an evaluation criterion for RSA instead of original Spearman’s rank-correlation,
+as the later is biased  for tied ranks (for details see Schütt et al, (2023)). Optionally,
+we assess the contribution to the representational structure that emerges in time-frequency
+correlation map, by using a permutation approach. For each frequency bin in a given time
+point (an index to an epoque), we proceeded as follows:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Calculate the correlation of the original RDMs A and B.</p></li>
+<li><dl class="simple">
+<dt>Perform a permutation on RDM A (random shuffle) and calculate the correlation with RDM B.</dt><dd><p>Repeat the other way around.To save time, this step is performed within a time window of
+interest (here -250 to 1200 ms). See line 200.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Repeat step 2 a certain number of times, e.g., 100 times, to obtain a null distribution</dt><dd><p>of correlation values.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Calculate the p-value based on the percentage of permuted correlation coefficients greater</dt><dd><p>than or equal to the  observed correlation.</p>
+</dd>
+</dl>
+</li>
+</ol>
+</div></blockquote>
+<p>This results in spectrograms that are based on time-frequency specific image-related information
+and a null distribution that tests for condition-level significance.</p>
+<p>Originally I was sugin scippy’s Kendall’s tau but now I use:
+<a class="reference external" href="https://rsatoolbox.readthedocs.io/en/stable/comparing.html#spearman-s-rho">https://rsatoolbox.readthedocs.io/en/stable/comparing.html#spearman-s-rho</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_path</strong> – a string</p></li>
+<li><p><strong>condition</strong> – an integer</p></li>
+<li><p><strong>fband</strong> – frequency band index (low frequencies, high frequencies), integer</p></li>
+<li><p><strong>method</strong> – method index (hanning, multitaper, wavelet)</p></li>
+<li><p><strong>dvar</strong> – spectral variable (GPR or spectral power), integer</p></li>
+<li><p><strong>split</strong> – index to split (even, odd or whole)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>empirical and nulll channel  x time x frequency distributiont (np.array)</p>
+</dd>
+</dl>
+<p>&#64;author: Nicolas Gravel, 19.09.2023</p>
+</dd></dl>
+
+</section>
+
+
+          </div>
+              <div class="related bottom">
+                &nbsp;
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="tfrStats.mvtfr_classifier.html" title="Previous document">tfrStats.mvtfr_classifier module</a>
+        </li>
+        <li>
+          <a href="tfrStats.plot_dmvtfr_stats.html" title="Next document">tfrStats.plot_dmvtfr_stats module</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+              </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;in dog we trust.
+      
+      |
+      <a href="_sources/tfrStats.mvtfr_reliability.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

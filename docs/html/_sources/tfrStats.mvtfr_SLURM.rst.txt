@@ -1,0 +1,7 @@
+tfrStats.mvtfr\_SLURM module
+============================
+
+.. automodule:: tfrStats.mvtfr_SLURM
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,7 @@
+tfrStats.stats\_tfrs\_avg module
+================================
+
+.. automodule:: tfrStats.stats_tfrs_avg
+   :members:
+   :undoc-members:
+   :show-inheritance:
