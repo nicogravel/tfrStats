@@ -104,7 +104,7 @@
 <span class="kn">import</span> <span class="nn">warnings</span>
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
 
-<div class="viewcode-block" id="plot_mvtfr_stats"><a class="viewcode-back" href="../../tfrStats.plot_mvtfr_stats.html#tfrStats.plot_mvtfr_stats.plot_mvtfr_stats">[docs]</a><span class="k">def</span> <span class="nf">plot_mvtfr_stats</span><span class="p">(</span><span class="n">tfr</span><span class="p">,</span> <span class="n">tfr_null</span><span class="p">,</span> <span class="n">fband</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">correction</span><span class="p">):</span>
+<div class="viewcode-block" id="plot_mvtfr_stats"><a class="viewcode-back" href="../../tfrStats.plot_mvtfr_stats.html#tfrStats.plot_mvtfr_stats.plot_mvtfr_stats">[docs]</a><span class="k">def</span> <span class="nf">plot_mvtfr_stats</span><span class="p">(</span><span class="n">cond</span><span class="p">,</span> <span class="n">tfr</span><span class="p">,</span> <span class="n">tfr_null</span><span class="p">,</span> <span class="n">fband</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">correction</span><span class="p">):</span>
 
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Plot empirical Multi-variate TFR and stats results</span>
@@ -211,8 +211,10 @@
     <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;frequency (Hz)&#39;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
     <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">title</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="s1">&#39;RDM reliability obtained using different stimulus choices&#39;</span><span class="p">)</span>
     <span class="c1">#ax[1].title.set_text(&#39;p-values&#39;)</span>
-    <span class="n">txt</span><span class="o">=</span><span class="s1">&#39;Cutoff (blue outline) is corrected across sites and frequencies.&#39;</span>
+    <span class="n">txt</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="s1">&#39;Cutoff (blue outline) is corrected across &#39;</span> <span class="o">+</span> <span class="n">correction</span><span class="p">)</span>
     <span class="n">fig</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.06</span><span class="p">,</span> <span class="n">txt</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">)</span>
+
+
 
     <span class="k">return</span></div>
 

@@ -241,5 +241,22 @@ def plot_tfr_stats(input_path, cond, fband, null, type):
     txt='Cutoff (blue outline) is valid for the 400-1000 ms window.'
     fig.text(0.5, -0.06, txt, ha='center')
 
+    # Figure params
+    blocks  = ['grat', 'nat']
+    svars   = ['spw', 'gpr']
+    fbands  = ['low','high','higher']  
+    svar = 0
+    if cond == 0:
+        fname = str(input_path +'uvtfr_gtfr_' +    fbands[fband]  + '_' + blocks[cond] + '_' + svars[svar] + '.png')
+    if cond == 1:
+        fname = str(input_path +'uvtfr_gtfr_' +    fbands[fband]  + '_' + blocks[cond] + '_' + svars[svar] + '.png')
+    if cond == 2:
+        fname = str(input_path +'uvtfr_gtfr_' +    fbands[fband]  + '_' + blocks[cond] + '_' + svars[svar] + '.png')
+    if cond == 3:
+        fname = str(input_path +'uvtfr_gtfr_' +    fbands[fband]  + '_' + blocks[cond] + '_' + svars[svar] + '.png')
+
+    print('figure :', fname)
+    plt.savefig(fname, bbox_inches="tight")
+
     return TFR_emp, significant, THR
 

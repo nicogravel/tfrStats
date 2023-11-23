@@ -10,7 +10,7 @@ from tfrStats.cluster_correction import cluster_correction as cluster_correction
 import warnings
 warnings.filterwarnings('ignore')
 
-def plot_dmvtfr_stats(tfr_emp, tfr_null, fband, alpha, correction):
+def plot_dmvtfr_stats(cond, tfr_emp, tfr_null, fband, alpha, correction):
 
     """
     Plot empirical Multi-variate TFR and stats results
@@ -204,8 +204,9 @@ def plot_dmvtfr_stats(tfr_emp, tfr_null, fband, alpha, correction):
     ax[1].set_ylabel('frequency (Hz)', rotation=90, fontsize=10)
     ax[0].title.set_text('RDM reliability obtained using different stimulus choices')
     #ax[1].title.set_text('p-values')
-    txt='Cutoff (blue outline) is corrected across sites and frequencies.'
+    txt=str('Cutoff (blue outline) is corrected across ' + correction)
     fig.text(0.5, -0.06, txt, ha='center')
+
 
 
     return

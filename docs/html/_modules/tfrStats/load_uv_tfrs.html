@@ -126,7 +126,15 @@
     <span class="n">blocks</span>  <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;grat&#39;</span><span class="p">,</span> <span class="s1">&#39;nat&#39;</span><span class="p">]</span>
     <span class="n">svars</span>   <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;spw&#39;</span><span class="p">,</span> <span class="s1">&#39;gpr&#39;</span><span class="p">]</span>
     <span class="n">fbands</span>  <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;low&#39;</span><span class="p">,</span><span class="s1">&#39;high&#39;</span><span class="p">,</span><span class="s1">&#39;higher&#39;</span><span class="p">]</span>
-    <span class="n">results</span>   <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;_100&#39;</span><span class="p">,</span> <span class="s1">&#39;_1000_minmax&#39;</span><span class="p">,</span><span class="s1">&#39;_30_roll&#39;</span><span class="p">,</span> <span class="s1">&#39;_100_minmax_roll&#39;</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">obs</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">cond</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">results</span>   <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;_100&#39;</span><span class="p">,</span> <span class="s1">&#39;_1000_minmax&#39;</span><span class="p">,</span> <span class="s1">&#39;_100_minmax_roll&#39;</span><span class="p">]</span>  
+    
+    <span class="k">if</span> <span class="n">obs</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">cond</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">results</span>   <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;_100&#39;</span><span class="p">,</span> <span class="s1">&#39;_100_minmax&#39;</span><span class="p">,</span> <span class="s1">&#39;_100_minmax_roll&#39;</span><span class="p">]</span>  
+    
+    <span class="k">if</span> <span class="n">obs</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> 
+        <span class="n">results</span>   <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;_100&#39;</span><span class="p">,</span> <span class="s1">&#39;_100_minmax&#39;</span><span class="p">,</span> <span class="s1">&#39;_100_minmax_roll&#39;</span><span class="p">]</span>
 
     <span class="n">svar</span> <span class="o">=</span> <span class="mi">0</span>
 
@@ -144,7 +152,7 @@
 
 
 
-    <span class="nb">print</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;stats :&#39;</span><span class="p">,</span> <span class="n">fname</span><span class="p">)</span>
     <span class="n">npz</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
 
     <span class="c1"># Empirical TFR</span>
