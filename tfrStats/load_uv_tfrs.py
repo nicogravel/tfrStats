@@ -37,7 +37,6 @@ def load_uv_tfrs(input_path, svar, cond, fband, obs):
     svar = 0
 
 
-
     # Condition index
     if cond == 0:
         fname = str(input_path +'uvtfr_stats_' +    fbands[fband]  + '_' + blocks[cond] + '_' + svars[svar] + results[obs] + '.npz')

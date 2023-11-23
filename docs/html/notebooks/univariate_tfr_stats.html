@@ -139,7 +139,7 @@ pip install -e .
 </div>
 <p>Voilà!</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tfrStats.plot_tfr_stats</span> <span class="kn">import</span> <span class="n">plot_tfr_stats</span> <span class="k">as</span> <span class="n">plot_tfr_stats</span>
@@ -177,77 +177,25 @@ unfolding within the task.</p>
 </pre></div>
 </div>
 </div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-site indices :
-[[  0  12  24  36  48  60  72  84  96 108]
- [  1  13  25  37  49  61  73  85  97 109]
- [  2  14  26  38  50  62  74  86  98 110]
- [  3  15  27  39  51  63  75  87  99 111]
- [  4  16  28  40  52  64  76  88 100 112]
- [  5  17  29  41  53  65  77  89 101 113]
- [  6  18  30  42  54  66  78  90 102 114]
- [  7  19  31  43  55  67  79  91 103 115]
- [  8  20  32  44  56  68  80  92 104 116]
- [  9  21  33  45  57  69  81  93 105 117]
- [ 10  22  34  46  58  70  82  94 106 118]
- [ 11  23  35  47  59  71  83  95 107 119]]
-/Volumes/Gandalf/MWlamprop/data/ftPool_grat_high_wavelet.mat
-(30, 10, 120, 16, 113)
-</pre></div></div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-0 - grat - high: 100%|██████████| 30/30 [00:52&lt;00:00,  1.74s/it]
-</pre></div></div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-(30, 12, 16, 113)
-(30, 12, 16, 113)
-/Volumes/Gandalf/MWlamprop/results/stats/univariate/uvtfr_stats_high_grat_spw_2.npz
-site indices :
-[[  0  12  24  36  48  60  72  84  96 108]
- [  1  13  25  37  49  61  73  85  97 109]
- [  2  14  26  38  50  62  74  86  98 110]
- [  3  15  27  39  51  63  75  87  99 111]
- [  4  16  28  40  52  64  76  88 100 112]
- [  5  17  29  41  53  65  77  89 101 113]
- [  6  18  30  42  54  66  78  90 102 114]
- [  7  19  31  43  55  67  79  91 103 115]
- [  8  20  32  44  56  68  80  92 104 116]
- [  9  21  33  45  57  69  81  93 105 117]
- [ 10  22  34  46  58  70  82  94 106 118]
- [ 11  23  35  47  59  71  83  95 107 119]]
-/Volumes/Gandalf/MWlamprop/data/ftPool_grat_high_wavelet.mat
-(30, 10, 120, 16, 113)
-</pre></div></div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-0 - grat - high: 100%|██████████| 2/2 [00:15&lt;00:00,  7.75s/it]
-</pre></div></div>
-</div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-(30, 12, 16, 113)
-(2, 30, 12, 2)
-/Volumes/Gandalf/MWlamprop/results/stats/univariate/uvtfr_stats_high_grat_spw_2_minmax.npz
+site indices :
+[[  0  12  24  36  48  60  72  84  96 108]
+ [  1  13  25  37  49  61  73  85  97 109]
+ [  2  14  26  38  50  62  74  86  98 110]
+ [  3  15  27  39  51  63  75  87  99 111]
+ [  4  16  28  40  52  64  76  88 100 112]
+ [  5  17  29  41  53  65  77  89 101 113]
+ [  6  18  30  42  54  66  78  90 102 114]
+ [  7  19  31  43  55  67  79  91 103 115]
+ [  8  20  32  44  56  68  80  92 104 116]
+ [  9  21  33  45  57  69  81  93 105 117]
+ [ 10  22  34  46  58  70  82  94 106 118]
+ [ 11  23  35  47  59  71  83  95 107 119]]
+/Volumes/Gandalf/MWlamprop/data/ftPool_grat_high_wavelet.mat
 </pre></div></div>
 </div>
 </section>
@@ -259,7 +207,7 @@ Therefore, the multiple correction will change slightly.</p>
 <li><p>Results saving minimal and maximal values at each permutation iteration (Min-Max approach)</p></li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span>         <span class="o">=</span> <span class="s1">&#39;minmax&#39;</span>
@@ -268,10 +216,10 @@ Therefore, the multiple correction will change slightly.</p>
 <span class="n">cond</span>         <span class="o">=</span> <span class="mi">0</span>
 
 <span class="c1"># Time-frequency map</span>
-<span class="n">plot_tfr_stats</span><span class="p">(</span><span class="n">out_path</span><span class="p">,</span> <span class="n">cond</span><span class="p">,</span> <span class="n">fband</span><span class="p">,</span> <span class="n">null</span><span class="p">,</span> <span class="nb">type</span><span class="p">)</span>
+<span class="n">TFR_emp</span><span class="p">,</span> <span class="n">significant</span><span class="p">,</span> <span class="n">THR</span>  <span class="o">=</span> <span class="n">plot_tfr_stats</span><span class="p">(</span><span class="n">out_path</span><span class="p">,</span> <span class="n">cond</span><span class="p">,</span> <span class="n">fband</span><span class="p">,</span> <span class="n">null</span><span class="p">,</span> <span class="nb">type</span><span class="p">)</span>
 
 <span class="c1"># Time-frequency-space map</span>
-<span class="n">plot_dtfr_stats</span><span class="p">(</span><span class="n">out_path</span><span class="p">,</span> <span class="n">cond</span><span class="p">,</span> <span class="n">fband</span><span class="p">,</span> <span class="n">null</span><span class="p">,</span> <span class="nb">type</span><span class="p">)</span>
+<span class="n">TFR_emp</span><span class="p">,</span> <span class="n">significant</span><span class="p">,</span> <span class="n">THR</span>  <span class="o">=</span> <span class="n">plot_dtfr_stats</span><span class="p">(</span><span class="n">out_path</span><span class="p">,</span> <span class="n">cond</span><span class="p">,</span> <span class="n">fband</span><span class="p">,</span> <span class="n">null</span><span class="p">,</span> <span class="nb">type</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -312,7 +260,7 @@ cutoff computed using min/max of null distribution:  70.91082666125475
 <li><p>Results using the whole null distribution averaged across relevant dimensions</p></li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span>         <span class="o">=</span> <span class="s1">&#39;whole&#39;</span>
@@ -321,10 +269,10 @@ cutoff computed using min/max of null distribution:  70.91082666125475
 <span class="n">cond</span>         <span class="o">=</span> <span class="mi">0</span>
 
 <span class="c1"># Time-frequency map</span>
-<span class="n">plot_tfr_stats</span><span class="p">(</span><span class="n">out_path</span><span class="p">,</span> <span class="n">cond</span><span class="p">,</span> <span class="n">fband</span><span class="p">,</span> <span class="n">null</span><span class="p">,</span> <span class="nb">type</span><span class="p">)</span>
+<span class="n">TFR_emp</span><span class="p">,</span> <span class="n">significant</span><span class="p">,</span> <span class="n">THR</span>  <span class="o">=</span> <span class="n">plot_tfr_stats</span><span class="p">(</span><span class="n">out_path</span><span class="p">,</span> <span class="n">cond</span><span class="p">,</span> <span class="n">fband</span><span class="p">,</span> <span class="n">null</span><span class="p">,</span> <span class="nb">type</span><span class="p">)</span>
 
 <span class="c1"># Time-frequency-space map</span>
-<span class="n">plot_dtfr_stats</span><span class="p">(</span><span class="n">out_path</span><span class="p">,</span> <span class="n">cond</span><span class="p">,</span> <span class="n">fband</span><span class="p">,</span> <span class="n">null</span><span class="p">,</span> <span class="nb">type</span><span class="p">)</span>
+<span class="n">TFR_emp</span><span class="p">,</span> <span class="n">significant</span><span class="p">,</span> <span class="n">THR</span>  <span class="o">=</span> <span class="n">plot_dtfr_stats</span><span class="p">(</span><span class="n">out_path</span><span class="p">,</span> <span class="n">cond</span><span class="p">,</span> <span class="n">fband</span><span class="p">,</span> <span class="n">null</span><span class="p">,</span> <span class="nb">type</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>

@@ -193,20 +193,29 @@ def plot_tfr_stats(input_path, cond, fband, null, type):
                         Y2[overlay_range[0]:overlay_range[1],twindow[0]:-twindow[1]],
                         significant, cmap=cmap,norm=norm,alpha=calpha)
 
-    ax[1].contour(X2[overlay_range[0]:overlay_range[1],twindow[0]:-twindow[1]], Y2[overlay_range[0]:overlay_range[1],twindow[0]:-twindow[1]],THR[overlay_range[0]:overlay_range[1],twindow[0]:-twindow[1]],
+    ax[1].contour(X2[overlay_range[0]:overlay_range[1],twindow[0]:-twindow[1]],
+                        Y2[overlay_range[0]:overlay_range[1],twindow[0]:-twindow[1]],
+                        THR[overlay_range[0]:overlay_range[1],twindow[0]:-twindow[1]],
                         origin='upper',
                         colors='red',
                         linestyles='solid',
                         linewidths=0.5)
 
+    cut = np.full((TFR_emp.shape[0],TFR_emp.shape[1]),alpha)
+    t0 = np.searchsorted(x2,stats_range[0],side='left', sorter=None)
+    td = np.searchsorted(x2,stats_range[1],side='left', sorter=None)
+    cut[1:-1,0:t0] = np.nan
+    cut[1:-1,td:-1] = np.nan
 
-    # Plot p-values ad thresholding
+
+    # Plot p-values and thresholding
 
     f = interp2d(x, y, stats, kind='linear')
     TFR_pvals = f(x2, y2)
-    THR = TFR_pvals <= alpha
+    THR = TFR_pvals <= cut #alpha
     im_pvals = ax[1].pcolormesh(X2[:,twindow[0]:-twindow[1]], Y2[:,twindow[0]:-twindow[1]], 
                                 TFR_pvals[:,twindow[0]:-twindow[1]])
+    
     ax[0].contour(X2[overlay_range[0]:overlay_range[1],twindow[0]:-twindow[1]], 
                         Y2[overlay_range[0]:overlay_range[1],twindow[0]:-twindow[1]],
                         THR[overlay_range[0]:overlay_range[1],twindow[0]:-twindow[1]],
@@ -214,6 +223,8 @@ def plot_tfr_stats(input_path, cond, fband, null, type):
                         colors='dodgerblue',
                         linestyles='solid',
                         linewidths=0.5)
+
+
 
 
     cbar = plt.colorbar(im_spwr,cax = fig.add_axes([0.95, 0.6, 0.02, 0.15]),extend='both')
@@ -229,5 +240,6 @@ def plot_tfr_stats(input_path, cond, fband, null, type):
     #ax[1].title.set_text('p-values')
     txt='Cutoff (blue outline) is valid for the 400-1000 ms window.'
     fig.text(0.5, -0.06, txt, ha='center')
-    return
+
+    return TFR_emp, significant, THR
 
