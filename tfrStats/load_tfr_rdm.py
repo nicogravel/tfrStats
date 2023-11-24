@@ -4,7 +4,7 @@ import numpy as np
 def load_tfr_rdm(conf):
 
     """
-    Load TFR representation dissimilarity materices 
+    Load TFR representation dissimilarity matrices 
 
     Function to load RDMs. 
 

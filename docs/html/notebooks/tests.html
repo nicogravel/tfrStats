@@ -105,7 +105,7 @@
 <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
     <span class="n">a_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">secrets</span><span class="o">.</span><span class="n">randbelow</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">a_</span><span class="p">)</span>
-<br/></pre></div>
+<br/><br/></pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -123,6 +123,46 @@
 [0 1 2 3 4 5 6 7 8 9] [5 6 7 8 9 0 1 2 3 4]
 [0 1 2 3 4 5 6 7 8 9] [6 7 8 9 0 1 2 3 4 5]
 [0 1 2 3 4 5 6 7 8 9] [3 4 5 6 7 8 9 0 1 2]
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span> <span class="n">secrets</span><span class="o">.</span><span class="n">randbelow</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+7
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="n">trialIdx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">36</span><span class="p">)</span>
+<span class="n">c1</span> <span class="o">=</span> <span class="n">trialIdx</span><span class="p">[</span><span class="mi">1</span><span class="p">::</span><span class="mi">2</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">c1</span><span class="p">)</span>
+<span class="n">c2</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">c1</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">c1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">c2</span><span class="p">)</span>
+<br/><br/></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[ 1  3  5  7  9 11 13 15 17 19 21 23 25 27 29 31 33 35]
+[11, 9, 5, 19, 29, 3, 35, 13, 33, 21, 25, 15, 17, 7, 23, 27, 31, 1]
 </pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
@@ -664,7 +704,7 @@ cutoff computed using whole null distribution:  108.30031964473675
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_tests_8_1.png" src="../_images/notebooks_tests_8_1.png" />
+<img alt="../_images/notebooks_tests_10_1.png" src="../_images/notebooks_tests_10_1.png" />
 </div>
 </div>
 <div class="nbinput docutils container">
@@ -726,7 +766,7 @@ File <span class="ansi-green-fg">~/Documents/Websites/tfrStats/tfrStats_local/tf
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_tests_9_2.png" src="../_images/notebooks_tests_9_2.png" />
+<img alt="../_images/notebooks_tests_11_2.png" src="../_images/notebooks_tests_11_2.png" />
 </div>
 </div>
 </section>

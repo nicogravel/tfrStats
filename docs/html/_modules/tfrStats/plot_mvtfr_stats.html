@@ -98,7 +98,6 @@
 <span class="kn">from</span> <span class="nn">scipy.interpolate</span> <span class="kn">import</span> <span class="n">interp2d</span>
 <span class="kn">import</span> <span class="nn">matplotlib.colors</span> <span class="k">as</span> <span class="nn">colors</span>
 <span class="kn">from</span> <span class="nn">tfrStats.stats_tfrs_avg</span> <span class="kn">import</span> <span class="n">stats_tfrs_avg</span> <span class="k">as</span> <span class="n">stats_tfrs_avg</span>  
-<span class="kn">from</span> <span class="nn">tfrStats.cluster_correction</span> <span class="kn">import</span> <span class="n">cluster_correction</span> <span class="k">as</span> <span class="n">cluster_correction</span> 
 
 
 <span class="kn">import</span> <span class="nn">warnings</span>
@@ -180,7 +179,7 @@
     <span class="n">f</span> <span class="o">=</span> <span class="n">interp2d</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span><span class="n">gavg</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">cnorm</span> <span class="o">==</span> <span class="mi">1</span> <span class="p">:</span>
         <span class="n">vmin</span> <span class="o">=</span> <span class="mi">0</span>   <span class="c1">#_min</span>
-        <span class="n">vmax</span> <span class="o">=</span> <span class="mf">0.6</span> <span class="c1">#_max</span>
+        <span class="n">vmax</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="c1">#_max</span>
     <span class="n">vcenter</span> <span class="o">=</span> <span class="n">coloroffset</span><span class="p">(</span><span class="n">vmin</span><span class="p">,</span> <span class="n">vmax</span><span class="p">,</span> <span class="n">coloff</span><span class="p">)</span>
     <span class="n">norm</span> <span class="o">=</span> <span class="n">colors</span><span class="o">.</span><span class="n">TwoSlopeNorm</span><span class="p">(</span><span class="n">vmin</span><span class="o">=</span><span class="n">vmin</span><span class="p">,</span> <span class="n">vcenter</span><span class="o">=</span><span class="n">vcenter</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">vmax</span><span class="p">)</span>
     <span class="n">TFR_emp</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">)</span>

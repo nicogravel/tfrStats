@@ -29,16 +29,76 @@
           "text": [
             "session:  0\n",
             "(12, 19, 36, 36, 57)\n",
-            "(12, 19, 36, 36, 57)\n",
-            "/Users/nicogravel/Documents/Websites/tfrStats/tfrStats_local/docs/source/notebooks/example_data/mvtfr_obj_low.npy\n",
+            "(12, 19, 36, 36, 57)\n"
+          ]
+        },
+        {
+          "data": {
+            "application/vnd.jupyter.widget-view+json": {
+              "model_id": "0995a2754e43452a9946841af6b57a91",
+              "version_major": 2,
+              "version_minor": 0
+            },
+            "text/plain": [
+              "3:   0%|          | 0/12 [00:00<?, ?it/s]"
+            ]
+          },
+          "metadata": {},
+          "output_type": "display_data"
+        },
+        {
+          "name": "stdout",
+          "output_type": "stream",
+          "text": [
+            "/Users/nicogravel/Documents/Websites/tfrStats/tfrStats_local/docs/source/notebooks/example_data/mvtfr_bck_low_100.npy\n",
             "session:  0\n",
             "(12, 16, 36, 36, 113)\n",
-            "(12, 16, 36, 36, 113)\n",
-            "/Users/nicogravel/Documents/Websites/tfrStats/tfrStats_local/docs/source/notebooks/example_data/mvtfr_obj_high.npy\n",
+            "(12, 16, 36, 36, 113)\n"
+          ]
+        },
+        {
+          "data": {
+            "application/vnd.jupyter.widget-view+json": {
+              "model_id": "e59cd5be7aa7453babceb7f8feea3c41",
+              "version_major": 2,
+              "version_minor": 0
+            },
+            "text/plain": [
+              "3:   0%|          | 0/12 [00:00<?, ?it/s]"
+            ]
+          },
+          "metadata": {},
+          "output_type": "display_data"
+        },
+        {
+          "name": "stdout",
+          "output_type": "stream",
+          "text": [
+            "/Users/nicogravel/Documents/Websites/tfrStats/tfrStats_local/docs/source/notebooks/example_data/mvtfr_bck_high_100.npy\n",
             "session:  0\n",
             "(12, 11, 36, 36, 141)\n",
-            "(12, 11, 36, 36, 141)\n",
-            "/Users/nicogravel/Documents/Websites/tfrStats/tfrStats_local/docs/source/notebooks/example_data/mvtfr_obj_higher.npy\n"
+            "(12, 11, 36, 36, 141)\n"
+          ]
+        },
+        {
+          "data": {
+            "application/vnd.jupyter.widget-view+json": {
+              "model_id": "914958f2631d4c7d8865946979f70a25",
+              "version_major": 2,
+              "version_minor": 0
+            },
+            "text/plain": [
+              "3:   0%|          | 0/12 [00:00<?, ?it/s]"
+            ]
+          },
+          "metadata": {},
+          "output_type": "display_data"
+        },
+        {
+          "name": "stdout",
+          "output_type": "stream",
+          "text": [
+            "/Users/nicogravel/Documents/Websites/tfrStats/tfrStats_local/docs/source/notebooks/example_data/mvtfr_bck_higher_100.npy\n"
           ]
         }
       ],
@@ -54,7 +114,7 @@
         "example_data = '/Users/nicogravel/Documents/Websites/tfrStats/tfrStats_local/docs/source/notebooks/example_data/'\n",
         "\n",
         "# Loop over blocks and frequency bands\n",
-        "for  block in range(2,3):\n",
+        "for  block in range(3,4):\n",
         "    for  fband in range(3):\n",
         "\n",
         "        # Configure inputs\n",
@@ -80,7 +140,7 @@
         "            'layers'   : False,\n",
         "            'lump'     : True,\n",
         "            'rsa'      : True,\n",
-        "            'n_perm'   : 2\n",
+        "            'n_perm'   : 100\n",
         "            }\n",
         "\n",
         "        # Load data\n",
@@ -103,7 +163,7 @@
         "        # Save outputs\n",
         "        fname = os.path.join(example_data + 'mvtfr_'\n",
         "                    + blocks[block] + '_' \n",
-        "                    + fbands[fband]\n",
+        "                    + fbands[fband] + '_' + str(conf['n_perm'])\n",
         "                    + '.npy') \n",
         "        print(fname)\n",
         "        np.save(fname,tfrs) \n"
@@ -300,7 +360,7 @@
       "name": "python",
       "nbconvert_exporter": "python",
       "pygments_lexer": "ipython3",
-      "version": "3.8.18"
+      "version": "3.8.13"
     }
   },
   "nbformat": 4,

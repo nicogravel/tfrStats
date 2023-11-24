@@ -7,7 +7,6 @@ import matplotlib.colors as colors
 from tfrStats.load_uv_tfrs import load_uv_tfrs as load_uv_tfrs
 from tfrStats.get_pvals_whole import get_pvals_whole as get_pvals_whole
 from tfrStats.get_pvals_minmax import get_pvals_minmax as get_pvals_minmax
-from tfrStats.cluster_correction import cluster_correction as cluster_correction
 
 import warnings
 warnings.filterwarnings('ignore')
@@ -188,10 +187,10 @@ def plot_tfr_stats(input_path, cond, fband, null, type):
     cut[1:-1,0:t0] = np.nan
     cut[1:-1,td:-1] = np.nan
     THR =  TFR_emp >= cut
-    significant = THR[overlay_range[0]:overlay_range[1],twindow[0]:-twindow[1]]*TFR_emp[overlay_range[0]:overlay_range[1],twindow[0]:-twindow[1]]
+    prctl_cutoff = THR[overlay_range[0]:overlay_range[1],twindow[0]:-twindow[1]]*TFR_emp[overlay_range[0]:overlay_range[1],twindow[0]:-twindow[1]]
     im_pvals = ax[0].pcolormesh(X2[overlay_range[0]:overlay_range[1],twindow[0]:-twindow[1]],
                         Y2[overlay_range[0]:overlay_range[1],twindow[0]:-twindow[1]],
-                        significant, cmap=cmap,norm=norm,alpha=calpha)
+                        prctl_cutoff, cmap=cmap,norm=norm,alpha=calpha)
 
     ax[1].contour(X2[overlay_range[0]:overlay_range[1],twindow[0]:-twindow[1]],
                         Y2[overlay_range[0]:overlay_range[1],twindow[0]:-twindow[1]],
@@ -258,5 +257,5 @@ def plot_tfr_stats(input_path, cond, fband, null, type):
     print('figure :', fname)
     plt.savefig(fname, bbox_inches="tight")
 
-    return TFR_emp, significant, THR
+    return 
 

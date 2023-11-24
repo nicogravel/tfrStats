@@ -7,7 +7,6 @@ Submodules
 .. toctree::
    :maxdepth: 4
 
-   tfrStats.cluster_correction
    tfrStats.get_dpvals_minmax
    tfrStats.get_dpvals_whole
    tfrStats.get_pvals_minmax

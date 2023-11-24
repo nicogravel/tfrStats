@@ -4,7 +4,6 @@ import matplotlib.pyplot as plt
 from scipy.interpolate import interp2d
 import matplotlib.colors as colors
 from tfrStats.stats_tfrs_avg import stats_tfrs_avg as stats_tfrs_avg  
-from tfrStats.cluster_correction import cluster_correction as cluster_correction 
 
 
 import warnings
@@ -86,7 +85,7 @@ def plot_mvtfr_stats(cond, tfr, tfr_null, fband, alpha, correction):
     f = interp2d(x, y,gavg, kind='linear')
     if cnorm == 1 :
         vmin = 0   #_min
-        vmax = 0.6 #_max
+        vmax = 0.5 #_max
     vcenter = coloroffset(vmin, vmax, coloff)
     norm = colors.TwoSlopeNorm(vmin=vmin, vcenter=vcenter, vmax=vmax)
     TFR_emp = f(x2, y2)

@@ -4,7 +4,6 @@ import matplotlib.pyplot as plt
 from scipy.interpolate import interp2d
 import matplotlib.colors as colors
 from tfrStats.stats_tfrs_davg import stats_tfrs_davg as stats_tfrs_davg  
-from tfrStats.cluster_correction import cluster_correction as cluster_correction 
 
 
 import warnings

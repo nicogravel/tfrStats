@@ -30,8 +30,10 @@ def stats_tfrs_avg(tfr_null, tfr_emp, correction):
     
     if correction == "space":
         nullDist  = np.amax(nullDist,axis=1) # max across sites
+        #nullDist  = np.nanmean(nullDist,axis=1) # max across sites
     elif correction == "frequency":
         nullDist  = np.amax(nullDist,axis=2) # max across freqs
+        #nullDist  = np.nanmean(nullDist,axis=2) # max across sites
     elif correction == "space-frequency":
         nullDist  = np.amax(nullDist,axis=(1,2)) # max across freqs
 

@@ -129,7 +129,7 @@
 <span class="n">example_data</span> <span class="o">=</span> <span class="s1">&#39;/Users/nicogravel/Documents/Websites/tfrStats/tfrStats_local/docs/source/notebooks/example_data/&#39;</span>
 
 <span class="c1"># Loop over blocks and frequency bands</span>
-<span class="k">for</span>  <span class="n">block</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">):</span>
+<span class="k">for</span>  <span class="n">block</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">):</span>
     <span class="k">for</span>  <span class="n">fband</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
 
         <span class="c1"># Configure inputs</span>
@@ -155,7 +155,7 @@
             <span class="s1">&#39;layers&#39;</span>   <span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
             <span class="s1">&#39;lump&#39;</span>     <span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
             <span class="s1">&#39;rsa&#39;</span>      <span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-            <span class="s1">&#39;n_perm&#39;</span>   <span class="p">:</span> <span class="mi">2</span>
+            <span class="s1">&#39;n_perm&#39;</span>   <span class="p">:</span> <span class="mi">100</span>
             <span class="p">}</span>
 
         <span class="c1"># Load data</span>
@@ -178,14 +178,14 @@
         <span class="c1"># Save outputs</span>
         <span class="n">fname</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">example_data</span> <span class="o">+</span> <span class="s1">&#39;mvtfr_&#39;</span>
                     <span class="o">+</span> <span class="n">blocks</span><span class="p">[</span><span class="n">block</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span>
-                    <span class="o">+</span> <span class="n">fbands</span><span class="p">[</span><span class="n">fband</span><span class="p">]</span>
+                    <span class="o">+</span> <span class="n">fbands</span><span class="p">[</span><span class="n">fband</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">conf</span><span class="p">[</span><span class="s1">&#39;n_perm&#39;</span><span class="p">])</span>
                     <span class="o">+</span> <span class="s1">&#39;.npy&#39;</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
         <span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span><span class="n">tfrs</span><span class="p">)</span>
 <br/></pre></div>
 </div>
 </div>
-<div class="nboutput nblast docutils container">
+<div class="nboutput docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
@@ -193,15 +193,54 @@
 session:  0
 (12, 19, 36, 36, 57)
 (12, 19, 36, 36, 57)
-/Users/nicogravel/Documents/Websites/tfrStats/tfrStats_local/docs/source/notebooks/example_data/mvtfr_obj_low.npy
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "0995a2754e43452a9946841af6b57a91", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+/Users/nicogravel/Documents/Websites/tfrStats/tfrStats_local/docs/source/notebooks/example_data/mvtfr_bck_low_100.npy
 session:  0
 (12, 16, 36, 36, 113)
 (12, 16, 36, 36, 113)
-/Users/nicogravel/Documents/Websites/tfrStats/tfrStats_local/docs/source/notebooks/example_data/mvtfr_obj_high.npy
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "e59cd5be7aa7453babceb7f8feea3c41", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+/Users/nicogravel/Documents/Websites/tfrStats/tfrStats_local/docs/source/notebooks/example_data/mvtfr_bck_high_100.npy
 session:  0
 (12, 11, 36, 36, 141)
 (12, 11, 36, 36, 141)
-/Users/nicogravel/Documents/Websites/tfrStats/tfrStats_local/docs/source/notebooks/example_data/mvtfr_obj_higher.npy
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "914958f2631d4c7d8865946979f70a25", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+/Users/nicogravel/Documents/Websites/tfrStats/tfrStats_local/docs/source/notebooks/example_data/mvtfr_bck_higher_100.npy
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">

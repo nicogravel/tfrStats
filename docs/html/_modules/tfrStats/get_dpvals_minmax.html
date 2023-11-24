@@ -98,11 +98,10 @@
 <div class="viewcode-block" id="get_dpvals_minmax"><a class="viewcode-back" href="../../tfrStats.get_dpvals_minmax.html#tfrStats.get_dpvals_minmax.get_dpvals_minmax">[docs]</a><span class="k">def</span> <span class="nf">get_dpvals_minmax</span><span class="p">(</span><span class="n">tfr_emp</span><span class="p">,</span> <span class="n">tfr_null</span><span class="p">,</span> <span class="n">tail</span><span class="p">):</span>
 
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Get p-values from whole null distribution</span>
+<span class="sd">    Get p-values from min-max null distribution</span>
 
-<span class="sd">    This functions pools the averaged null distribution values and computes</span>
-<span class="sd">    the p-values for each frequency and time bin using the empirical</span>
-<span class="sd">    cumulative distribution method.</span>
+<span class="sd">    This functions pools the null distribution values and computes</span>
+<span class="sd">    the p-values for each frequency and time bin.</span>
 
 <span class="sd">    .. todo::</span>
 <span class="sd">        * Merge this function with get_pvals_whole.</span>

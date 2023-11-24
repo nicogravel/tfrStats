@@ -7,6 +7,9 @@ import rsatoolbox
 from rsatoolbox.rdm.rdms import RDMs
 from scipy import stats as st
 from tfrStats.load_tfr_rdm import load_tfr_rdm as load_tfr_rdm
+import random
+
+random.seed(111)
 
 def mvtfr_reliability(rdms,conf):  
     """   
@@ -74,6 +77,7 @@ def mvtfr_reliability(rdms,conf):
         
     tps = [57,113,141,140] 
     fps = [19,16,11,1]
+
     fbands  = ['lf','hf','hhf','mua']
     blocks   = ['grat', 'nat','nat']
     conds   = ['grat', 'bck','obj','bck-obj','grat_lowcon','grat_highcon','bckXobj']
@@ -174,7 +178,8 @@ def mvtfr_reliability(rdms,conf):
         rsa  = np.zeros((depths,fps[fband],tps[fband]))    
         rsa_null  = np.zeros((n_perm*2,depths,fps[fband],tps[fband]))    
        
-    for ch in range(depths):
+    for ch in tqdm(range(depths), desc=str(cond), position=0): 
+
         # Load MUA
         if fband == 3:
             # Load MUA
@@ -228,11 +233,14 @@ def mvtfr_reliability(rdms,conf):
                     rsa[ch,tp] = rsatoolbox.rdm.compare_rho_a(rdm_1,rdm_2)[0]
 
                     
-                    for rep in range(n_perm):                   
-                    
-                        X_null  = XX[np.ix_(c1,np.random.choice(c2, size=len(c2), replace=False))]
+                    for rep in range(n_perm): 
+
+
+                        c_rnd = random.sample(list(c1), len(c1))
+
+                        X_null  = XX[np.ix_(c_rnd,c_rnd)]
                         X_null  = X_null[~np.eye(X_null.shape[0],dtype=bool)].reshape(X_null.shape[0],-1) 
-                        Y_null  = YY[np.ix_(c1,np.random.choice(c2, size=len(c2), replace=False))] 
+                        Y_null  = YY[np.ix_(c_rnd,c_rnd)] 
                         Y_null  = Y_null[~np.eye(Y_null.shape[0],dtype=bool)].reshape(Y_null.shape[0],-1) 
                                         
                         rdm_1_null = RDMs(dissimilarity_measure = 'classification accuracy',dissimilarities = np.array(X_null[idx]))
@@ -243,6 +251,7 @@ def mvtfr_reliability(rdms,conf):
                     
            
         else:
+
             for fr in range(fps[fband]):
 
                 #(12, 16, 30, 30, 113)
@@ -266,7 +275,7 @@ def mvtfr_reliability(rdms,conf):
                     if tt >= tt0 or tt <ttf:
                          
                         if cond == -5 or cond == -4 or cond == -3 or cond == -2 or cond == -1:
-                            XX = np.squeeze(X_t[:,:,tp])*mask +mask_2
+                            XX = np.squeeze(X_t[:,:,tp])*mask+mask_2
                             YY = np.squeeze(Y_t[:,:,tp])
                         else:
                             XX = np.squeeze(X_t[:,:,tp])
@@ -286,15 +295,17 @@ def mvtfr_reliability(rdms,conf):
 
                         for rep in range(n_perm):            
                             
-                            X_null  = XX[np.ix_(c1, np.random.choice(c2, size=len(c2), replace=False))]
+                            c_rnd = random.sample(list(c1), len(c1))
+
+                            X_null  = XX[np.ix_(c_rnd,c_rnd)]
                             X_null  = X_null[~np.eye(X_null.shape[0],dtype=bool)].reshape(X_null.shape[0],-1) 
-                            Y_null  = YY[np.ix_(c1, np.random.choice(c2, size=len(c2), replace=False))] 
+                            Y_null  = YY[np.ix_(c_rnd,c_rnd)] 
                             Y_null  = Y_null[~np.eye(Y_null.shape[0],dtype=bool)].reshape(Y_null.shape[0],-1) 
                                             
                             rdm_1_null = RDMs(dissimilarity_measure = 'classification accuracy',dissimilarities = np.array(X_null[idx]))
                             rdm_2_null = RDMs(dissimilarity_measure = 'classification accuracy', dissimilarities = np.array(Y_null[idx]))
 
                             rsa_null[rep,ch,fr,tp]    = rsatoolbox.rdm.compare_rho_a(rdm_1,rdm_2_null)[0]            
-                            rsa_null[rep+n_perm,ch,fr,tp] = rsatoolbox.rdm.compare_rho_a(rdm_1_null,rdm_2)[0]        
+                            rsa_null[rep+n_perm,ch,fr,tp] = rsatoolbox.rdm.compare_rho_a(rdm_2,rdm_1_null)[0]        
                        
     return rsa, rsa_null

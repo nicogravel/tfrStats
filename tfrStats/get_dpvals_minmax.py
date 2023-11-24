@@ -4,11 +4,10 @@ from statsmodels.distributions.empirical_distribution import ECDF
 def get_dpvals_minmax(tfr_emp, tfr_null, tail):
 
     """
-    Get p-values from whole null distribution
+    Get p-values from min-max null distribution
 
-    This functions pools the averaged null distribution values and computes
-    the p-values for each frequency and time bin using the empirical
-    cumulative distribution method.
+    This functions pools the null distribution values and computes
+    the p-values for each frequency and time bin.
 
     .. todo::
         * Merge this function with get_pvals_whole.
