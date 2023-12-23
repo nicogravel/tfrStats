@@ -9,7 +9,7 @@ from tfrStats.stats_tfrs_avg import stats_tfrs_avg as stats_tfrs_avg
 import warnings
 warnings.filterwarnings('ignore')
 
-def plot_mvtfr_stats(cond, tfr, tfr_null, fband, alpha, correction):
+def plot_mvtfr_stats(tfr, tfr_null, fband, alpha, correction):
 
     """
     Plot empirical Multi-variate TFR and stats results

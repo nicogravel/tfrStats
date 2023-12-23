@@ -147,10 +147,10 @@ def tfr_spw_stats_minmax(paths, cond, svar, fband, n_perm):
                             X_h0[i_rep,i_freq,:] = ((X-XX_bs)/XX_bs)*100
                 X_h0[X_h0 == -inf] = np.nan
                 X_h0[X_h0 == inf]  = np.nan
-                X = X_h0[:,:,t0:tf] # pool repetitions, frequency bins (all..) and time bins (400-1000ms))
+                X = X_h0[i_depth,i_rep,i_freq,t0:tf] # pool repetitions, frequency bins (all..) and time bins (400-1000ms))
                 # save permutation's min-max for each condition and depth
-                tfr_null[i_perm,i_cond,i_depth,0] = np.nanmin(X.flatten())
-                tfr_null[i_perm,i_cond,i_depth,1] = np.nanmax(X.flatten())
+                tfr_null[i_perm,i_cond,i_depth,i_freq,0] = np.nanmin(X.flatten())  
+                tfr_null[i_perm,i_cond,i_depth,i_freq,1] = np.nanmax(X.flatten())  
 
 
     print(tfr_emp.shape)

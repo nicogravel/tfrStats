@@ -1,0 +1,7 @@
+tfrStats.dynFlow module
+=======================
+
+.. automodule:: tfrStats.dynFlow
+   :members:
+   :undoc-members:
+   :show-inheritance:

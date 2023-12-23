@@ -24,8 +24,8 @@ def stats_tfrs_davg(tfr_null, tfr_emp, correction):
     @author: Nicolas Gravel, 19.09.2023
     """
 
-    n_perm   = tfr_null.shape[0] # (12, 16, 113) (20, 12, 16, 113)
-    tfr      =  tfr_emp #np.nanmean(tfr_emp,axis=1) # average sites
+    n_perm    = tfr_null.shape[0] # (12, 16, 113) (20, 12, 16, 113)
+    tfr       = tfr_emp #np.nanmean(tfr_emp,axis=1) # average sites
     nullDist  = tfr_null
     
     print('null:',nullDist.shape)
@@ -34,8 +34,11 @@ def stats_tfrs_davg(tfr_null, tfr_emp, correction):
         nullDist  = np.amax(nullDist,axis=1) # max across sites
     elif correction == "frequency":
         nullDist  = np.amax(nullDist,axis=2) # max across freqs
+        #nullDist  = np.nanmean(nullDist,axis=2) # max across freqs
     elif correction == "space-frequency":
         nullDist  = np.amax(nullDist,axis=(1,2)) # max across freqs
+    #elif correction == "no":
+        #nullDist  = np.amax(nullDist,axis=1) # max across sites
 
     print(nullDist.shape)
     print('dimensions :', tfr.shape, tfr_null.shape, nullDist.shape)
@@ -53,9 +56,11 @@ def stats_tfrs_davg(tfr_null, tfr_emp, correction):
                 null = nullDist[:,:,i_time]
             elif correction == "space-frequency":
                 null = nullDist[:,i_time]
+            elif correction == "no":
+                null = nullDist[:,:,:,i_time]
             obs = np.squeeze(tfr[i_site,i_time])
             ecdf = ECDF(null.flatten())
             p_fwe = ecdf(obs)
             stats[i_site,i_time] = 1.0 - p_fwe
-            #stats[i_freq,i_time] = (null >= obs).sum() / n_perm
+            #stats[i_site,i_time] = (null >= obs).sum() / n_perm
     return stats

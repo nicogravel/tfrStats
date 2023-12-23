@@ -80,7 +80,6 @@ def mvtfr_reliability(rdms,conf):
 
     fbands  = ['lf','hf','hhf','mua']
     blocks   = ['grat', 'nat','nat']
-    conds   = ['grat', 'bck','obj','bck-obj','grat_lowcon','grat_highcon','bckXobj']
     
     depths = 12
     methods = ['hanning', 'wavelet', 'wavelet','wavelet']
@@ -116,7 +115,7 @@ def mvtfr_reliability(rdms,conf):
 
     # Object and scenes indices were fliped during the creation of: 'ftPool_' + cond + ...  + '.mat' 
     # =============================================================================
-    elif cond == 2:
+    elif cond == 3:
         block = 1
         n_sess = 11
         results_path = input_path + blocks[block] + '/'
@@ -126,7 +125,7 @@ def mvtfr_reliability(rdms,conf):
         c2 = c1
         M = np.zeros((c1.shape[0],c2.shape[0]))
 
-    elif cond == 1:
+    elif cond == 2:
         block = 1
         n_sess = 11
         results_path = input_path + blocks[block] + '/'
@@ -138,7 +137,7 @@ def mvtfr_reliability(rdms,conf):
 
     # =============================================================================
     
-    elif cond == 3:
+    elif cond == 1:
         block = 1
         results_path = input_path + blocks[block] + '/'
         trialIdx = np.arange(36)
@@ -233,10 +232,12 @@ def mvtfr_reliability(rdms,conf):
                     rsa[ch,tp] = rsatoolbox.rdm.compare_rho_a(rdm_1,rdm_2)[0]
 
                     
+                    c_rnd = random.sample(list(c1), len(c1))
+
+
                     for rep in range(n_perm): 
 
 
-                        c_rnd = random.sample(list(c1), len(c1))
 
                         X_null  = XX[np.ix_(c_rnd,c_rnd)]
                         X_null  = X_null[~np.eye(X_null.shape[0],dtype=bool)].reshape(X_null.shape[0],-1) 
@@ -293,10 +294,11 @@ def mvtfr_reliability(rdms,conf):
                         rsa[ch,fr,tp] = rsatoolbox.rdm.compare_rho_a(rdm_1,rdm_2)[0]
                         
 
+                        c_rnd = random.sample(list(c1), len(c1))
+
                         for rep in range(n_perm):            
                             
-                            c_rnd = random.sample(list(c1), len(c1))
-
+                            
                             X_null  = XX[np.ix_(c_rnd,c_rnd)]
                             X_null  = X_null[~np.eye(X_null.shape[0],dtype=bool)].reshape(X_null.shape[0],-1) 
                             Y_null  = YY[np.ix_(c_rnd,c_rnd)] 

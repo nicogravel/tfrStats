@@ -52,7 +52,7 @@ def load_tfr_rdm(conf):
 
 
     blocks  = ['grat', 'nat','nat','nat','nat','nat']   
-    decvars = ["spw", "gpr",'spwgpr']
+    decvars = ['spw', 'gpr','spwgpr']
     results_path = input_path + blocks[cond] + '/'
     
     if layers == True:
