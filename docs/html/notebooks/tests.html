@@ -3,11 +3,11 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Import libraries and define functions &#8212; tfrStats 1.0.0 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b3523f8e" />
-    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=218a107a" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=55c3aa90" />
     <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=af2ce170"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
@@ -96,12 +96,12 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">secrets</span>
-<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
-    <span class="n">a_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">secrets</span><span class="o">.</span><span class="n">randbelow</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">a_</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import numpy as np
+import secrets
+a = np.arange(10)
+for idx in range(10):
+    a_ = np.roll(a, secrets.randbelow(10))
+    print(a, a_)
 <br/><br/></pre></div>
 </div>
 </div>
@@ -126,7 +126,7 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span> <span class="n">secrets</span><span class="o">.</span><span class="n">randbelow</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span> secrets.randbelow(10)
 </pre></div>
 </div>
 </div>
@@ -143,13 +143,13 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">random</span>
-<span class="n">trialIdx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">36</span><span class="p">)</span>
-<span class="n">c1</span> <span class="o">=</span> <span class="n">trialIdx</span><span class="p">[</span><span class="mi">1</span><span class="p">::</span><span class="mi">2</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">c1</span><span class="p">)</span>
-<span class="n">c2</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">c1</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">c1</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">c2</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import numpy as np
+import random
+trialIdx = np.arange(36)
+c1 = trialIdx[1::2]
+print(c1)
+c2 = random.sample(list(c1), len(c1))
+print(c2)
 <br/><br/></pre></div>
 </div>
 </div>
@@ -166,330 +166,330 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">tqdm.auto</span> <span class="kn">import</span> <span class="n">tqdm</span>
-<span class="kn">import</span> <span class="nn">scipy.io</span> <span class="k">as</span> <span class="nn">sio</span>
-<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">inf</span>
-<span class="kn">import</span> <span class="nn">secrets</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import numpy as np
+from tqdm.auto import tqdm
+import scipy.io as sio
+from numpy import inf
+import secrets
 
 
-<span class="k">def</span> <span class="nf">tfr_spw_stats_whole_roll</span><span class="p">(</span><span class="n">paths</span><span class="p">,</span> <span class="n">cond</span><span class="p">,</span> <span class="n">svar</span><span class="p">,</span> <span class="n">fband</span><span class="p">,</span> <span class="n">n_perm</span><span class="p">):</span>
+def tfr_spw_stats_whole_roll(paths, cond, svar, fband, n_perm):
 
 
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Permutation based TFR statistical asessement based on whole null distribution</span>
+    &quot;&quot;&quot;
+    Permutation based TFR statistical asessement based on whole null distribution
 
-<span class="sd">    Function to compute the null distribution keeping the dimensions of the empirical</span>
-<span class="sd">    distribution. When testing using the whole null distribution, the permutations are</span>
-<span class="sd">    averaged and the dimensions of the empirical distributions are preserved.</span>
+    Function to compute the null distribution keeping the dimensions of the empirical
+    distribution. When testing using the whole null distribution, the permutations are
+    averaged and the dimensions of the empirical distributions are preserved.
 
-<span class="sd">    .. todo::</span>
-<span class="sd">        *  Implement onset shifting to account for whole triakl (in the current example we pool values from the 400-1000 ms time window).</span>
-<span class="sd">        *  Implement compatibilityu with Syncopy (for now it relies on ftPool_... .mat containing the TFRs computed in Fieldtrip).</span>
-
-
-<span class="sd">    :param string input_path: path to the .npz file.</span>
-<span class="sd">    :param in condition: condition index (i.e. 0, 1, 2, 3).</span>
-<span class="sd">    :param int svar: spectral power or GPR (not implemented here).</span>
-<span class="sd">    :param int fband: frequency band index (i.e. low, high, higher).</span>
-<span class="sd">    :param int obs: [nullType, percentile], two integeres: 0 for min-max, 1 for whole, 0-100 percentile.</span>
-<span class="sd">    :param int correction: 1 for p-values, 2 for cluster corrected p-values.</span>
-<span class="sd">    :param int cluster_size: cluster size.</span>
-<span class="sd">    :param float alpha: alpha.</span>
-
-<span class="sd">    :return: empirical time frequency representation n_conds x n_sites x n_freqs x n_time (i.e. 30, 12, 16, 113).</span>
-<span class="sd">    :return: null time frequency representation (i.e. 30, 12, 16, 113  or 1000, 30, 12, 16, 2).</span>
-<span class="sd">    :rtype: float</span>
-
-<span class="sd">    @author: Nicolas Gravel, 19.09.2023</span>
-
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">tps</span> <span class="o">=</span> <span class="p">[</span><span class="mi">57</span><span class="p">,</span><span class="mi">113</span><span class="p">,</span><span class="mi">141</span><span class="p">,</span><span class="mi">140</span><span class="p">]</span>
-    <span class="n">fps</span> <span class="o">=</span> <span class="p">[</span><span class="mi">19</span><span class="p">,</span><span class="mi">16</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
-    <span class="n">fbands</span>  <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;low&#39;</span><span class="p">,</span><span class="s1">&#39;high&#39;</span><span class="p">,</span><span class="s1">&#39;higher&#39;</span><span class="p">]</span>
-    <span class="n">blocks</span>  <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;grat&#39;</span><span class="p">,</span> <span class="s1">&#39;nat&#39;</span><span class="p">]</span>
-    <span class="n">svars</span>   <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;spw&#39;</span><span class="p">,</span> <span class="s1">&#39;gpr&#39;</span><span class="p">]</span>
-    <span class="n">methods</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;hanning&#39;</span><span class="p">,</span> <span class="s1">&#39;wavelet&#39;</span><span class="p">,</span><span class="s1">&#39;wavelet&#39;</span><span class="p">]</span>
-    <span class="n">svar</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="c1"># Conditions</span>
-    <span class="k">if</span> <span class="n">cond</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">block</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="n">n_sess</span> <span class="o">=</span> <span class="mi">10</span>
-    <span class="c1"># =============================================================================</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">block</span> <span class="o">=</span> <span class="mi">1</span>
-        <span class="n">n_sess</span> <span class="o">=</span> <span class="mi">11</span>
+    .. todo::
+        *  Implement onset shifting to account for whole triakl (in the current example we pool values from the 400-1000 ms time window).
+        *  Implement compatibilityu with Syncopy (for now it relies on ftPool_... .mat containing the TFRs computed in Fieldtrip).
 
 
-    <span class="c1"># =============================================================================</span>
-    <span class="c1"># How the indices are organized within the dataset</span>
-    <span class="c1"># =============================================================================</span>
-    <span class="n">channels</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">12</span><span class="o">*</span><span class="n">n_sess</span><span class="p">)]</span> <span class="c1"># Total channels</span>
-    <span class="n">site_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">12</span><span class="p">,</span><span class="n">n_sess</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint</span><span class="p">)</span> <span class="c1"># Index to sites</span>
-    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">12</span><span class="p">):</span> <span class="c1"># for time</span>
-            <span class="n">site</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">channels</span> <span class="k">if</span> <span class="n">x</span><span class="o">%</span><span class="k">12</span> == n]
-            <span class="n">site_idx</span><span class="p">[</span><span class="n">n</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">site</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;site indices :&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">site_idx</span><span class="p">)</span>
+    :param string input_path: path to the .npz file.
+    :param in condition: condition index (i.e. 0, 1, 2, 3).
+    :param int svar: spectral power or GPR (not implemented here).
+    :param int fband: frequency band index (i.e. low, high, higher).
+    :param int obs: [nullType, percentile], two integeres: 0 for min-max, 1 for whole, 0-100 percentile.
+    :param int correction: 1 for p-values, 2 for cluster corrected p-values.
+    :param int cluster_size: cluster size.
+    :param float alpha: alpha.
 
-    <span class="k">if</span> <span class="n">fband</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-         <span class="n">bs_t0</span> <span class="o">=</span> <span class="o">-</span><span class="mi">700</span>
-         <span class="n">bs_t1</span> <span class="o">=</span> <span class="o">-</span><span class="mi">100</span>
-    <span class="k">elif</span> <span class="n">fband</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-         <span class="n">bs_t0</span> <span class="o">=</span> <span class="o">-</span><span class="mi">700</span>
-         <span class="n">bs_t1</span> <span class="o">=</span> <span class="o">-</span><span class="mi">100</span>
-    <span class="k">elif</span> <span class="n">fband</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
-         <span class="n">bs_t0</span> <span class="o">=</span> <span class="o">-</span><span class="mi">700</span>
-         <span class="n">bs_t1</span> <span class="o">=</span> <span class="o">-</span><span class="mi">100</span>
+    :return: empirical time frequency representation n_conds x n_sites x n_freqs x n_time (i.e. 30, 12, 16, 113).
+    :return: null time frequency representation (i.e. 30, 12, 16, 113  or 1000, 30, 12, 16, 2).
+    :rtype: float
 
-    <span class="c1"># =============================================================================</span>
-    <span class="c1"># Empirical TFR</span>
-    <span class="c1"># =============================================================================</span>
-    <span class="n">fname</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">paths</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-                <span class="o">+</span> <span class="s1">&#39;ftPool_&#39;</span>
-                <span class="o">+</span> <span class="n">blocks</span><span class="p">[</span><span class="n">block</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span>
-                <span class="o">+</span> <span class="n">fbands</span><span class="p">[</span><span class="n">fband</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span>
-                <span class="o">+</span> <span class="n">methods</span><span class="p">[</span><span class="n">fband</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;.mat&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
-    <span class="n">mat</span> <span class="o">=</span> <span class="n">sio</span><span class="o">.</span><span class="n">loadmat</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
-    <span class="n">dataPool</span> <span class="o">=</span> <span class="n">mat</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="s1">&#39;dataLump_&#39;</span> <span class="o">+</span> <span class="n">svars</span><span class="p">[</span><span class="n">svar</span><span class="p">]))</span>
+    @author: Nicolas Gravel, 19.09.2023
 
+    &quot;&quot;&quot;
 
-
-    <span class="nb">print</span><span class="p">(</span><span class="n">dataPool</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-    <span class="n">time</span> <span class="o">=</span>  <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">start</span> <span class="o">=</span> <span class="o">-</span><span class="mi">800</span><span class="p">,</span> <span class="n">stop</span> <span class="o">=</span> <span class="mi">2000</span><span class="p">,</span> <span class="n">num</span> <span class="o">=</span> <span class="n">tps</span><span class="p">[</span><span class="n">fband</span><span class="p">])</span>
-    <span class="n">b0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">searchsorted</span><span class="p">(</span><span class="n">time</span><span class="p">,</span><span class="n">bs_t0</span><span class="p">,</span><span class="n">side</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">sorter</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-    <span class="n">bf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">searchsorted</span><span class="p">(</span><span class="n">time</span><span class="p">,</span><span class="n">bs_t1</span><span class="p">,</span><span class="n">side</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">sorter</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-
-    <span class="n">tfr_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">dataPool</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">dataPool</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="mi">12</span><span class="p">,</span><span class="n">dataPool</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span><span class="n">dataPool</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">4</span><span class="p">]))</span>
-
-    <span class="k">for</span> <span class="n">i_cond</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dataPool</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
-        <span class="k">for</span> <span class="n">i_rep</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dataPool</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
-            <span class="k">for</span> <span class="n">i_depth</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">12</span><span class="p">):</span>
-                <span class="k">for</span> <span class="n">i_freq</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dataPool</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">3</span><span class="p">]):</span>
-                    <span class="n">X</span> <span class="o">=</span> <span class="n">dataPool</span><span class="p">[</span><span class="n">i_cond</span><span class="p">,</span><span class="n">i_rep</span><span class="p">,</span><span class="n">site_idx</span><span class="p">[</span><span class="n">i_depth</span><span class="p">,:],</span><span class="n">i_freq</span><span class="p">,:]</span>
-                    <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># average sessions</span>
-                    <span class="n">baseline</span> <span class="o">=</span> <span class="n">dataPool</span><span class="p">[:,:,</span><span class="n">site_idx</span><span class="p">[</span><span class="n">i_depth</span><span class="p">,:],</span><span class="n">i_freq</span><span class="p">,</span><span class="n">b0</span><span class="p">:</span><span class="n">bf</span><span class="p">]</span>
-                    <span class="n">baseline</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">baseline</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># average time</span>
-                    <span class="n">X_bs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">baseline</span><span class="o">.</span><span class="n">flatten</span><span class="p">())</span>
-                    <span class="n">tfr_</span><span class="p">[</span><span class="n">i_cond</span><span class="p">,</span><span class="n">i_rep</span><span class="p">,</span><span class="n">i_depth</span><span class="p">,</span><span class="n">i_freq</span><span class="p">,:]</span> <span class="o">=</span>  <span class="p">((</span><span class="n">X</span><span class="o">-</span><span class="n">X_bs</span><span class="p">)</span><span class="o">/</span><span class="n">X_bs</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span>
-
-    <span class="n">tfr_</span><span class="p">[</span><span class="n">tfr_</span> <span class="o">==</span> <span class="o">-</span><span class="n">inf</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
-    <span class="n">tfr_</span><span class="p">[</span><span class="n">tfr_</span> <span class="o">==</span> <span class="n">inf</span><span class="p">]</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
-    <span class="n">tfr_emp</span> <span class="o">=</span>  <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">tfr_</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># repetition average</span>
-
-    <span class="c1"># =============================================================================</span>
-    <span class="c1"># Null TFR</span>
-    <span class="c1"># =============================================================================</span>
-    <span class="n">time</span> <span class="o">=</span>  <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">start</span> <span class="o">=</span> <span class="o">-</span><span class="mi">800</span><span class="p">,</span> <span class="n">stop</span> <span class="o">=</span> <span class="mi">2000</span><span class="p">,</span> <span class="n">num</span> <span class="o">=</span> <span class="n">tps</span><span class="p">[</span><span class="n">fband</span><span class="p">])</span>
-    <span class="n">b0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">searchsorted</span><span class="p">(</span><span class="n">time</span><span class="p">,</span><span class="n">bs_t0</span><span class="p">,</span><span class="n">side</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">,</span> <span class="n">sorter</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-    <span class="n">bf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">searchsorted</span><span class="p">(</span><span class="n">time</span><span class="p">,</span><span class="n">bs_t1</span><span class="p">,</span><span class="n">side</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">,</span> <span class="n">sorter</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-    <span class="n">t0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">searchsorted</span><span class="p">(</span><span class="n">time</span><span class="p">,</span><span class="mi">400</span><span class="p">,</span><span class="n">side</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">sorter</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-    <span class="n">tf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">searchsorted</span><span class="p">(</span><span class="n">time</span><span class="p">,</span><span class="mi">1000</span><span class="p">,</span><span class="n">side</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">sorter</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-    <span class="n">X_h0</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_perm</span><span class="p">,</span><span class="n">dataPool</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">dataPool</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">4</span><span class="p">]))</span>
-    <span class="n">tfr_null</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">dataPool</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="mi">12</span><span class="p">,</span><span class="n">dataPool</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span><span class="n">dataPool</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">4</span><span class="p">]))</span>
-
-    <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">cond</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; - &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">blocks</span><span class="p">[</span><span class="n">block</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39; - &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">fbands</span><span class="p">[</span><span class="n">fband</span><span class="p">]))</span>
-    <span class="n">choices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">n_perm</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">0.5</span>
-    <span class="k">for</span> <span class="n">i_cond</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">dataPool</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span><span class="n">desc</span><span class="o">=</span><span class="n">msg</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">i_depth</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">12</span><span class="p">):</span>
-            <span class="k">for</span> <span class="n">i_freq</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dataPool</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">3</span><span class="p">]):</span>
-                <span class="k">for</span> <span class="n">i_perm</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_perm</span><span class="p">):</span>
-                    <span class="k">for</span> <span class="n">i_rep</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dataPool</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
-                        <span class="k">if</span> <span class="n">choices</span><span class="p">[</span><span class="n">i_perm</span><span class="p">]</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
-                            <span class="n">X</span> <span class="o">=</span> <span class="n">dataPool</span><span class="p">[</span><span class="n">i_cond</span><span class="p">,</span><span class="n">i_rep</span><span class="p">,</span><span class="n">site_idx</span><span class="p">[</span><span class="n">i_depth</span><span class="p">,:],</span><span class="n">i_freq</span><span class="p">,:]</span>
-                            <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># average sessions</span>
-                            <span class="n">baseline</span> <span class="o">=</span> <span class="n">dataPool</span><span class="p">[:,:,</span><span class="n">site_idx</span><span class="p">[</span><span class="n">i_depth</span><span class="p">,:],</span><span class="n">i_freq</span><span class="p">,:]</span>
-                            <span class="n">baseline</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">baseline</span><span class="p">,</span> <span class="n">secrets</span><span class="o">.</span><span class="n">randbelow</span><span class="p">(</span><span class="n">dataPool</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">4</span><span class="p">]))</span>
-                            <span class="n">baseline</span> <span class="o">=</span> <span class="n">dataPool</span><span class="p">[:,:,</span><span class="n">site_idx</span><span class="p">[</span><span class="n">i_depth</span><span class="p">,:],</span><span class="n">i_freq</span><span class="p">,</span><span class="n">b0</span><span class="p">:</span><span class="n">bf</span><span class="p">]</span>
-                            <span class="n">baseline</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">baseline</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span> <span class="c1"># average time</span>
-                            <span class="n">X_bs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">baseline</span><span class="o">.</span><span class="n">flatten</span><span class="p">())</span>
-                            <span class="n">XX_bs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">X_bs</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="n">dataPool</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">4</span><span class="p">]])</span>
-                            <span class="n">X_h0</span><span class="p">[</span><span class="n">i_perm</span><span class="p">,</span><span class="n">i_rep</span><span class="p">,:]</span> <span class="o">=</span> <span class="p">((</span><span class="n">X</span><span class="o">-</span><span class="n">XX_bs</span><span class="p">)</span><span class="o">/</span><span class="n">XX_bs</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span>
-                        <span class="k">elif</span> <span class="n">choices</span><span class="p">[</span><span class="n">i_perm</span><span class="p">]</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
-                            <span class="n">X</span> <span class="o">=</span> <span class="n">dataPool</span><span class="p">[</span><span class="n">i_cond</span><span class="p">,</span><span class="n">i_rep</span><span class="p">,</span><span class="n">site_idx</span><span class="p">[</span><span class="n">i_depth</span><span class="p">,:],</span><span class="n">i_freq</span><span class="p">,:]</span>
-                            <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># average sessions</span>
-                            <span class="n">baseline</span> <span class="o">=</span> <span class="n">dataPool</span><span class="p">[:,:,</span><span class="n">site_idx</span><span class="p">[</span><span class="n">i_depth</span><span class="p">,:],</span><span class="n">i_freq</span><span class="p">,</span><span class="n">b0</span><span class="p">:</span><span class="n">bf</span><span class="p">]</span>
-                            <span class="n">baseline</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">baseline</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span> <span class="c1"># average time</span>
-                            <span class="n">X_bs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">baseline</span><span class="o">.</span><span class="n">flatten</span><span class="p">())</span>
-                            <span class="n">XX_bs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">X_bs</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="n">dataPool</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">4</span><span class="p">]])</span>
-                            <span class="n">X_h0</span><span class="p">[</span><span class="n">i_perm</span><span class="p">,</span><span class="n">i_rep</span><span class="p">,:]</span> <span class="o">=</span> <span class="p">((</span><span class="n">X</span><span class="o">-</span><span class="n">XX_bs</span><span class="p">)</span><span class="o">/</span><span class="n">XX_bs</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span>
-                <span class="n">X_h0</span><span class="p">[</span><span class="n">X_h0</span> <span class="o">==</span> <span class="o">-</span><span class="n">inf</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
-                <span class="n">X_h0</span><span class="p">[</span><span class="n">X_h0</span> <span class="o">==</span> <span class="n">inf</span><span class="p">]</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
-                <span class="n">tfr_null</span><span class="p">[</span><span class="n">i_cond</span><span class="p">,</span><span class="n">i_depth</span><span class="p">,</span><span class="n">i_freq</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">X_h0</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    tps = [57,113,141,140]
+    fps = [19,16,11,1]
+    fbands  = [&#39;low&#39;,&#39;high&#39;,&#39;higher&#39;]
+    blocks  = [&#39;grat&#39;, &#39;nat&#39;]
+    svars   = [&#39;spw&#39;, &#39;gpr&#39;]
+    methods = [&#39;hanning&#39;, &#39;wavelet&#39;,&#39;wavelet&#39;]
+    svar = 0
+    # Conditions
+    if cond == 0:
+        block = 0
+        n_sess = 10
+    # =============================================================================
+    else:
+        block = 1
+        n_sess = 11
 
 
-    <span class="nb">print</span><span class="p">(</span><span class="n">tfr_emp</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">tfr_null</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    # =============================================================================
+    # How the indices are organized within the dataset
+    # =============================================================================
+    channels = [i for i in range(12*n_sess)] # Total channels
+    site_idx = np.zeros((12,n_sess)).astype(np.uint) # Index to sites
+    for n in range(12): # for time
+            site = [x for x in channels if x%12 == n]
+            site_idx[n,:] = site
+    print(&#39;site indices :&#39;)
+    print(site_idx)
 
-    <span class="n">fname</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">paths</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;uvtfr_stats_&#39;</span> <span class="o">+</span>  <span class="n">fbands</span><span class="p">[</span><span class="n">fband</span><span class="p">]</span>  <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="n">blocks</span><span class="p">[</span><span class="n">cond</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="n">svars</span><span class="p">[</span><span class="n">svar</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">n_perm</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;_roll.npz&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
-    <span class="n">np</span><span class="o">.</span><span class="n">savez</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">tfr_emp</span><span class="p">,</span> <span class="n">tfr_null</span><span class="p">)</span>
+    if fband == 0:
+         bs_t0 = -700
+         bs_t1 = -100
+    elif fband == 1:
+         bs_t0 = -700
+         bs_t1 = -100
+    elif fband == 2:
+         bs_t0 = -700
+         bs_t1 = -100
 
-    <span class="k">return</span> <span class="n">tfr_emp</span><span class="p">,</span> <span class="n">tfr_null</span>
+    # =============================================================================
+    # Empirical TFR
+    # =============================================================================
+    fname = str(paths[0]
+                + &#39;ftPool_&#39;
+                + blocks[block] + &#39;_&#39;
+                + fbands[fband] + &#39;_&#39;
+                + methods[fband] + &#39;.mat&#39;)
+    print(fname)
+    mat = sio.loadmat(fname)
+    dataPool = mat.get(str(&#39;dataLump_&#39; + svars[svar]))
 
 
 
-<span class="k">def</span> <span class="nf">tfr_spw_stats_minmax_roll</span><span class="p">(</span><span class="n">paths</span><span class="p">,</span> <span class="n">cond</span><span class="p">,</span> <span class="n">svar</span><span class="p">,</span> <span class="n">fband</span><span class="p">,</span> <span class="n">n_perm</span><span class="p">):</span>
+    print(dataPool.shape)
+    time =  np.linspace(start = -800, stop = 2000, num = tps[fband])
+    b0 = np.searchsorted(time,bs_t0,side=&#39;left&#39;, sorter=None)
+    bf = np.searchsorted(time,bs_t1,side=&#39;left&#39;, sorter=None)
+
+    tfr_ = np.zeros((dataPool.shape[0],dataPool.shape[1],12,dataPool.shape[3],dataPool.shape[4]))
+
+    for i_cond in range(dataPool.shape[0]):
+        for i_rep in range(dataPool.shape[1]):
+            for i_depth in range(12):
+                for i_freq in range(dataPool.shape[3]):
+                    X = dataPool[i_cond,i_rep,site_idx[i_depth,:],i_freq,:]
+                    X = np.nanmean(X,axis=0) # average sessions
+                    baseline = dataPool[:,:,site_idx[i_depth,:],i_freq,b0:bf]
+                    baseline = np.nanmean(baseline,axis=2) # average time
+                    X_bs = np.nanmean(baseline.flatten())
+                    tfr_[i_cond,i_rep,i_depth,i_freq,:] =  ((X-X_bs)/X_bs)*100
+
+    tfr_[tfr_ == -inf] = np.nan
+    tfr_[tfr_ == inf]  = np.nan
+    tfr_emp =  np.nanmean(tfr_,axis=1) # repetition average
+
+    # =============================================================================
+    # Null TFR
+    # =============================================================================
+    time =  np.linspace(start = -800, stop = 2000, num = tps[fband])
+    b0 = np.searchsorted(time,bs_t0,side=&#39;right&#39;, sorter=None)
+    bf = np.searchsorted(time,bs_t1,side=&#39;right&#39;, sorter=None)
+    t0 = np.searchsorted(time,400,side=&#39;left&#39;, sorter=None)
+    tf = np.searchsorted(time,1000,side=&#39;left&#39;, sorter=None)
+    X_h0   = np.zeros((n_perm,dataPool.shape[1],dataPool.shape[4]))
+    tfr_null = np.zeros((dataPool.shape[0],12,dataPool.shape[3],dataPool.shape[4]))
+
+    msg = (str(cond) + &#39; - &#39; + str(blocks[block]) + &#39; - &#39; + str(fbands[fband]))
+    choices = np.random.random(n_perm) &gt; 0.5
+    for i_cond in tqdm(range(dataPool.shape[0]),desc=msg, position=0):
+        for i_depth in range(12):
+            for i_freq in range(dataPool.shape[3]):
+                for i_perm in range(n_perm):
+                    for i_rep in range(dataPool.shape[1]):
+                        if choices[i_perm] == True:
+                            X = dataPool[i_cond,i_rep,site_idx[i_depth,:],i_freq,:]
+                            X = np.nanmean(X,axis=0) # average sessions
+                            baseline = dataPool[:,:,site_idx[i_depth,:],i_freq,:]
+                            baseline = np.roll(baseline, secrets.randbelow(dataPool.shape[4]))
+                            baseline = dataPool[:,:,site_idx[i_depth,:],i_freq,b0:bf]
+                            baseline = np.nanmean(baseline,axis=3) # average time
+                            X_bs = np.nanmean(baseline.flatten())
+                            XX_bs = np.tile(X_bs,[1,dataPool.shape[4]])
+                            X_h0[i_perm,i_rep,:] = ((X-XX_bs)/XX_bs)*100
+                        elif choices[i_perm] == False:
+                            X = dataPool[i_cond,i_rep,site_idx[i_depth,:],i_freq,:]
+                            X = np.nanmean(X,axis=0) # average sessions
+                            baseline = dataPool[:,:,site_idx[i_depth,:],i_freq,b0:bf]
+                            baseline = np.nanmean(baseline,axis=3) # average time
+                            X_bs = np.nanmean(baseline.flatten())
+                            XX_bs = np.tile(X_bs,[1,dataPool.shape[4]])
+                            X_h0[i_perm,i_rep,:] = ((X-XX_bs)/XX_bs)*100
+                X_h0[X_h0 == -inf] = np.nan
+                X_h0[X_h0 == inf]  = np.nan
+                tfr_null[i_cond,i_depth,i_freq,:] = np.nanmean(np.nanmean(X_h0,axis=0),axis=0)
 
 
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Permutation based TFR statistical asessement based on min-max</span>
+    print(tfr_emp.shape)
+    print(tfr_null.shape)
 
-<span class="sd">    Function to compute the truncated min-max distribution keeping the permutations</span>
-<span class="sd">    for each condition and recording site. It captures the variations at the extreme</span>
-<span class="sd">    of the null ditribution. In the min-max approach the minimum and maximum values</span>
-<span class="sd">    at each permutations are used.</span>
+    fname = str(paths[1] + &#39;uvtfr_stats_&#39; +  fbands[fband]  + &#39;_&#39; + blocks[cond] + &#39;_&#39; + svars[svar] + &#39;_&#39; + str(n_perm) + &#39;_roll.npz&#39;)
+    print(fname)
+    np.savez(fname, tfr_emp, tfr_null)
 
-<span class="sd">    .. todo::</span>
-<span class="sd">        *  Implement onset shifting to account for whole trial (in the current example we pool values from the 400-1000 ms time window).</span>
-<span class="sd">        *  Implement compatibilityu with Syncopy (for now it relies on ftPool_... .mat containing the TFRs computed in Fieldtrip).</span>
-
-
-<span class="sd">    :param string input_path: path to the .npz file.</span>
-<span class="sd">    :param in condition: condition index (i.e. 0, 1, 2, 3).</span>
-<span class="sd">    :param int svar: spectral power or GPR (not implemented here).</span>
-<span class="sd">    :param int fband: frequency band index (i.e. low, high, higher).</span>
-<span class="sd">    :param int obs: [nullType, percentile], two integeres: 0 for min-max, 1 for whole, 0-100 percentile.</span>
-<span class="sd">    :param int correction: 1 for p-values, 2 for cluster corrected p-values.</span>
-<span class="sd">    :param int cluster_size: cluster size.</span>
-<span class="sd">    :param float alpha: alpha.</span>
-
-<span class="sd">    :return: empirical time frequency representation n_conds x n_sites x n_freqs x n_time (i.e. 30, 12, 16, 113).</span>
-<span class="sd">    :return: null time frequency representation (i.e. 30, 12, 16, 113  or 1000, 30, 12, 16, 2).</span>
-<span class="sd">    :rtype: float</span>
-
-<span class="sd">    @author: Nicolas Gravel, 19.09.2023</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">tps</span> <span class="o">=</span> <span class="p">[</span><span class="mi">57</span><span class="p">,</span><span class="mi">113</span><span class="p">,</span><span class="mi">141</span><span class="p">,</span><span class="mi">140</span><span class="p">]</span>
-    <span class="n">fps</span> <span class="o">=</span> <span class="p">[</span><span class="mi">19</span><span class="p">,</span><span class="mi">16</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
-    <span class="n">fbands</span>  <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;low&#39;</span><span class="p">,</span><span class="s1">&#39;high&#39;</span><span class="p">,</span><span class="s1">&#39;higher&#39;</span><span class="p">]</span>
-    <span class="n">blocks</span>  <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;grat&#39;</span><span class="p">,</span> <span class="s1">&#39;nat&#39;</span><span class="p">]</span>
-    <span class="n">svars</span>   <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;spw&#39;</span><span class="p">,</span> <span class="s1">&#39;gpr&#39;</span><span class="p">]</span>
-    <span class="n">methods</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;hanning&#39;</span><span class="p">,</span> <span class="s1">&#39;wavelet&#39;</span><span class="p">,</span><span class="s1">&#39;wavelet&#39;</span><span class="p">]</span>
-    <span class="n">svar</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="c1"># Conditions</span>
-    <span class="k">if</span> <span class="n">cond</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">block</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="n">n_sess</span> <span class="o">=</span> <span class="mi">10</span>
-    <span class="c1"># =============================================================================</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">block</span> <span class="o">=</span> <span class="mi">1</span>
-        <span class="n">n_sess</span> <span class="o">=</span> <span class="mi">11</span>
-
-
-    <span class="c1"># =============================================================================</span>
-    <span class="c1"># How the indices are organized within the dataset</span>
-    <span class="c1"># =============================================================================</span>
-    <span class="n">channels</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">12</span><span class="o">*</span><span class="n">n_sess</span><span class="p">)]</span> <span class="c1"># Total channels</span>
-    <span class="n">site_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">12</span><span class="p">,</span><span class="n">n_sess</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint</span><span class="p">)</span> <span class="c1"># Index to sites</span>
-    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">12</span><span class="p">):</span> <span class="c1"># for time</span>
-            <span class="n">site</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">channels</span> <span class="k">if</span> <span class="n">x</span><span class="o">%</span><span class="k">12</span> == n]
-            <span class="n">site_idx</span><span class="p">[</span><span class="n">n</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">site</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;site indices :&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">site_idx</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">fband</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-         <span class="n">bs_t0</span> <span class="o">=</span> <span class="o">-</span><span class="mi">700</span>
-         <span class="n">bs_t1</span> <span class="o">=</span> <span class="o">-</span><span class="mi">100</span>
-    <span class="k">elif</span> <span class="n">fband</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-         <span class="n">bs_t0</span> <span class="o">=</span> <span class="o">-</span><span class="mi">700</span>
-         <span class="n">bs_t1</span> <span class="o">=</span> <span class="o">-</span><span class="mi">100</span>
-    <span class="k">elif</span> <span class="n">fband</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
-         <span class="n">bs_t0</span> <span class="o">=</span> <span class="o">-</span><span class="mi">700</span>
-         <span class="n">bs_t1</span> <span class="o">=</span> <span class="o">-</span><span class="mi">100</span>
-
-    <span class="c1"># =============================================================================</span>
-    <span class="c1"># Empirical TFR</span>
-    <span class="c1"># =============================================================================</span>
-    <span class="n">fname</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">paths</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-                <span class="o">+</span> <span class="s1">&#39;ftPool_&#39;</span>
-                <span class="o">+</span> <span class="n">blocks</span><span class="p">[</span><span class="n">block</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span>
-                <span class="o">+</span> <span class="n">fbands</span><span class="p">[</span><span class="n">fband</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span>
-                <span class="o">+</span> <span class="n">methods</span><span class="p">[</span><span class="n">fband</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;.mat&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
-    <span class="n">mat</span> <span class="o">=</span> <span class="n">sio</span><span class="o">.</span><span class="n">loadmat</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
-    <span class="n">dataPool</span> <span class="o">=</span> <span class="n">mat</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="s1">&#39;dataLump_&#39;</span> <span class="o">+</span> <span class="n">svars</span><span class="p">[</span><span class="n">svar</span><span class="p">]))</span>
+    return tfr_emp, tfr_null
 
 
 
-    <span class="nb">print</span><span class="p">(</span><span class="n">dataPool</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-    <span class="n">time</span> <span class="o">=</span>  <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">start</span> <span class="o">=</span> <span class="o">-</span><span class="mi">800</span><span class="p">,</span> <span class="n">stop</span> <span class="o">=</span> <span class="mi">2000</span><span class="p">,</span> <span class="n">num</span> <span class="o">=</span> <span class="n">tps</span><span class="p">[</span><span class="n">fband</span><span class="p">])</span>
-    <span class="n">b0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">searchsorted</span><span class="p">(</span><span class="n">time</span><span class="p">,</span><span class="n">bs_t0</span><span class="p">,</span><span class="n">side</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">sorter</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-    <span class="n">bf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">searchsorted</span><span class="p">(</span><span class="n">time</span><span class="p">,</span><span class="n">bs_t1</span><span class="p">,</span><span class="n">side</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">sorter</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-
-    <span class="n">tfr_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">dataPool</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">dataPool</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="mi">12</span><span class="p">,</span><span class="n">dataPool</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span><span class="n">dataPool</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">4</span><span class="p">]))</span>
-
-    <span class="k">for</span> <span class="n">i_cond</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dataPool</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
-        <span class="k">for</span> <span class="n">i_rep</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dataPool</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
-            <span class="k">for</span> <span class="n">i_depth</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">12</span><span class="p">):</span>
-                <span class="k">for</span> <span class="n">i_freq</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dataPool</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">3</span><span class="p">]):</span>
-                    <span class="n">X</span> <span class="o">=</span> <span class="n">dataPool</span><span class="p">[</span><span class="n">i_cond</span><span class="p">,</span><span class="n">i_rep</span><span class="p">,</span><span class="n">site_idx</span><span class="p">[</span><span class="n">i_depth</span><span class="p">,:],</span><span class="n">i_freq</span><span class="p">,:]</span>
-                    <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># average sessions</span>
-                    <span class="n">baseline</span> <span class="o">=</span> <span class="n">dataPool</span><span class="p">[:,:,</span><span class="n">site_idx</span><span class="p">[</span><span class="n">i_depth</span><span class="p">,:],</span><span class="n">i_freq</span><span class="p">,</span><span class="n">b0</span><span class="p">:</span><span class="n">bf</span><span class="p">]</span>
-                    <span class="n">baseline</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">baseline</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># average time</span>
-                    <span class="n">X_bs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">baseline</span><span class="o">.</span><span class="n">flatten</span><span class="p">())</span>
-                    <span class="n">tfr_</span><span class="p">[</span><span class="n">i_cond</span><span class="p">,</span><span class="n">i_rep</span><span class="p">,</span><span class="n">i_depth</span><span class="p">,</span><span class="n">i_freq</span><span class="p">,:]</span> <span class="o">=</span>  <span class="p">((</span><span class="n">X</span><span class="o">-</span><span class="n">X_bs</span><span class="p">)</span><span class="o">/</span><span class="n">X_bs</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span>
-
-    <span class="n">tfr_</span><span class="p">[</span><span class="n">tfr_</span> <span class="o">==</span> <span class="o">-</span><span class="n">inf</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
-    <span class="n">tfr_</span><span class="p">[</span><span class="n">tfr_</span> <span class="o">==</span> <span class="n">inf</span><span class="p">]</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
-    <span class="n">tfr_emp</span> <span class="o">=</span>  <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">tfr_</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># repetition average</span>
-
-    <span class="c1"># =============================================================================</span>
-    <span class="c1"># Null TFR</span>
-    <span class="c1"># =============================================================================</span>
-    <span class="n">time</span> <span class="o">=</span>  <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">start</span> <span class="o">=</span> <span class="o">-</span><span class="mi">800</span><span class="p">,</span> <span class="n">stop</span> <span class="o">=</span> <span class="mi">2000</span><span class="p">,</span> <span class="n">num</span> <span class="o">=</span> <span class="n">tps</span><span class="p">[</span><span class="n">fband</span><span class="p">])</span>
-    <span class="n">b0</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">searchsorted</span><span class="p">(</span><span class="n">time</span><span class="p">,</span><span class="n">bs_t0</span><span class="p">,</span><span class="n">side</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">,</span> <span class="n">sorter</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-    <span class="n">bf</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">searchsorted</span><span class="p">(</span><span class="n">time</span><span class="p">,</span><span class="n">bs_t1</span><span class="p">,</span><span class="n">side</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">,</span> <span class="n">sorter</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-    <span class="n">t0</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">searchsorted</span><span class="p">(</span><span class="n">time</span><span class="p">,</span><span class="o">-</span><span class="mi">200</span><span class="p">,</span><span class="n">side</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">sorter</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-    <span class="n">tf</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">searchsorted</span><span class="p">(</span><span class="n">time</span><span class="p">,</span><span class="mi">1200</span><span class="p">,</span><span class="n">side</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">sorter</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-    <span class="n">win</span> <span class="o">=</span> <span class="n">time</span><span class="p">[</span><span class="n">t0</span><span class="p">:</span><span class="n">tf</span><span class="p">]</span>
-    <span class="n">X_h0</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">10</span><span class="p">,</span><span class="n">dataPool</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span><span class="n">dataPool</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">4</span><span class="p">]))</span>
-    <span class="n">tfr_null</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_perm</span><span class="p">,</span><span class="n">dataPool</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="mi">12</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
-
-    <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">cond</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; - &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">blocks</span><span class="p">[</span><span class="n">block</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39; - &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">fbands</span><span class="p">[</span><span class="n">fband</span><span class="p">]))</span>
-    <span class="n">choices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">n_perm</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">0.5</span>
-    <span class="k">for</span> <span class="n">i_perm</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n_perm</span><span class="p">),</span><span class="n">desc</span><span class="o">=</span><span class="n">msg</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">i_cond</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dataPool</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
-            <span class="k">for</span> <span class="n">i_depth</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">12</span><span class="p">):</span>
-                <span class="k">for</span> <span class="n">i_freq</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dataPool</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">3</span><span class="p">]):</span>
-                    <span class="k">for</span> <span class="n">i_rep</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dataPool</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
-                        <span class="k">if</span> <span class="n">choices</span><span class="p">[</span><span class="n">i_perm</span><span class="p">]</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
-                            <span class="n">X</span> <span class="o">=</span> <span class="n">dataPool</span><span class="p">[</span><span class="n">i_cond</span><span class="p">,</span><span class="n">i_rep</span><span class="p">,</span><span class="n">site_idx</span><span class="p">[</span><span class="n">i_depth</span><span class="p">,:],</span><span class="n">i_freq</span><span class="p">,:]</span>
-                            <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># average sessions</span>
-                            <span class="n">baseline</span> <span class="o">=</span> <span class="n">dataPool</span><span class="p">[:,:,</span><span class="n">site_idx</span><span class="p">[</span><span class="n">i_depth</span><span class="p">,:],</span><span class="n">i_freq</span><span class="p">,:]</span>
-                            <span class="n">baseline</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">baseline</span><span class="p">,</span> <span class="n">secrets</span><span class="o">.</span><span class="n">randbelow</span><span class="p">(</span><span class="n">dataPool</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">4</span><span class="p">]))</span>
-                            <span class="n">baseline</span> <span class="o">=</span> <span class="n">dataPool</span><span class="p">[:,:,</span><span class="n">site_idx</span><span class="p">[</span><span class="n">i_depth</span><span class="p">,:],</span><span class="n">i_freq</span><span class="p">,</span><span class="n">b0</span><span class="p">:</span><span class="n">bf</span><span class="p">]</span>
-                            <span class="n">baseline</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">baseline</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span> <span class="c1"># average time</span>
-                            <span class="n">X_bs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">baseline</span><span class="o">.</span><span class="n">flatten</span><span class="p">())</span>
-                            <span class="n">XX_bs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">X_bs</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="n">dataPool</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">4</span><span class="p">]])</span>
-                            <span class="n">X_h0</span><span class="p">[</span><span class="n">i_rep</span><span class="p">,</span><span class="n">i_freq</span><span class="p">,:]</span> <span class="o">=</span> <span class="p">((</span><span class="n">X</span><span class="o">-</span><span class="n">XX_bs</span><span class="p">)</span><span class="o">/</span><span class="n">XX_bs</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span>
-                        <span class="k">elif</span> <span class="n">choices</span><span class="p">[</span><span class="n">i_perm</span><span class="p">]</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
-                            <span class="n">X</span> <span class="o">=</span> <span class="n">dataPool</span><span class="p">[</span><span class="n">i_cond</span><span class="p">,</span><span class="n">i_rep</span><span class="p">,</span><span class="n">site_idx</span><span class="p">[</span><span class="n">i_depth</span><span class="p">,:],</span><span class="n">i_freq</span><span class="p">,:]</span>
-                            <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># average sessions</span>
-                            <span class="n">baseline</span> <span class="o">=</span> <span class="n">dataPool</span><span class="p">[:,:,</span><span class="n">site_idx</span><span class="p">[</span><span class="n">i_depth</span><span class="p">,:],</span><span class="n">i_freq</span><span class="p">,</span><span class="n">b0</span><span class="p">:</span><span class="n">bf</span><span class="p">]</span>
-                            <span class="n">baseline</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">baseline</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span> <span class="c1"># average time</span>
-                            <span class="n">X_bs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">baseline</span><span class="o">.</span><span class="n">flatten</span><span class="p">())</span>
-                            <span class="n">XX_bs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">X_bs</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="n">dataPool</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">4</span><span class="p">]])</span>
-                            <span class="n">X_h0</span><span class="p">[</span><span class="n">i_rep</span><span class="p">,</span><span class="n">i_freq</span><span class="p">,:]</span> <span class="o">=</span> <span class="p">((</span><span class="n">X</span><span class="o">-</span><span class="n">XX_bs</span><span class="p">)</span><span class="o">/</span><span class="n">XX_bs</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span>
-                <span class="n">X_h0</span><span class="p">[</span><span class="n">X_h0</span> <span class="o">==</span> <span class="o">-</span><span class="n">inf</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
-                <span class="n">X_h0</span><span class="p">[</span><span class="n">X_h0</span> <span class="o">==</span> <span class="n">inf</span><span class="p">]</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
-                <span class="n">X</span> <span class="o">=</span> <span class="n">X_h0</span><span class="p">[:,:,</span><span class="n">t0</span><span class="p">:</span><span class="n">tf</span><span class="p">]</span> <span class="c1"># pool repetitions, frequency bins (all..) and time bins (400-1000ms))</span>
-                <span class="c1"># save permutation&#39;s min-max for each condition and depth</span>
-                <span class="n">tfr_null</span><span class="p">[</span><span class="n">i_perm</span><span class="p">,</span><span class="n">i_cond</span><span class="p">,</span><span class="n">i_depth</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmin</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">flatten</span><span class="p">())</span>
-                <span class="n">tfr_null</span><span class="p">[</span><span class="n">i_perm</span><span class="p">,</span><span class="n">i_cond</span><span class="p">,</span><span class="n">i_depth</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmax</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">flatten</span><span class="p">())</span>
+def tfr_spw_stats_minmax_roll(paths, cond, svar, fband, n_perm):
 
 
-    <span class="nb">print</span><span class="p">(</span><span class="n">tfr_emp</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">tfr_null</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    &quot;&quot;&quot;
+    Permutation based TFR statistical asessement based on min-max
 
-    <span class="n">fname</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">paths</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;uvtfr_stats_&#39;</span> <span class="o">+</span>  <span class="n">fbands</span><span class="p">[</span><span class="n">fband</span><span class="p">]</span>  <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="n">blocks</span><span class="p">[</span><span class="n">cond</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="n">svars</span><span class="p">[</span><span class="n">svar</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">n_perm</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;_minmax_roll.npz&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
-    <span class="n">np</span><span class="o">.</span><span class="n">savez</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">tfr_emp</span><span class="p">,</span> <span class="n">tfr_null</span><span class="p">)</span>
+    Function to compute the truncated min-max distribution keeping the permutations
+    for each condition and recording site. It captures the variations at the extreme
+    of the null ditribution. In the min-max approach the minimum and maximum values
+    at each permutations are used.
 
-    <span class="k">return</span> <span class="n">tfr_emp</span><span class="p">,</span> <span class="n">tfr_null</span>
+    .. todo::
+        *  Implement onset shifting to account for whole trial (in the current example we pool values from the 400-1000 ms time window).
+        *  Implement compatibilityu with Syncopy (for now it relies on ftPool_... .mat containing the TFRs computed in Fieldtrip).
+
+
+    :param string input_path: path to the .npz file.
+    :param in condition: condition index (i.e. 0, 1, 2, 3).
+    :param int svar: spectral power or GPR (not implemented here).
+    :param int fband: frequency band index (i.e. low, high, higher).
+    :param int obs: [nullType, percentile], two integeres: 0 for min-max, 1 for whole, 0-100 percentile.
+    :param int correction: 1 for p-values, 2 for cluster corrected p-values.
+    :param int cluster_size: cluster size.
+    :param float alpha: alpha.
+
+    :return: empirical time frequency representation n_conds x n_sites x n_freqs x n_time (i.e. 30, 12, 16, 113).
+    :return: null time frequency representation (i.e. 30, 12, 16, 113  or 1000, 30, 12, 16, 2).
+    :rtype: float
+
+    @author: Nicolas Gravel, 19.09.2023
+    &quot;&quot;&quot;
+
+    tps = [57,113,141,140]
+    fps = [19,16,11,1]
+    fbands  = [&#39;low&#39;,&#39;high&#39;,&#39;higher&#39;]
+    blocks  = [&#39;grat&#39;, &#39;nat&#39;]
+    svars   = [&#39;spw&#39;, &#39;gpr&#39;]
+    methods = [&#39;hanning&#39;, &#39;wavelet&#39;,&#39;wavelet&#39;]
+    svar = 0
+    # Conditions
+    if cond == 0:
+        block = 0
+        n_sess = 10
+    # =============================================================================
+    else:
+        block = 1
+        n_sess = 11
+
+
+    # =============================================================================
+    # How the indices are organized within the dataset
+    # =============================================================================
+    channels = [i for i in range(12*n_sess)] # Total channels
+    site_idx = np.zeros((12,n_sess)).astype(np.uint) # Index to sites
+    for n in range(12): # for time
+            site = [x for x in channels if x%12 == n]
+            site_idx[n,:] = site
+    print(&#39;site indices :&#39;)
+    print(site_idx)
+
+    if fband == 0:
+         bs_t0 = -700
+         bs_t1 = -100
+    elif fband == 1:
+         bs_t0 = -700
+         bs_t1 = -100
+    elif fband == 2:
+         bs_t0 = -700
+         bs_t1 = -100
+
+    # =============================================================================
+    # Empirical TFR
+    # =============================================================================
+    fname = str(paths[0]
+                + &#39;ftPool_&#39;
+                + blocks[block] + &#39;_&#39;
+                + fbands[fband] + &#39;_&#39;
+                + methods[fband] + &#39;.mat&#39;)
+    print(fname)
+    mat = sio.loadmat(fname)
+    dataPool = mat.get(str(&#39;dataLump_&#39; + svars[svar]))
+
+
+
+    print(dataPool.shape)
+    time =  np.linspace(start = -800, stop = 2000, num = tps[fband])
+    b0 = np.searchsorted(time,bs_t0,side=&#39;left&#39;, sorter=None)
+    bf = np.searchsorted(time,bs_t1,side=&#39;left&#39;, sorter=None)
+
+    tfr_ = np.zeros((dataPool.shape[0],dataPool.shape[1],12,dataPool.shape[3],dataPool.shape[4]))
+
+    for i_cond in range(dataPool.shape[0]):
+        for i_rep in range(dataPool.shape[1]):
+            for i_depth in range(12):
+                for i_freq in range(dataPool.shape[3]):
+                    X = dataPool[i_cond,i_rep,site_idx[i_depth,:],i_freq,:]
+                    X = np.nanmean(X,axis=0) # average sessions
+                    baseline = dataPool[:,:,site_idx[i_depth,:],i_freq,b0:bf]
+                    baseline = np.nanmean(baseline,axis=2) # average time
+                    X_bs = np.nanmean(baseline.flatten())
+                    tfr_[i_cond,i_rep,i_depth,i_freq,:] =  ((X-X_bs)/X_bs)*100
+
+    tfr_[tfr_ == -inf] = np.nan
+    tfr_[tfr_ == inf]  = np.nan
+    tfr_emp =  np.nanmean(tfr_,axis=1) # repetition average
+
+    # =============================================================================
+    # Null TFR
+    # =============================================================================
+    time =  np.linspace(start = -800, stop = 2000, num = tps[fband])
+    b0  = np.searchsorted(time,bs_t0,side=&#39;right&#39;, sorter=None)
+    bf  = np.searchsorted(time,bs_t1,side=&#39;right&#39;, sorter=None)
+    t0  = np.searchsorted(time,-200,side=&#39;left&#39;, sorter=None)
+    tf  = np.searchsorted(time,1200,side=&#39;left&#39;, sorter=None)
+    win = time[t0:tf]
+    X_h0   = np.zeros((10,dataPool.shape[3],dataPool.shape[4]))
+    tfr_null = np.zeros((n_perm,dataPool.shape[0],12,2))
+
+    msg = (str(cond) + &#39; - &#39; + str(blocks[block]) + &#39; - &#39; + str(fbands[fband]))
+    choices = np.random.random(n_perm) &gt; 0.5
+    for i_perm in tqdm(range(n_perm),desc=msg, position=0):
+        for i_cond in range(dataPool.shape[1]):
+            for i_depth in range(12):
+                for i_freq in range(dataPool.shape[3]):
+                    for i_rep in range(dataPool.shape[1]):
+                        if choices[i_perm] == True:
+                            X = dataPool[i_cond,i_rep,site_idx[i_depth,:],i_freq,:]
+                            X = np.nanmean(X,axis=0) # average sessions
+                            baseline = dataPool[:,:,site_idx[i_depth,:],i_freq,:]
+                            baseline = np.roll(baseline, secrets.randbelow(dataPool.shape[4]))
+                            baseline = dataPool[:,:,site_idx[i_depth,:],i_freq,b0:bf]
+                            baseline = np.nanmean(baseline,axis=3) # average time
+                            X_bs = np.nanmean(baseline.flatten())
+                            XX_bs = np.tile(X_bs,[1,dataPool.shape[4]])
+                            X_h0[i_rep,i_freq,:] = ((X-XX_bs)/XX_bs)*100
+                        elif choices[i_perm] == False:
+                            X = dataPool[i_cond,i_rep,site_idx[i_depth,:],i_freq,:]
+                            X = np.nanmean(X,axis=0) # average sessions
+                            baseline = dataPool[:,:,site_idx[i_depth,:],i_freq,b0:bf]
+                            baseline = np.nanmean(baseline,axis=3) # average time
+                            X_bs = np.nanmean(baseline.flatten())
+                            XX_bs = np.tile(X_bs,[1,dataPool.shape[4]])
+                            X_h0[i_rep,i_freq,:] = ((X-XX_bs)/XX_bs)*100
+                X_h0[X_h0 == -inf] = np.nan
+                X_h0[X_h0 == inf]  = np.nan
+                X = X_h0[:,:,t0:tf] # pool repetitions, frequency bins (all..) and time bins (400-1000ms))
+                # save permutation&#39;s min-max for each condition and depth
+                tfr_null[i_perm,i_cond,i_depth,0] = np.nanmin(X.flatten())
+                tfr_null[i_perm,i_cond,i_depth,1] = np.nanmax(X.flatten())
+
+
+    print(tfr_emp.shape)
+    print(tfr_null.shape)
+
+    fname = str(paths[1] + &#39;uvtfr_stats_&#39; +  fbands[fband]  + &#39;_&#39; + blocks[cond] + &#39;_&#39; + svars[svar] + &#39;_&#39; + str(n_perm) + &#39;_minmax_roll.npz&#39;)
+    print(fname)
+    np.savez(fname, tfr_emp, tfr_null)
+
+    return tfr_emp, tfr_null
 <br/></pre></div>
 </div>
 </div>
@@ -500,9 +500,9 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">in_path</span>   <span class="o">=</span> <span class="s1">&#39;/Volumes/Gandalf/MWlamprop/data/&#39;</span>
-<span class="n">out_path</span>  <span class="o">=</span> <span class="s1">&#39;/Volumes/Gandalf/MWlamprop/results/stats/univariate/&#39;</span>
-<span class="n">paths</span> <span class="o">=</span> <span class="p">[</span><span class="n">in_path</span><span class="p">,</span><span class="n">out_path</span><span class="p">]</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>in_path   = &#39;/Volumes/Gandalf/MWlamprop/data/&#39;
+out_path  = &#39;/Volumes/Gandalf/MWlamprop/results/stats/univariate/&#39;
+paths = [in_path,out_path]
 </pre></div>
 </div>
 </div>
@@ -510,11 +510,11 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_perm</span> <span class="o">=</span> <span class="mi">30</span>
-<span class="n">fband</span>  <span class="o">=</span> <span class="mi">1</span>
-<span class="n">cond</span>   <span class="o">=</span> <span class="mi">0</span>
-<span class="n">tfr_emp</span><span class="p">,</span> <span class="n">tfr_null</span>  <span class="o">=</span> <span class="n">tfr_spw_stats_whole_roll</span><span class="p">(</span><span class="n">paths</span><span class="p">,</span><span class="n">cond</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">fband</span><span class="p">,</span><span class="n">n_perm</span><span class="p">)</span>
-<span class="c1">#tfr_emp, tfr_null = tfr_spw_stats_minmax(paths,cond,0,fband,n_perm)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>n_perm = 30
+fband  = 1
+cond   = 0
+tfr_emp, tfr_null  = tfr_spw_stats_whole_roll(paths,cond,0,fband,n_perm)
+#tfr_emp, tfr_null = tfr_spw_stats_minmax(paths,cond,0,fband,n_perm)
 </pre></div>
 </div>
 </div>
@@ -586,11 +586,11 @@ site indices :
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[32]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_perm</span> <span class="o">=</span> <span class="mi">100</span>
-<span class="n">fband</span>  <span class="o">=</span> <span class="mi">1</span>
-<span class="n">cond</span>   <span class="o">=</span> <span class="mi">0</span>
-<span class="c1">#tfr_emp, tfr_null  = tfr_spw_stats_whole_roll(paths,cond,0,fband,n_perm)</span>
-<span class="n">tfr_emp</span><span class="p">,</span> <span class="n">tfr_null</span> <span class="o">=</span> <span class="n">tfr_spw_stats_minmax_roll</span><span class="p">(</span><span class="n">paths</span><span class="p">,</span><span class="n">cond</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">fband</span><span class="p">,</span><span class="n">n_perm</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>n_perm = 100
+fband  = 1
+cond   = 0
+#tfr_emp, tfr_null  = tfr_spw_stats_whole_roll(paths,cond,0,fband,n_perm)
+tfr_emp, tfr_null = tfr_spw_stats_minmax_roll(paths,cond,0,fband,n_perm)
 </pre></div>
 </div>
 </div>
@@ -660,12 +660,12 @@ site indices :
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tfrStats.plot_tfr_stats</span> <span class="kn">import</span> <span class="n">plot_tfr_stats</span> <span class="k">as</span> <span class="n">plot_tfr_stats</span>
-<span class="kn">from</span> <span class="nn">tfrStats.plot_dtfr_stats</span> <span class="kn">import</span> <span class="n">plot_dtfr_stats</span> <span class="k">as</span> <span class="n">plot_dtfr_stats</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from tfrStats.plot_tfr_stats import plot_tfr_stats as plot_tfr_stats
+from tfrStats.plot_dtfr_stats import plot_dtfr_stats as plot_dtfr_stats
 
-<span class="n">in_path</span>   <span class="o">=</span> <span class="s1">&#39;/Volumes/Gandalf/MWlamprop/data/&#39;</span>
-<span class="n">out_path</span>  <span class="o">=</span> <span class="s1">&#39;/Volumes/Gandalf/MWlamprop/results/stats/univariate/&#39;</span>
-<span class="n">paths</span> <span class="o">=</span> <span class="p">[</span><span class="n">in_path</span><span class="p">,</span><span class="n">out_path</span><span class="p">]</span>
+in_path   = &#39;/Volumes/Gandalf/MWlamprop/data/&#39;
+out_path  = &#39;/Volumes/Gandalf/MWlamprop/results/stats/univariate/&#39;
+paths = [in_path,out_path]
 </pre></div>
 </div>
 </div>
@@ -673,15 +673,15 @@ site indices :
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">null</span>         <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">95</span><span class="p">]</span>
-<span class="n">alpha</span>        <span class="o">=</span> <span class="mf">0.05</span>
-<span class="n">correction</span>   <span class="o">=</span> <span class="mi">1</span>
-<span class="n">cluster_size</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="n">fband</span>        <span class="o">=</span> <span class="mi">1</span>
-<span class="n">cond</span>         <span class="o">=</span> <span class="mi">0</span>
-<span class="nb">type</span>         <span class="o">=</span> <span class="s1">&#39;whole_roll&#39;</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>null         = [2, 95]
+alpha        = 0.05
+correction   = 1
+cluster_size = 0
+fband        = 1
+cond         = 0
+type         = &#39;whole_roll&#39;
 
-<span class="n">plot_tfr_stats</span><span class="p">(</span><span class="n">out_path</span><span class="p">,</span> <span class="n">cond</span><span class="p">,</span> <span class="n">fband</span><span class="p">,</span> <span class="n">null</span><span class="p">,</span> <span class="n">correction</span><span class="p">,</span> <span class="n">cluster_size</span><span class="p">,</span> <span class="nb">type</span><span class="p">,</span> <span class="n">alpha</span><span class="p">)</span>
+plot_tfr_stats(out_path, cond, fband, null, correction, cluster_size, type, alpha)
 </pre></div>
 </div>
 </div>
@@ -708,15 +708,15 @@ cutoff computed using whole null distribution:  108.30031964473675
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">null</span>         <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">95</span><span class="p">]</span>
-<span class="n">alpha</span>        <span class="o">=</span> <span class="mf">0.05</span>
-<span class="n">correction</span>   <span class="o">=</span> <span class="mi">1</span>
-<span class="n">cluster_size</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="n">fband</span>        <span class="o">=</span> <span class="mi">1</span>
-<span class="n">cond</span>         <span class="o">=</span> <span class="mi">0</span>
-<span class="nb">type</span>         <span class="o">=</span> <span class="s1">&#39;minmax_roll&#39;</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>null         = [3, 95]
+alpha        = 0.05
+correction   = 1
+cluster_size = 0
+fband        = 1
+cond         = 0
+type         = &#39;minmax_roll&#39;
 
-<span class="n">plot_tfr_stats</span><span class="p">(</span><span class="n">out_path</span><span class="p">,</span> <span class="n">cond</span><span class="p">,</span> <span class="n">fband</span><span class="p">,</span> <span class="n">null</span><span class="p">,</span> <span class="n">correction</span><span class="p">,</span> <span class="n">cluster_size</span><span class="p">,</span> <span class="nb">type</span><span class="p">,</span> <span class="n">alpha</span><span class="p">)</span>
+plot_tfr_stats(out_path, cond, fband, null, correction, cluster_size, type, alpha)
 </pre></div>
 </div>
 </div>

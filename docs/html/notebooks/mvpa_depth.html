@@ -3,11 +3,11 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>MV-TFRs, spatial aspects &#8212; tfrStats 1.0.0 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b3523f8e" />
-    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=218a107a" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=55c3aa90" />
     <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=af2ce170"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
@@ -98,16 +98,16 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">tfrMVPA.plot_mvtfr_stats</span> <span class="kn">import</span> <span class="n">plot_mvtfr_stats</span> <span class="k">as</span> <span class="n">plot_mvtfr_stats</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import numpy as np
+from tfrMVPA.plot_mvtfr_stats import plot_mvtfr_stats as plot_mvtfr_stats
 
-<span class="n">fband</span>         <span class="o">=</span> <span class="mi">1</span>
-<span class="n">fname</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="s1">&#39;/Users/nicogravel/Documents/Websites/tfrStats/tfrMVPA_local/docs/notebooks/mvtfr_example_high.npy&#39;</span><span class="p">)</span>
-<span class="n">tfrs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span><span class="n">allow_pickle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
-<span class="n">tfr</span> <span class="o">=</span> <span class="n">tfrs</span><span class="p">[</span><span class="s1">&#39;tfrs&#39;</span><span class="p">]</span>
-<span class="n">tfr_null</span> <span class="o">=</span> <span class="n">tfrs</span><span class="p">[</span><span class="s1">&#39;tfrs_null&#39;</span><span class="p">]</span>
+fband         = 1
+fname = str(&#39;/Users/nicogravel/Documents/Websites/tfrStats/tfrMVPA_local/docs/notebooks/mvtfr_example_high.npy&#39;)
+tfrs = np.load(fname,allow_pickle=True).item()
+tfr = tfrs[&#39;tfrs&#39;]
+tfr_null = tfrs[&#39;tfrs_null&#39;]
 
-<span class="n">plot_mvtfr_stats</span><span class="p">(</span><span class="n">tfr</span><span class="p">,</span> <span class="n">tfr_null</span><span class="p">,</span> <span class="n">fband</span><span class="p">,</span> <span class="n">clust_corr</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">cluster_size</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">)</span>
+plot_mvtfr_stats(tfr, tfr_null, fband, clust_corr = False, cluster_size = 0, alpha = 0.05)
 </pre></div>
 </div>
 </div>
@@ -132,29 +132,29 @@ dimensions : (16, 113) (20, 12, 16, 113) (20, 12, 113)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">tfrMVPA.plot_mvtfr_stats</span> <span class="kn">import</span> <span class="n">plot_mvtfr_stats</span> <span class="k">as</span> <span class="n">plot_mvtfr_stats</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import os
+import numpy as np
+from tfrMVPA.plot_mvtfr_stats import plot_mvtfr_stats as plot_mvtfr_stats
 
 
-<span class="n">fbands</span>  <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;low&#39;</span><span class="p">,</span><span class="s1">&#39;high&#39;</span><span class="p">,</span><span class="s1">&#39;higher&#39;</span><span class="p">,</span><span class="s1">&#39;mua&#39;</span><span class="p">]</span>
-<span class="n">blocks</span>   <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;grat&#39;</span><span class="p">,</span><span class="s1">&#39;obj&#39;</span><span class="p">,</span><span class="s1">&#39;bck&#39;</span><span class="p">,</span><span class="s1">&#39;nat&#39;</span><span class="p">]</span>
+fbands  = [&#39;low&#39;,&#39;high&#39;,&#39;higher&#39;,&#39;mua&#39;]
+blocks   = [&#39;grat&#39;,&#39;obj&#39;,&#39;bck&#39;,&#39;nat&#39;]
 
 
-<span class="c1"># Loop over blocks and frequency bands</span>
-<span class="k">for</span>  <span class="n">block</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
-    <span class="k">for</span>  <span class="n">fband</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+# Loop over blocks and frequency bands
+for  block in range(4):
+    for  fband in range(3):
 
-        <span class="c1"># Load data</span>
-        <span class="n">fname</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;/Volumes/Gandalf/MWlamprop/results/stats/multivariate/mvtfr_&#39;</span>
-                    <span class="o">+</span> <span class="n">blocks</span><span class="p">[</span><span class="n">block</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span>
-                    <span class="o">+</span> <span class="n">fbands</span><span class="p">[</span><span class="n">fband</span><span class="p">]</span>
-                    <span class="o">+</span> <span class="s1">&#39;.npy&#39;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
-        <span class="n">tfrs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span><span class="n">allow_pickle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
-        <span class="n">tfr</span> <span class="o">=</span> <span class="n">tfrs</span><span class="p">[</span><span class="s1">&#39;tfr&#39;</span><span class="p">]</span>
-        <span class="n">tfr_null</span> <span class="o">=</span> <span class="n">tfrs</span><span class="p">[</span><span class="s1">&#39;tfr_null&#39;</span><span class="p">]</span>
-        <span class="n">plot_mvtfr_stats</span><span class="p">(</span><span class="n">tfr</span><span class="p">,</span> <span class="n">tfr_null</span><span class="p">,</span> <span class="n">fband</span><span class="p">,</span> <span class="n">clust_corr</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">cluster_size</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">)</span>
+        # Load data
+        fname = os.path.join(&#39;/Volumes/Gandalf/MWlamprop/results/stats/multivariate/mvtfr_&#39;
+                    + blocks[block] + &#39;_&#39;
+                    + fbands[fband]
+                    + &#39;.npy&#39;)
+        print(fname)
+        tfrs = np.load(fname,allow_pickle=True).item()
+        tfr = tfrs[&#39;tfr&#39;]
+        tfr_null = tfrs[&#39;tfr_null&#39;]
+        plot_mvtfr_stats(tfr, tfr_null, fband, clust_corr = False, cluster_size = 3, alpha = 0.05)
 <br/></pre></div>
 </div>
 </div>
