@@ -3,11 +3,11 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>Multiviariate TFR statistics, a mini-tutorial &#8212; tfrStats 1.0.0 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
-    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=55c3aa90" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b3523f8e" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=218a107a" />
     <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=af2ce170"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
@@ -99,77 +99,77 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import os
-import numpy as np
-from tfrStats.load_tfr_rdm import load_tfr_rdm as load_tfr_rdm
-from tfrStats.mvtfr_reliability import mvtfr_reliability as mvtfr_reliability
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">tfrStats.load_tfr_rdm</span> <span class="kn">import</span> <span class="n">load_tfr_rdm</span> <span class="k">as</span> <span class="n">load_tfr_rdm</span>
+<span class="kn">from</span> <span class="nn">tfrStats.mvtfr_reliability</span> <span class="kn">import</span> <span class="n">mvtfr_reliability</span> <span class="k">as</span> <span class="n">mvtfr_reliability</span>
 
-fbands  = [&#39;low&#39;,&#39;high&#39;,&#39;higher&#39;,&#39;mua&#39;]
-blocks   = [&#39;grat&#39;, &#39;nat&#39;,&#39;obj&#39;,&#39;bck&#39;]
+<span class="n">fbands</span>  <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;low&#39;</span><span class="p">,</span><span class="s1">&#39;high&#39;</span><span class="p">,</span><span class="s1">&#39;higher&#39;</span><span class="p">,</span><span class="s1">&#39;mua&#39;</span><span class="p">]</span>
+<span class="n">blocks</span>   <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;grat&#39;</span><span class="p">,</span> <span class="s1">&#39;nat&#39;</span><span class="p">,</span><span class="s1">&#39;obj&#39;</span><span class="p">,</span><span class="s1">&#39;bck&#39;</span><span class="p">]</span>
 
-conds   = [&#39;grat&#39;, &#39;bck&#39;,&#39;obj&#39;,&#39;bck-obj&#39;,&#39;grat_lowcon&#39;,&#39;grat_highcon&#39;,&#39;bckXobj&#39;]
-conds   = [&#39;grat&#39;, &#39;nat&#39;, &#39;bck&#39;,&#39;obj&#39;,&#39;grat_lowcon&#39;,&#39;grat_highcon&#39;,&#39;bckXobj&#39;]
-
-
-example_data = &#39;/Volumes/Gandalf/MWlamprop/results/stats/multivariate/&#39;
-#example_data = &#39;/Users/nicogravel/Documents/Websites/tfrStats/tfrStats_local/docs/source/notebooks/example_data/&#39;
+<span class="n">conds</span>   <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;grat&#39;</span><span class="p">,</span> <span class="s1">&#39;bck&#39;</span><span class="p">,</span><span class="s1">&#39;obj&#39;</span><span class="p">,</span><span class="s1">&#39;bck-obj&#39;</span><span class="p">,</span><span class="s1">&#39;grat_lowcon&#39;</span><span class="p">,</span><span class="s1">&#39;grat_highcon&#39;</span><span class="p">,</span><span class="s1">&#39;bckXobj&#39;</span><span class="p">]</span>
+<span class="n">conds</span>   <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;grat&#39;</span><span class="p">,</span> <span class="s1">&#39;nat&#39;</span><span class="p">,</span> <span class="s1">&#39;bck&#39;</span><span class="p">,</span><span class="s1">&#39;obj&#39;</span><span class="p">,</span><span class="s1">&#39;grat_lowcon&#39;</span><span class="p">,</span><span class="s1">&#39;grat_highcon&#39;</span><span class="p">,</span><span class="s1">&#39;bckXobj&#39;</span><span class="p">]</span>
 
 
+<span class="n">example_data</span> <span class="o">=</span> <span class="s1">&#39;/Volumes/Gandalf/MWlamprop/results/stats/multivariate/&#39;</span>
+<span class="c1">#example_data = &#39;/Users/nicogravel/Documents/Websites/tfrStats/tfrStats_local/docs/source/notebooks/example_data/&#39;</span>
 
-# Loop over blocks and frequency bands
-for  block in range(3,4):
-    for  fband in range(3):
 
-        # Configure inputs
-        conf = {
-            &#39;paths&#39;    : [
-            &#39;/Users/nicogravel/Documents/Gandalf/MWlamprop/data/results_bckp/&#39;,
-            # &#39;/mnt/hpc_slurm/projects/MWlamprop/Analysis/02_data/spectral_dec/&#39;
-            #&#39;/mnt/hpc/projects/MWlamprop/Analysis/02_data/preprocessed/&#39;,
-            #&#39;/mnt/pns/home/graveln/Documents/MWlamprop/results/spectral_dec/&#39;,
-            #&#39;/mnt/hpc/projects/MWlamprop/Analysis/02_data/spectral_dec/&#39;,
-            &#39;/Volumes/Gandalf/MWlamprop/data/&#39;,
-            #&#39;/Users/nicogravel/Documents/Gandalf/MWlamprop/data/results_bckp/&#39;,
-            #&#39;/Users/nicogravel/Documents/Gandalf/MWlamprop/data/processed/spectral_dec/&#39;,
-            &#39;/Volumes/Gandalf/MWlamprop/results/&#39;
-            ],
-            &#39;methods&#39;  : [&#39;spectral&#39;,&#39;mvpa&#39;],
-            &#39;decvars&#39;  : [&#39;spw&#39;,&#39;gpr&#39;,&#39;spwgpr&#39;],
-            &#39;method&#39;   : 1,
-            &#39;dvar&#39;     : 0,
-            &#39;fband&#39;    : fband,
-            &#39;cond&#39;     : block,
-            &#39;sess&#39;     : 0,
-            &#39;layers&#39;   : False,
-            &#39;lump&#39;     : True,
-            &#39;rsa&#39;      : True,
-            &#39;n_perm&#39;   : 1000
-            }
 
-        # Load data
-        rdms  = load_tfr_rdm(conf)
+<span class="c1"># Loop over blocks and frequency bands</span>
+<span class="k">for</span>  <span class="n">block</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">):</span>
+    <span class="k">for</span>  <span class="n">fband</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
 
-        #rdm1 = rdms[&#39;rdm_split1&#39;]
-        #rdm2 = rdms[&#39;rdm_split2&#39;]
-        #rdm  = rdms[&#39;rdm_whole&#39;]
-        #print(rdm.shape)
+        <span class="c1"># Configure inputs</span>
+        <span class="n">conf</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;paths&#39;</span>    <span class="p">:</span> <span class="p">[</span>
+            <span class="s1">&#39;/Users/nicogravel/Documents/Gandalf/MWlamprop/data/results_bckp/&#39;</span><span class="p">,</span>
+            <span class="c1"># &#39;/mnt/hpc_slurm/projects/MWlamprop/Analysis/02_data/spectral_dec/&#39;</span>
+            <span class="c1">#&#39;/mnt/hpc/projects/MWlamprop/Analysis/02_data/preprocessed/&#39;,</span>
+            <span class="c1">#&#39;/mnt/pns/home/graveln/Documents/MWlamprop/results/spectral_dec/&#39;,</span>
+            <span class="c1">#&#39;/mnt/hpc/projects/MWlamprop/Analysis/02_data/spectral_dec/&#39;,</span>
+            <span class="s1">&#39;/Volumes/Gandalf/MWlamprop/data/&#39;</span><span class="p">,</span>
+            <span class="c1">#&#39;/Users/nicogravel/Documents/Gandalf/MWlamprop/data/results_bckp/&#39;,</span>
+            <span class="c1">#&#39;/Users/nicogravel/Documents/Gandalf/MWlamprop/data/processed/spectral_dec/&#39;,</span>
+            <span class="s1">&#39;/Volumes/Gandalf/MWlamprop/results/&#39;</span>
+            <span class="p">],</span>
+            <span class="s1">&#39;methods&#39;</span>  <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;spectral&#39;</span><span class="p">,</span><span class="s1">&#39;mvpa&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;decvars&#39;</span>  <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;spw&#39;</span><span class="p">,</span><span class="s1">&#39;gpr&#39;</span><span class="p">,</span><span class="s1">&#39;spwgpr&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;method&#39;</span>   <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s1">&#39;dvar&#39;</span>     <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s1">&#39;fband&#39;</span>    <span class="p">:</span> <span class="n">fband</span><span class="p">,</span>
+            <span class="s1">&#39;cond&#39;</span>     <span class="p">:</span> <span class="n">block</span><span class="p">,</span>
+            <span class="s1">&#39;sess&#39;</span>     <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s1">&#39;layers&#39;</span>   <span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="s1">&#39;lump&#39;</span>     <span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="s1">&#39;rsa&#39;</span>      <span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="s1">&#39;n_perm&#39;</span>   <span class="p">:</span> <span class="mi">1000</span>
+            <span class="p">}</span>
 
-        # Compute reliability
-        tfr, tfr_null = mvtfr_reliability(rdms,conf)
+        <span class="c1"># Load data</span>
+        <span class="n">rdms</span>  <span class="o">=</span> <span class="n">load_tfr_rdm</span><span class="p">(</span><span class="n">conf</span><span class="p">)</span>
 
-        # Prepare outputs
-        tfrs = {
-                &#39;tfr&#39;  : tfr,
-                &#39;tfr_null&#39;  : tfr_null,
-            }
+        <span class="c1">#rdm1 = rdms[&#39;rdm_split1&#39;]</span>
+        <span class="c1">#rdm2 = rdms[&#39;rdm_split2&#39;]</span>
+        <span class="c1">#rdm  = rdms[&#39;rdm_whole&#39;]</span>
+        <span class="c1">#print(rdm.shape)</span>
 
-        # Save outputs
-        fname = os.path.join(example_data + &#39;mvtfr_&#39;
-                    + blocks[block] + &#39;_&#39;
-                    + fbands[fband] + &#39;_&#39; + str(conf[&#39;n_perm&#39;])
-                    + &#39;.npy&#39;)
-        print(fname)
-        np.save(fname,tfrs)
+        <span class="c1"># Compute reliability</span>
+        <span class="n">tfr</span><span class="p">,</span> <span class="n">tfr_null</span> <span class="o">=</span> <span class="n">mvtfr_reliability</span><span class="p">(</span><span class="n">rdms</span><span class="p">,</span><span class="n">conf</span><span class="p">)</span>
+
+        <span class="c1"># Prepare outputs</span>
+        <span class="n">tfrs</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s1">&#39;tfr&#39;</span>  <span class="p">:</span> <span class="n">tfr</span><span class="p">,</span>
+                <span class="s1">&#39;tfr_null&#39;</span>  <span class="p">:</span> <span class="n">tfr_null</span><span class="p">,</span>
+            <span class="p">}</span>
+
+        <span class="c1"># Save outputs</span>
+        <span class="n">fname</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">example_data</span> <span class="o">+</span> <span class="s1">&#39;mvtfr_&#39;</span>
+                    <span class="o">+</span> <span class="n">blocks</span><span class="p">[</span><span class="n">block</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span>
+                    <span class="o">+</span> <span class="n">fbands</span><span class="p">[</span><span class="n">fband</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">conf</span><span class="p">[</span><span class="s1">&#39;n_perm&#39;</span><span class="p">])</span>
+                    <span class="o">+</span> <span class="s1">&#39;.npy&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span><span class="n">tfrs</span><span class="p">)</span>
 <br/></pre></div>
 </div>
 </div>
@@ -232,13 +232,13 @@ session:  0
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Save outputs
-fname = os.path.join(example_data + &#39;mvtfr_&#39;
-            + blocks[block] + &#39;_&#39;
-            + fbands[fband] + &#39;_&#39; + str(conf[&#39;n_perm&#39;])
-            + &#39;.npy&#39;)
-print(fname)
-np.save(fname,tfrs)
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Save outputs</span>
+<span class="n">fname</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">example_data</span> <span class="o">+</span> <span class="s1">&#39;mvtfr_&#39;</span>
+            <span class="o">+</span> <span class="n">blocks</span><span class="p">[</span><span class="n">block</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span>
+            <span class="o">+</span> <span class="n">fbands</span><span class="p">[</span><span class="n">fband</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">conf</span><span class="p">[</span><span class="s1">&#39;n_perm&#39;</span><span class="p">])</span>
+            <span class="o">+</span> <span class="s1">&#39;.npy&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span><span class="n">tfrs</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -250,27 +250,27 @@ np.save(fname,tfrs)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import numpy as np
-from tfrStats.plot_mvtfr_stats import plot_mvtfr_stats as plot_mvtfr_stats
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">tfrStats.plot_mvtfr_stats</span> <span class="kn">import</span> <span class="n">plot_mvtfr_stats</span> <span class="k">as</span> <span class="n">plot_mvtfr_stats</span>
 
-results      = &#39;/Volumes/Gandalf/MWlamprop/results/stats/multivariate/&#39;
-example_data = &#39;/Users/nicogravel/Documents/Websites/tfrStats/tfrStats_local/docs/source/notebooks/example_data/&#39;
+<span class="n">results</span>      <span class="o">=</span> <span class="s1">&#39;/Volumes/Gandalf/MWlamprop/results/stats/multivariate/&#39;</span>
+<span class="n">example_data</span> <span class="o">=</span> <span class="s1">&#39;/Users/nicogravel/Documents/Websites/tfrStats/tfrStats_local/docs/source/notebooks/example_data/&#39;</span>
 
-blocks       = [&#39;grat&#39;, &#39;nat&#39;, &#39;bck&#39;, &#39;obj&#39;]
-fbands       = [&#39;low&#39;,&#39;high&#39;,&#39;higher&#39;]
+<span class="n">blocks</span>       <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;grat&#39;</span><span class="p">,</span> <span class="s1">&#39;nat&#39;</span><span class="p">,</span> <span class="s1">&#39;bck&#39;</span><span class="p">,</span> <span class="s1">&#39;obj&#39;</span><span class="p">]</span>
+<span class="n">fbands</span>       <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;low&#39;</span><span class="p">,</span><span class="s1">&#39;high&#39;</span><span class="p">,</span><span class="s1">&#39;higher&#39;</span><span class="p">]</span>
 
-fband        = 0
-cond         = 0
+<span class="n">fband</span>        <span class="o">=</span> <span class="mi">0</span>
+<span class="n">cond</span>         <span class="o">=</span> <span class="mi">0</span>
 
-#fname = str(example_data + &#39;mvtfr_example_&#39; + fbands[fband] + &#39;.npy&#39;)
-fname = str(results + &#39;mvtfr_&#39; + blocks[cond] + &#39;_&#39; + fbands[fband] + &#39;.npy&#39;)
-tfrs = np.load(fname,allow_pickle=True).item()
-tfr = tfrs[&#39;tfr&#39;]
-tfr_null = tfrs[&#39;tfr_null&#39;]
+<span class="c1">#fname = str(example_data + &#39;mvtfr_example_&#39; + fbands[fband] + &#39;.npy&#39;)</span>
+<span class="n">fname</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">results</span> <span class="o">+</span> <span class="s1">&#39;mvtfr_&#39;</span> <span class="o">+</span> <span class="n">blocks</span><span class="p">[</span><span class="n">cond</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="n">fbands</span><span class="p">[</span><span class="n">fband</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;.npy&#39;</span><span class="p">)</span>
+<span class="n">tfrs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span><span class="n">allow_pickle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+<span class="n">tfr</span> <span class="o">=</span> <span class="n">tfrs</span><span class="p">[</span><span class="s1">&#39;tfr&#39;</span><span class="p">]</span>
+<span class="n">tfr_null</span> <span class="o">=</span> <span class="n">tfrs</span><span class="p">[</span><span class="s1">&#39;tfr_null&#39;</span><span class="p">]</span>
 
-plot_mvtfr_stats(cond, tfr, tfr_null, fband, alpha = 0.05, correction=&#39;space&#39;)
-plot_mvtfr_stats(cond, tfr, tfr_null, fband, alpha = 0.05, correction=&#39;frequency&#39;)
-plot_mvtfr_stats(cond, tfr, tfr_null, fband, alpha = 0.05, correction=&#39;space-frequency&#39;)
+<span class="n">plot_mvtfr_stats</span><span class="p">(</span><span class="n">cond</span><span class="p">,</span> <span class="n">tfr</span><span class="p">,</span> <span class="n">tfr_null</span><span class="p">,</span> <span class="n">fband</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">,</span> <span class="n">correction</span><span class="o">=</span><span class="s1">&#39;space&#39;</span><span class="p">)</span>
+<span class="n">plot_mvtfr_stats</span><span class="p">(</span><span class="n">cond</span><span class="p">,</span> <span class="n">tfr</span><span class="p">,</span> <span class="n">tfr_null</span><span class="p">,</span> <span class="n">fband</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">,</span> <span class="n">correction</span><span class="o">=</span><span class="s1">&#39;frequency&#39;</span><span class="p">)</span>
+<span class="n">plot_mvtfr_stats</span><span class="p">(</span><span class="n">cond</span><span class="p">,</span> <span class="n">tfr</span><span class="p">,</span> <span class="n">tfr_null</span><span class="p">,</span> <span class="n">fband</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">,</span> <span class="n">correction</span><span class="o">=</span><span class="s1">&#39;space-frequency&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -278,27 +278,27 @@ plot_mvtfr_stats(cond, tfr, tfr_null, fband, alpha = 0.05, correction=&#39;space
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import numpy as np
-from tfrStats.plot_mvtfr_stats import plot_mvtfr_stats as plot_mvtfr_stats
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">tfrStats.plot_mvtfr_stats</span> <span class="kn">import</span> <span class="n">plot_mvtfr_stats</span> <span class="k">as</span> <span class="n">plot_mvtfr_stats</span>
 
-results      = &#39;/Volumes/Gandalf/MWlamprop/results/stats/multivariate/&#39;
-example_data = &#39;/Users/nicogravel/Documents/Websites/tfrStats/tfrStats_local/docs/source/notebooks/example_data/&#39;
+<span class="n">results</span>      <span class="o">=</span> <span class="s1">&#39;/Volumes/Gandalf/MWlamprop/results/stats/multivariate/&#39;</span>
+<span class="n">example_data</span> <span class="o">=</span> <span class="s1">&#39;/Users/nicogravel/Documents/Websites/tfrStats/tfrStats_local/docs/source/notebooks/example_data/&#39;</span>
 
-blocks       = [&#39;grat&#39;, &#39;nat&#39;, &#39;bck&#39;, &#39;obj&#39;]
-fbands       = [&#39;low&#39;,&#39;high&#39;,&#39;higher&#39;]
+<span class="n">blocks</span>       <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;grat&#39;</span><span class="p">,</span> <span class="s1">&#39;nat&#39;</span><span class="p">,</span> <span class="s1">&#39;bck&#39;</span><span class="p">,</span> <span class="s1">&#39;obj&#39;</span><span class="p">]</span>
+<span class="n">fbands</span>       <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;low&#39;</span><span class="p">,</span><span class="s1">&#39;high&#39;</span><span class="p">,</span><span class="s1">&#39;higher&#39;</span><span class="p">]</span>
 
-fband        = 1
-cond         = 0
+<span class="n">fband</span>        <span class="o">=</span> <span class="mi">1</span>
+<span class="n">cond</span>         <span class="o">=</span> <span class="mi">0</span>
 
-#fname = str(example_data + &#39;mvtfr_example_&#39; + fbands[fband] + &#39;.npy&#39;)
-fname = str(results + &#39;mvtfr_&#39; + blocks[cond] + &#39;_&#39; + fbands[fband] + &#39;.npy&#39;)
-tfrs = np.load(fname,allow_pickle=True).item()
-tfr = tfrs[&#39;tfr&#39;]
-tfr_null = tfrs[&#39;tfr_null&#39;]
+<span class="c1">#fname = str(example_data + &#39;mvtfr_example_&#39; + fbands[fband] + &#39;.npy&#39;)</span>
+<span class="n">fname</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">results</span> <span class="o">+</span> <span class="s1">&#39;mvtfr_&#39;</span> <span class="o">+</span> <span class="n">blocks</span><span class="p">[</span><span class="n">cond</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="n">fbands</span><span class="p">[</span><span class="n">fband</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;.npy&#39;</span><span class="p">)</span>
+<span class="n">tfrs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span><span class="n">allow_pickle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+<span class="n">tfr</span> <span class="o">=</span> <span class="n">tfrs</span><span class="p">[</span><span class="s1">&#39;tfr&#39;</span><span class="p">]</span>
+<span class="n">tfr_null</span> <span class="o">=</span> <span class="n">tfrs</span><span class="p">[</span><span class="s1">&#39;tfr_null&#39;</span><span class="p">]</span>
 
-plot_mvtfr_stats(cond, tfr, tfr_null, fband, alpha = 0.05, correction=&#39;space&#39;)
-plot_mvtfr_stats(cond, tfr, tfr_null, fband, alpha = 0.05, correction=&#39;frequency&#39;)
-plot_mvtfr_stats(cond, tfr, tfr_null, fband, alpha = 0.05, correction=&#39;space-frequency&#39;)
+<span class="n">plot_mvtfr_stats</span><span class="p">(</span><span class="n">cond</span><span class="p">,</span> <span class="n">tfr</span><span class="p">,</span> <span class="n">tfr_null</span><span class="p">,</span> <span class="n">fband</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">,</span> <span class="n">correction</span><span class="o">=</span><span class="s1">&#39;space&#39;</span><span class="p">)</span>
+<span class="n">plot_mvtfr_stats</span><span class="p">(</span><span class="n">cond</span><span class="p">,</span> <span class="n">tfr</span><span class="p">,</span> <span class="n">tfr_null</span><span class="p">,</span> <span class="n">fband</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">,</span> <span class="n">correction</span><span class="o">=</span><span class="s1">&#39;frequency&#39;</span><span class="p">)</span>
+<span class="n">plot_mvtfr_stats</span><span class="p">(</span><span class="n">cond</span><span class="p">,</span> <span class="n">tfr</span><span class="p">,</span> <span class="n">tfr_null</span><span class="p">,</span> <span class="n">fband</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">,</span> <span class="n">correction</span><span class="o">=</span><span class="s1">&#39;space-frequency&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -306,27 +306,27 @@ plot_mvtfr_stats(cond, tfr, tfr_null, fband, alpha = 0.05, correction=&#39;space
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import numpy as np
-from tfrStats.plot_mvtfr_stats import plot_mvtfr_stats as plot_mvtfr_stats
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">tfrStats.plot_mvtfr_stats</span> <span class="kn">import</span> <span class="n">plot_mvtfr_stats</span> <span class="k">as</span> <span class="n">plot_mvtfr_stats</span>
 
-results      = &#39;/Volumes/Gandalf/MWlamprop/results/stats/multivariate/&#39;
-example_data = &#39;/Users/nicogravel/Documents/Websites/tfrStats/tfrStats_local/docs/source/notebooks/example_data/&#39;
+<span class="n">results</span>      <span class="o">=</span> <span class="s1">&#39;/Volumes/Gandalf/MWlamprop/results/stats/multivariate/&#39;</span>
+<span class="n">example_data</span> <span class="o">=</span> <span class="s1">&#39;/Users/nicogravel/Documents/Websites/tfrStats/tfrStats_local/docs/source/notebooks/example_data/&#39;</span>
 
-blocks       = [&#39;grat&#39;, &#39;nat&#39;, &#39;bck&#39;, &#39;obj&#39;]
-fbands       = [&#39;low&#39;,&#39;high&#39;,&#39;higher&#39;]
+<span class="n">blocks</span>       <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;grat&#39;</span><span class="p">,</span> <span class="s1">&#39;nat&#39;</span><span class="p">,</span> <span class="s1">&#39;bck&#39;</span><span class="p">,</span> <span class="s1">&#39;obj&#39;</span><span class="p">]</span>
+<span class="n">fbands</span>       <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;low&#39;</span><span class="p">,</span><span class="s1">&#39;high&#39;</span><span class="p">,</span><span class="s1">&#39;higher&#39;</span><span class="p">]</span>
 
-fband        = 2
-cond         = 0
+<span class="n">fband</span>        <span class="o">=</span> <span class="mi">2</span>
+<span class="n">cond</span>         <span class="o">=</span> <span class="mi">0</span>
 
-#fname = str(example_data + &#39;mvtfr_example_&#39; + fbands[fband] + &#39;.npy&#39;)
-fname = str(results + &#39;mvtfr_&#39; + blocks[cond] + &#39;_&#39; + fbands[fband] + &#39;.npy&#39;)
-tfrs = np.load(fname,allow_pickle=True).item()
-tfr = tfrs[&#39;tfr&#39;]
-tfr_null = tfrs[&#39;tfr_null&#39;]
+<span class="c1">#fname = str(example_data + &#39;mvtfr_example_&#39; + fbands[fband] + &#39;.npy&#39;)</span>
+<span class="n">fname</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">results</span> <span class="o">+</span> <span class="s1">&#39;mvtfr_&#39;</span> <span class="o">+</span> <span class="n">blocks</span><span class="p">[</span><span class="n">cond</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="n">fbands</span><span class="p">[</span><span class="n">fband</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;.npy&#39;</span><span class="p">)</span>
+<span class="n">tfrs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span><span class="n">allow_pickle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+<span class="n">tfr</span> <span class="o">=</span> <span class="n">tfrs</span><span class="p">[</span><span class="s1">&#39;tfr&#39;</span><span class="p">]</span>
+<span class="n">tfr_null</span> <span class="o">=</span> <span class="n">tfrs</span><span class="p">[</span><span class="s1">&#39;tfr_null&#39;</span><span class="p">]</span>
 
-plot_mvtfr_stats(cond, tfr, tfr_null, fband, alpha = 0.05, correction=&#39;space&#39;)
-plot_mvtfr_stats(cond, tfr, tfr_null, fband, alpha = 0.05, correction=&#39;frequency&#39;)
-plot_mvtfr_stats(cond, tfr, tfr_null, fband, alpha = 0.05, correction=&#39;space-frequency&#39;)
+<span class="n">plot_mvtfr_stats</span><span class="p">(</span><span class="n">cond</span><span class="p">,</span> <span class="n">tfr</span><span class="p">,</span> <span class="n">tfr_null</span><span class="p">,</span> <span class="n">fband</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">,</span> <span class="n">correction</span><span class="o">=</span><span class="s1">&#39;space&#39;</span><span class="p">)</span>
+<span class="n">plot_mvtfr_stats</span><span class="p">(</span><span class="n">cond</span><span class="p">,</span> <span class="n">tfr</span><span class="p">,</span> <span class="n">tfr_null</span><span class="p">,</span> <span class="n">fband</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">,</span> <span class="n">correction</span><span class="o">=</span><span class="s1">&#39;frequency&#39;</span><span class="p">)</span>
+<span class="n">plot_mvtfr_stats</span><span class="p">(</span><span class="n">cond</span><span class="p">,</span> <span class="n">tfr</span><span class="p">,</span> <span class="n">tfr_null</span><span class="p">,</span> <span class="n">fband</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">,</span> <span class="n">correction</span><span class="o">=</span><span class="s1">&#39;space-frequency&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>

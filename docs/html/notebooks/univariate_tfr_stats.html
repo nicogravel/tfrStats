@@ -3,11 +3,11 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>2. Univariate TFR statistics, a mini-tutorial &#8212; tfrStats 1.0.0 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
-    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=55c3aa90" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b3523f8e" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=218a107a" />
     <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=af2ce170"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
@@ -139,18 +139,18 @@ pip install -e .
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from tfrStats.plot_tfr_stats import plot_tfr_stats as plot_tfr_stats
-from tfrStats.plot_dtfr_stats import plot_dtfr_stats as plot_dtfr_stats
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tfrStats.plot_tfr_stats</span> <span class="kn">import</span> <span class="n">plot_tfr_stats</span> <span class="k">as</span> <span class="n">plot_tfr_stats</span>
+<span class="kn">from</span> <span class="nn">tfrStats.plot_dtfr_stats</span> <span class="kn">import</span> <span class="n">plot_dtfr_stats</span> <span class="k">as</span> <span class="n">plot_dtfr_stats</span>
 
-#in_path   = &#39;/Volumes/.../data/&#39;
-#out_path  = &#39;/Volumes/.../results/stats/univariate/&#39;
-in_path   = &#39;/Volumes/Gandalf/MWlamprop/data/&#39;
-out_path  = &#39;/Volumes/Gandalf/MWlamprop/results/stats/univariate/&#39;
-paths     = [in_path, out_path]
+<span class="c1">#in_path   = &#39;/Volumes/.../data/&#39;</span>
+<span class="c1">#out_path  = &#39;/Volumes/.../results/stats/univariate/&#39;</span>
+<span class="n">in_path</span>   <span class="o">=</span> <span class="s1">&#39;/Volumes/Gandalf/MWlamprop/data/&#39;</span>
+<span class="n">out_path</span>  <span class="o">=</span> <span class="s1">&#39;/Volumes/Gandalf/MWlamprop/results/stats/univariate/&#39;</span>
+<span class="n">paths</span>     <span class="o">=</span> <span class="p">[</span><span class="n">in_path</span><span class="p">,</span> <span class="n">out_path</span><span class="p">]</span>
 
-##  Uncomment this to run the notebook locally (and see the example results)
-#example_data = &#39;/Users/nicogravel/Documents/Websites/tfrStats/tfrStats_local/docs/source/notebooks/example_data/&#39;
-#paths     = [in_path,example_data]
+<span class="c1">##  Uncomment this to run the notebook locally (and see the example results)</span>
+<span class="c1">#example_data = &#39;/Users/nicogravel/Documents/Websites/tfrStats/tfrStats_local/docs/source/notebooks/example_data/&#39;</span>
+<span class="c1">#paths     = [in_path,example_data]</span>
 <br/></pre></div>
 </div>
 </div>
@@ -163,14 +163,14 @@ unfolding within the task.</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from tfrStats.tfr_spw_stats_whole import tfr_spw_stats_whole as tfr_spw_stats_whole
-from tfrStats.tfr_spw_stats_minmax import tfr_spw_stats_minmax as tfr_spw_stats_minmax
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tfrStats.tfr_spw_stats_whole</span> <span class="kn">import</span> <span class="n">tfr_spw_stats_whole</span> <span class="k">as</span> <span class="n">tfr_spw_stats_whole</span>
+<span class="kn">from</span> <span class="nn">tfrStats.tfr_spw_stats_minmax</span> <span class="kn">import</span> <span class="n">tfr_spw_stats_minmax</span> <span class="k">as</span> <span class="n">tfr_spw_stats_minmax</span>
 
-n_perm = 2 # just to see if it works :P
-fband  = 1
-cond   = 0
-#tfr_emp, tfr_null = tfr_spw_stats_whole(paths,cond,0,fband,n_perm)
-#tfr_emp, tfr_null = tfr_spw_stats_minmax(paths,cond,0,fband,n_perm)
+<span class="n">n_perm</span> <span class="o">=</span> <span class="mi">2</span> <span class="c1"># just to see if it works :P</span>
+<span class="n">fband</span>  <span class="o">=</span> <span class="mi">1</span>
+<span class="n">cond</span>   <span class="o">=</span> <span class="mi">0</span>
+<span class="c1">#tfr_emp, tfr_null = tfr_spw_stats_whole(paths,cond,0,fband,n_perm)</span>
+<span class="c1">#tfr_emp, tfr_null = tfr_spw_stats_minmax(paths,cond,0,fband,n_perm)</span>
 </pre></div>
 </div>
 </div>
@@ -186,16 +186,16 @@ Therefore, the multiple correction will change slightly.</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>type         = &#39;minmax&#39;
-null         = [95, 0.05] # percentile, p-value
-fband        = 1
-cond         = 0
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span>         <span class="o">=</span> <span class="s1">&#39;minmax&#39;</span>
+<span class="n">null</span>         <span class="o">=</span> <span class="p">[</span><span class="mi">95</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">]</span> <span class="c1"># percentile, p-value</span>
+<span class="n">fband</span>        <span class="o">=</span> <span class="mi">1</span>
+<span class="n">cond</span>         <span class="o">=</span> <span class="mi">0</span>
 
-# Time-frequency map
-plot_tfr_stats(out_path, cond, fband, null, type)
+<span class="c1"># Time-frequency map</span>
+<span class="n">plot_tfr_stats</span><span class="p">(</span><span class="n">out_path</span><span class="p">,</span> <span class="n">cond</span><span class="p">,</span> <span class="n">fband</span><span class="p">,</span> <span class="n">null</span><span class="p">,</span> <span class="nb">type</span><span class="p">)</span>
 
-# Time-frequency-space map
-plot_dtfr_stats(out_path, cond, fband, null, type)
+<span class="c1"># Time-frequency-space map</span>
+<span class="n">plot_dtfr_stats</span><span class="p">(</span><span class="n">out_path</span><span class="p">,</span> <span class="n">cond</span><span class="p">,</span> <span class="n">fband</span><span class="p">,</span> <span class="n">null</span><span class="p">,</span> <span class="nb">type</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -241,16 +241,16 @@ figure : /Volumes/Gandalf/MWlamprop/results/stats/univariate/uvtfr_dtfr_high_gra
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>type         = &#39;whole&#39;
-null         = [95, 0.05] # percentile, p-value
-fband        = 1
-cond         = 0
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span>         <span class="o">=</span> <span class="s1">&#39;whole&#39;</span>
+<span class="n">null</span>         <span class="o">=</span> <span class="p">[</span><span class="mi">95</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">]</span> <span class="c1"># percentile, p-value</span>
+<span class="n">fband</span>        <span class="o">=</span> <span class="mi">1</span>
+<span class="n">cond</span>         <span class="o">=</span> <span class="mi">0</span>
 
-# Time-frequency map
-plot_tfr_stats(out_path, cond, fband, null, type)
+<span class="c1"># Time-frequency map</span>
+<span class="n">plot_tfr_stats</span><span class="p">(</span><span class="n">out_path</span><span class="p">,</span> <span class="n">cond</span><span class="p">,</span> <span class="n">fband</span><span class="p">,</span> <span class="n">null</span><span class="p">,</span> <span class="nb">type</span><span class="p">)</span>
 
-# Time-frequency-space map
-plot_dtfr_stats(out_path, cond, fband, null, type)
+<span class="c1"># Time-frequency-space map</span>
+<span class="n">plot_dtfr_stats</span><span class="p">(</span><span class="n">out_path</span><span class="p">,</span> <span class="n">cond</span><span class="p">,</span> <span class="n">fband</span><span class="p">,</span> <span class="n">null</span><span class="p">,</span> <span class="nb">type</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
