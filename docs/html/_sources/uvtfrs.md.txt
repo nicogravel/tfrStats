@@ -31,12 +31,3 @@ As per multivariate pattern analysis {cite:p}`Kriegeskorte2008`.
 
 ```{disqus}
 ```
-
-
-
-## References
-
-
-```{bibliography} references.bib
-  :filter: docname in docnames  
-```

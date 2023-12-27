@@ -29,17 +29,3 @@ It has been proposed that two frequency bands of electrophysiological brain acti
 
 ```{disqus}
 ```
-  
-
-
-## References
-
-
-```{bibliography} references.bib
-  :filter: docname in docnames  
-```
-
-
-
-
-

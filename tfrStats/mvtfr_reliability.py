@@ -37,9 +37,9 @@ def mvtfr_reliability(rdms,conf):
     This results in spectrograms that are based on time-frequency specific image-related information
     and a null distribution that tests for condition-level significance.
 
-    Originally I was sugin scippy's Kendall's tau but now I use:
+    Originally I was using scipy's Kendall's tau but now I use:
     https://rsatoolbox.readthedocs.io/en/stable/comparing.html#spearman-s-rho
-
+    
     
 
     Args:
