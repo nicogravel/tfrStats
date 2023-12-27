@@ -9,7 +9,6 @@ comments: true
 # **References**
 
 ```{bibliography} references.bib
-  :filter: docname in docnames  
 ```
 
 ```{disqus}
