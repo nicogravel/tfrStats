@@ -28,6 +28,7 @@ Content
     ..mvtfrs
     notebooks/multivariate_tfr_stats
     ..notebooks/layer_approach
+    refs
 
 .. toctree::
     :maxdepth: 1
